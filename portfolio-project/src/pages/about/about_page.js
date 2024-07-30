@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './AboutPage.module.css';
 import codingPhoto from '/Users/hamiltonn/portfolio-project/src/images/CodingPhoto.png';
+import coverImage from '/Users/hamiltonn/portfolio-project/src/images/UP_Cover_Image.png';
+import bereaCoverPhoto from '/Users/hamiltonn/portfolio-project/src/images/BereaCoverPhoto.jpeg';
+import bereaGroupPhoto from '/Users/hamiltonn/portfolio-project/src/images/BereaGroupPhoto.jpg';
 
 const AboutPage = () => {
   const sectionRefs = useRef([]);
@@ -41,19 +44,29 @@ const AboutPage = () => {
       </section>
 
       <section ref={el => sectionRefs.current[1] = el} className={`${styles.section} ${styles.imageSection}`}>
-  <img src={codingPhoto} alt="Nicholas coding" className={styles.sectionImage} />
-  <p>My academic path has equipped me with a strong foundation in Python, C++, R and SQL. But beyond just coding, I'm fascinated by how these tools can be applied to real-world problems.</p>
+        <img src={codingPhoto} alt="Nicholas coding" className={styles.sectionImage} />
+        <p>My academic path has equipped me with a strong foundation in Python, C++, R and SQL. But beyond just coding, I'm fascinated by how these tools can be applied to real-world problems.</p>
+      </section>
+
+      <section ref={el => sectionRefs.current[2] = el} className={`${styles.section} ${styles.teachingSection}`}>
+  <h3>Teaching and Mentoring</h3>
+  <div className={styles.teachingContent}>
+    <div className={styles.teachingText}>
+      <p>As a Teaching Assistant and Manager in the Computer Science Department, I've discovered my passion for education. I've had the opportunity to develop curricula, mentor fellow students, and manage educational programs. These experiences have not only deepened my technical knowledge but also honed my communication and leadership skills.</p>
+    </div>
+    {/* <img src={bereaGroupPhoto} alt="Berea group photo" className={styles.smallImage} /> */}
+  </div>
+  <img src={bereaCoverPhoto} alt="Berea cover photo" className={styles.fullWidthImage} />
 </section>
 
-      <section ref={el => sectionRefs.current[2] = el} className={styles.section}>
-        <h3>Teaching and Mentoring</h3>
-        <p>As a Teaching Assistant and Manager in the Computer Science Department, I've discovered my passion for education. I've had the opportunity to develop curricula, mentor fellow students, and manage educational programs. These experiences have not only deepened my technical knowledge but also honed my communication and leadership skills.</p>
-      </section>
+<section ref={el => sectionRefs.current[3] = el} className={`${styles.section} ${styles.nonprofitSection}`}>
+  <div className={styles.nonprofitContent}>
+    <h3>Nonprofit Initiative</h3>
+    <p>One of my most rewarding experiences has been applying my skills to support a local nonprofit initiative. I developed a full-stack application using Vue.js, Flask, and PostgreSQL, which reinforced my belief in technology's power to drive positive change in communities.</p>
+  </div>
+  <img src={coverImage} alt="app cover photo" className={styles.sectionImage} />
+</section>
 
-      <section ref={el => sectionRefs.current[3] = el} className={`${styles.section} ${styles.imageSection}`}>
-        <p>One of my most rewarding experiences has been applying my skills to support a local nonprofit initiative. I developed a full-stack application using Vue.js, Flask, and PostgreSQL, which reinforced my belief in technology's power to drive positive change in communities.</p>
-        <div className={styles.imagePlaceholder}>Image: App screenshot</div>
-      </section>
 
       <section ref={el => sectionRefs.current[4] = el} className={styles.section}>
         <h3>Data Science Journey</h3>
