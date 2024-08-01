@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import styles from './AboutPage.module.css';
-import codingPhoto from '/Users/hamiltonn/portfolio-project/src/images/CodingPhoto.png';
+import codingPhoto from '/Users/hamiltonn/portfolio-project/src/images/CodingPhoto.jpeg';
 import coverImage from '/Users/hamiltonn/portfolio-project/src/images/UP_Cover_Image.png';
 import bereaCoverPhoto from '/Users/hamiltonn/portfolio-project/src/images/BereaCoverPhoto.jpeg';
 //import bereaGroupPhoto from '/Users/hamiltonn/portfolio-project/src/images/BereaGroupPhoto.jpg';
