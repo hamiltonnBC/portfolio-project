@@ -1,30 +1,41 @@
 import React from 'react';
 import './projects_styles.css';
 
-const ProjectCard = ({ title, description, image, link }) => (
+const ProjectCard = ({ title, description, image, link, githubLink, youtubeLink, date }) => (
   <div className="project_card">
-    <img src={image} alt={title} className="project_image" />
+    {image && <img src={image} alt={title} className="project_image" />}
     <h3>{title}</h3>
+    <p className="project_date">{date}</p>
     <p>{description}</p>
-    <a href={link} target="_blank" rel="noopener noreferrer">View Project</a>
+    <div className="project_links">
+      {link && <a href={link} target="_blank" rel="noopener noreferrer" className="project_link">View Project</a>}
+      {githubLink && <a href={githubLink} target="_blank" rel="noopener noreferrer" className="project_link github_link">GitHub</a>}
+      {youtubeLink && <a href={youtubeLink} target="_blank" rel="noopener noreferrer" className="project_link youtube_link">YouTube</a>}
+    </div>
   </div>
 );
 
 const ProjectsPage = () => {
   const projects = [
     {
-      title: "Project 1",
-      description: "A brief description of project 1.",
-      image: "/path/to/project1-image.jpg",
-      link: "https://project1-link.com"
+      title: "Projecting Food Insecurity",
+      description: "Shiny App written primarily in R, using Machine Learning to project future levels of food insecurity across the Continental United States to assist Feeding America in grant funding and resource management",
+      link: "https://virginiatechdatascienceforthepublicgood2024foodinsecurity.shinyapps.io/VTDSPGPFI/",
+      date: "May 2025 - July 2025"
     },
     {
-      title: "Project 2",
-      description: "A brief description of project 2.",
-      image: "/path/to/project2-image.jpg",
-      link: "https://project2-link.com"
+      title: "Full Stack Database Application for UP Initiative",
+      description: "Vue frontend and Python backend application with PostgreSQL for a local nonprofit initiative assisting the houseless population in Madison County, KY",
+      githubLink: "https://github.com/2024-databases-bereacollege/client-project-up-unhoused-persons-initiative-team",
+      youtubeLink: "https://youtu.be/Run8F22sIcs?si=nKssADWBe_TkOUi0",
+      date: "January 2025 - May 2025"
     },
-    // Add more projects as needed
+    {
+      title: "Rank Based Voting System",
+      description: "Python and CustomTKinter, Final Project for Introduction to software design",
+      githubLink: "https://github.com/hamiltonnBC/RankBasedVotingSystem",
+      date: "December 2024"
+    }
   ];
 
   return (

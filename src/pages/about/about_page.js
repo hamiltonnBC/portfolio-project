@@ -3,7 +3,8 @@ import styles from './AboutPage.module.css';
 import codingPhoto from '/Users/hamiltonn/portfolio-project/src/images/CodingPhoto.png';
 import coverImage from '/Users/hamiltonn/portfolio-project/src/images/UP_Cover_Image.png';
 import bereaCoverPhoto from '/Users/hamiltonn/portfolio-project/src/images/BereaCoverPhoto.jpeg';
-import bereaGroupPhoto from '/Users/hamiltonn/portfolio-project/src/images/BereaGroupPhoto.jpg';
+//import bereaGroupPhoto from '/Users/hamiltonn/portfolio-project/src/images/BereaGroupPhoto.jpg';
+import vtdsCohort from '/Users/hamiltonn/portfolio-project/src/images/VTDSPG_Cohort.png';
 
 const AboutPage = () => {
   const sectionRefs = useRef([]);
@@ -74,7 +75,7 @@ const AboutPage = () => {
       </section>
 
       <section ref={el => sectionRefs.current[5] = el} className={`${styles.section} ${styles.imageSection}`}>
-        <div className={styles.imagePlaceholder}>Image: Data visualization</div>
+      <img src={vtdsCohort} alt="Virginia Tech Cohort" className={styles.sectionImage} />
         <p>Working with real-world data to address societal issues has been incredibly fulfilling. It's shown me the tangible impact that data-driven approaches can have on understanding and addressing complex social problems.</p>
       </section>
 
@@ -83,10 +84,10 @@ const AboutPage = () => {
         <p>What truly excites me is the intersection of computer science, data analysis, and sociology. I believe that by combining these disciplines, we can gain deeper insights into societal issues and develop more effective solutions. Whether it's through research, tech development, or data science, I'm committed to using my skills to drive positive change.</p>
       </section>
 
-      <section ref={el => sectionRefs.current[7] = el} className={`${styles.section} ${styles.imageSection}`}>
+      {/* <section ref={el => sectionRefs.current[7] = el} className={`${styles.section} ${styles.imageSection}`}>
         <p>Looking ahead, I'm eager to pursue opportunities that allow me to merge my technical skills with my passion for social impact. I'm particularly interested in projects or roles that use technology and data to illuminate societal issues and create meaningful change.</p>
         <div className={styles.imagePlaceholder}>Image: Future goals</div>
-      </section>
+      </section> */}
 
       <section ref={el => sectionRefs.current[8] = el} className={styles.section}>
         <h3>Let's Connect</h3>

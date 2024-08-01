@@ -1,0 +1,46 @@
+.project_links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .project_link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #4a90e2;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .project_link:hover {
+    background-color: #3a7bc8;
+  }
+  
+  .github_link {
+    background-color: #333;
+  }
+  
+  .github_link:hover {
+    background-color: #555;
+  }
+  
+  .youtube_link {
+    background-color: #832424;
+  }
+  
+  .youtube_link:hover {
+    background-color: #CC0000;
+  }
+  
+  @media (max-width: 480px) {
+    .project_links {
+      flex-direction: column;
+    }
+  
+    .project_link {
+      width: 100%;
+      text-align: center;
+    }
+  }
