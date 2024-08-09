@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d9392755.css",
+    "main.js": "/static/js/main.fcc0ecb0.js",
+    "static/media/CodingPhoto.jpeg": "/static/media/CodingPhoto.ffd78c11cc1a1437c1d0.jpeg",
+    "static/media/BereaCoverPhoto.jpeg": "/static/media/BereaCoverPhoto.01222d50b284fba6fdef.jpeg",
+    "static/media/VTDSPG_Cohort.png": "/static/media/VTDSPG_Cohort.cf8e0bc4edc0b03722cb.png",
+    "static/media/PERSONAL_HEADSHOT.png": "/static/media/PERSONAL_HEADSHOT.9ae2a55dc4d625e75d63.png",
+    "static/media/UP_Cover_Image.png": "/static/media/UP_Cover_Image.367ec6714807f61595b4.png",
+    "static/media/PosterImage.jpg": "/static/media/PosterImage.036b8da6e81f07e39ba2.jpg",
+    "static/media/DataLitCert.png": "/static/media/DataLitCert.65e3aad72ad314d4ce56.png",
+    "static/media/Resume_Hamilton_Nicholas.pdf": "/static/media/Resume_Hamilton_Nicholas.6818198fd211bce93312.pdf",
+    "static/media/BereaCollegeLogo.png": "/static/media/BereaCollegeLogo.c0d1b3364824e1285bd5.png",
+    "static/media/VTDSPGIntroduction.jpeg": "/static/media/VTDSPGIntroduction.bf11e1bbd98394264e6b.jpeg",
+    "index.html": "/index.html",
+    "main.d9392755.css.map": "/static/css/main.d9392755.css.map",
+    "main.fcc0ecb0.js.map": "/static/js/main.fcc0ecb0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d9392755.css",
+    "static/js/main.fcc0ecb0.js"
+  ]
+}
