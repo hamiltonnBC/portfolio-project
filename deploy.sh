@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# # Current method: Need to commit, push, and then run bash deploy.sh 
+
 # Ensure the main branch is up to date
 git checkout main
 git pull origin main

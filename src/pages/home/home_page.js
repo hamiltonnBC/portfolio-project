@@ -5,6 +5,7 @@ import bereaLogo from '/Users/hamiltonn/portfolio-project/src/images/BereaColleg
 import vtdspgLogo from '/Users/hamiltonn/portfolio-project/src/images/VTDSPGIntroduction.jpeg';
 import upCoverImage from '/Users/hamiltonn/portfolio-project/src/images/UP_Cover_Image.png';
 import posterImage from '/Users/hamiltonn/portfolio-project/src/images/PosterImage.jpg';
+import dataLiteracyCertification from '/Users/hamiltonn/portfolio-project/src/images/DataLitCert.png';
 
 const HomePage = () => {
   return (
@@ -43,6 +44,15 @@ const HomePage = () => {
         </div>
       </section>
 
+      <section className={styles.certificationsSection}>
+        <h2>Certifications</h2>
+        <div className={styles.certificationCard}>
+          <h3>Data Literacy Certification</h3>
+          <img src={dataLiteracyCertification} alt="Data Literacy Certification" className={styles.certificationImage} />
+          <p>Certification in Data Literacy, demonstrating proficiency in understanding and interpreting data.</p>
+        </div>
+      </section>
+      
       <section className={styles.logosSection}>
         <img src={bereaLogo} alt="Berea College Logo" className={styles.logo} />
         <img src={vtdspgLogo} alt="Virginia Tech DSPG Logo" className={styles.logovt} />
