@@ -1,10 +1,26 @@
+/*************************************************
+ * Filename: global.css
+ * 
+ * Purpose: Defines global layout rules and color scheme for the application.
+ * These styles affect the entire application and provide the base structure
+ * for the portfolio layout.
+ * 
+ * Project Role:
+ * - Sets up full-height layout
+ * - Defines background color
+ * - Controls overflow behavior
+ *************************************************/
+
+/* Full-height layout setup */
 html, body, #root {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: #1a1a2e; 
-  }
-  
-  body {
+    /* Dark theme background color */
+    background-color: #1a1a2e;
+}
+
+/* Prevent horizontal scrolling */
+body {
     overflow-x: hidden;
-  }
+}
