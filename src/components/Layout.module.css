@@ -10,23 +10,17 @@
  * - Handles responsive design
  * - Manages animations and transitions
  * - Sets color scheme and typography
- * 
- * Connected Files:
- * - Layout.js: The main layout component this styles
- * - global.css: Base styling that this builds upon
  *************************************************/
 
 /* Main Layout Structure
 -------------------------------------------------- */
-/* Container for the entire application */
 .container {
   display: flex;
   min-height: 100vh;
-  background-color: #1a1a2e; /* Dark blue background */
+  background-color: #1a1a2e;
   color: #ffffff;
 }
 
-/* Fixed left panel styling */
 .leftPanel {
   width: 30%;
   padding: 2rem;
@@ -37,44 +31,84 @@
   box-sizing: border-box;
 }
 
-/* Scrollable right panel styling */
 .rightPanel {
   width: 70%;
-  margin-left: 30%; /* Matches left panel width */
+  margin-left: 30%;
   padding: 2rem;
   overflow-y: auto;
   min-height: 100vh;
   box-sizing: border-box;
 }
 
-/* Typography and Text Styling
+/* Animations
 -------------------------------------------------- */
-/* Main name styling */
-.name {
-  font-size: 3rem;
-  color: #1355a6; /* Blue accent color */
-  margin-bottom: 0.5rem;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* Name link interactions */
+@keyframes rainbow {
+  0% { color: red; }
+  16.67% { color: orange; }
+  33.33% { color: yellow; }
+  50% { color: green; }
+  66.67% { color: blue; }
+  83.33% { color: indigo; }
+  100% { color: violet; }
+}
+
+/* Introduction Elements
+-------------------------------------------------- */
+.introduction {
+  opacity: 0;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.greeting {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+  color: #7a7a7a;
+}
+
+/* Name styling with rainbow animation */
+.name {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 2.3rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  opacity: 0;
+  animation:
+          fadeIn 0.5s ease-out 0.35s forwards,
+          rainbow 4s linear 0.5s infinite;
+}
+
 .nameLink {
-  color: #1355a6;
+  color: inherit;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
 .nameLink:hover {
-  color: #0f3460; /* Darker blue on hover */
+  color: #0f3460;
 }
 
-/* Professional title styling */
+/* Content Sections
+-------------------------------------------------- */
+.content {
+  opacity: 0;
+  animation: fadeIn 1s ease-out 0.75s forwards;
+}
+
 .title {
   font-size: 1.2rem;
   margin-bottom: 2rem;
-  color: #ebeffb; /* Light blue-grey */
+  color: #ebeffb;
 }
 
-/* Navigation Menu
+/* Navigation
 -------------------------------------------------- */
 .navigation {
   display: flex;
@@ -94,7 +128,7 @@
   color: #0f3460;
 }
 
-/* Social Media Icons
+/* Social Icons
 -------------------------------------------------- */
 .socialIcons {
   display: flex;
@@ -110,90 +144,7 @@
 
 .socialIcons a:hover {
   color: #0f3460;
-  transform: scale(1.1); /* Slight grow effect on hover */
-}
-
-/* Content Section Styling
--------------------------------------------------- */
-.aboutSection,
-.projectsSection,
-.experienceSection {
-  margin-bottom: 3rem;
-}
-
-/* Card Styling for Projects and Experience
--------------------------------------------------- */
-.projectCard,
-.experienceItem {
-  background-color: #16213e; /* Slightly lighter than background */
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-
-.projectCard:hover,
-.experienceItem:hover {
-  transform: translateY(-5px); /* Slight lift effect on hover */
-}
-
-/* Section Headers
--------------------------------------------------- */
-h2 {
-  color: #0f3460;
-  margin-bottom: 1rem;
-}
-
-/* Animations
--------------------------------------------------- */
-/* Fade-in animation */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Rainbow effect animation */
-@keyframes rainbow {
-  0% { color: red; }
-  16.67% { color: orange; }
-  33.33% { color: yellow; }
-  50% { color: green; }
-  66.67% { color: blue; }
-  83.33% { color: indigo; }
-  100% { color: violet; }
-}
-
-/* Animated Elements
--------------------------------------------------- */
-.introduction {
-  opacity: 0;
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.greeting {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 1.2rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
-  color: #7a7a7a;
-}
-
-/* Name with rainbow animation */
-.name {
-  font-family: 'Quicksand', sans-serif;
-  font-size: 2.3rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  opacity: 0;
-  animation:
-          fadeIn 0.5s ease-out 0.35s forwards,
-          rainbow 4s linear 0.5s infinite;
-}
-
-.content {
-  opacity: 0;
-  animation: fadeIn 1s ease-out 0.75s forwards;
+  transform: scale(1.1);
 }
 
 /* Email Display
@@ -215,6 +166,35 @@ h2 {
   transition: opacity 0.3s ease;
 }
 
+/* Content Cards
+-------------------------------------------------- */
+.aboutSection,
+.projectsSection,
+.experienceSection {
+  margin-bottom: 3rem;
+}
+
+.projectCard,
+.experienceItem {
+  background-color: #16213e;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.projectCard:hover,
+.experienceItem:hover {
+  transform: translateY(-5px);
+}
+
+/* Typography
+-------------------------------------------------- */
+h2 {
+  color: #0f3460;
+  margin-bottom: 1rem;
+}
+
 /* Responsive Design
 -------------------------------------------------- */
 @media (max-width: 768px) {
@@ -231,7 +211,7 @@ h2 {
   }
 }
 
-/* Commented out alternate color scheme for reference
+/* Alternate color scheme (commented for reference)
 -------------------------------------------------- 
 @keyframes darkVioletScheme {
     0% { color: #F5E6FF; }   
