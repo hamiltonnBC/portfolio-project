@@ -1,13 +1,37 @@
+/*************************************************
+ * Filename: home_styles.module.css
+ * 
+ * Purpose: Provides styling for the home page component, including layout,
+ * animations, responsive design, and image handling. This module creates
+ * a professional and engaging presentation of portfolio content.
+ * 
+ * Project Role:
+ * - Defines the main layout structure
+ * - Manages responsive design
+ * - Handles image styling and scaling
+ * - Creates interactive animations
+ * 
+ * Connected Files:
+ * - home_page.js: The main component this styles
+ * - Layout.module.css: Parent styles this builds upon
+ *************************************************/
+
+/* Main Layout
+-------------------------------------------------- */
+/* Container for all content */
 .rightPanel {
   padding: 2rem;
 }
 
+/* Introduction Section Layout
+-------------------------------------------------- */
 .introSection {
   display: flex;
   align-items: center;
   margin-bottom: 3rem;
 }
 
+/* Profile image styling */
 .headshot {
   width: 250px;
   height: 250px;
@@ -16,6 +40,7 @@
   margin-right: 2rem;
 }
 
+/* Introduction text list styling */
 .introText ul {
   list-style-type: none;
   padding: 0;
@@ -25,100 +50,7 @@
   margin-bottom: 0.5rem;
 }
 
-.aboutSection, .projectsSection {
-  margin-bottom: 3rem;
-}
-
-.projectsContainer {
-  display: flex;
-  justify-content: space-between;
-}
-
-.projectCard {
-  background-color: #16213e;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-  width: 48%; /* Adjust as needed */
-}
-
-.projectCard:hover {
-  transform: translateY(-5px);
-}
-
-.projectLink {
-  display: inline-block;
-  margin-top: 1rem;
-  color: #4a90e2;
-  text-decoration: none;
-}
-
-.projectLink:hover {
-  text-decoration: underline;
-}
-
-h2 {
-  color: #0f3460;
-  margin-bottom: 1rem;
-}
-
-h3 {
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-}
-
-@media (max-width: 768px) {
-  .introSection {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .headshot {
-    margin-right: 0;
-    margin-bottom: 1rem;
-  }
-
-  .projectsContainer {
-    flex-direction: column;
-  }
-
-  .projectCard {
-    width: 100%;
-  }
-}
-
-
-.logosSection {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 3rem;
-  gap: 2rem;
-}
-
-.logo {
-  width: 150px; /* can be adjusted here */
-  height: auto;
-  object-fit: contain;
-}
-.logovt {
-  width: 300px; /* can be adjusted here */
-  height: auto;
-  object-fit: contain;
-}
-
-@media (max-width: 768px) {
-  .logosSection {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .logo {
-    width: 80px; /* Slightly smaller on mobile */
-  }
-}
-
+/* Introduction links styling */
 .introText a {
   color: #4a90e2;
   text-decoration: none;
@@ -130,25 +62,39 @@ h3 {
   text-decoration: underline;
 }
 
-.projectImage {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-top: 1rem;
-  object-fit: cover;
+/* Section Spacing
+-------------------------------------------------- */
+.aboutSection,
+.projectsSection,
+.certificationsSection {
+  margin-bottom: 3rem;
 }
 
+/* Projects Layout
+-------------------------------------------------- */
+/* Container for project cards */
+.projectsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Individual project card styling */
 .projectCard {
   background-color: #16213e;
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 8px;
   transition: transform 0.3s ease;
-  width: 48%; /* Adjust as needed */
+  width: 48%;
   display: flex;
   flex-direction: column;
 }
 
+.projectCard:hover {
+  transform: translateY(-5px);
+}
+
+/* Project content styling */
 .projectCard h3 {
   color: #ffffff;
   margin-bottom: 0.5rem;
@@ -158,6 +104,7 @@ h3 {
   flex-grow: 1;
 }
 
+/* Project link styling */
 .projectLink {
   display: inline-block;
   margin-top: 1rem;
@@ -166,21 +113,21 @@ h3 {
   text-decoration: none;
 }
 
-@media (max-width: 768px) {
-  .projectCard {
-    width: 100%;
-  }
-
-  .projectImage {
-    height: 200px; /* Fixed height for mobile */
-  }
+.projectLink:hover {
+  text-decoration: underline;
 }
 
-
-.certificationsSection {
-  margin-bottom: 3rem;
+/* Project image styling */
+.projectImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 1rem;
+  object-fit: cover;
 }
 
+/* Certifications Layout
+-------------------------------------------------- */
 .certificationCard {
   background-color: #16213e;
   padding: 1rem;
@@ -196,6 +143,7 @@ h3 {
   transform: translateY(-5px);
 }
 
+/* Certification content styling */
 .certificationCard h3 {
   color: #ffffff;
   margin-bottom: 1rem;
@@ -208,6 +156,7 @@ h3 {
   text-align: center;
 }
 
+/* Certification image styling */
 .certificationImage {
   width: 100%;
   max-width: 400px;
@@ -216,12 +165,85 @@ h3 {
   margin-bottom: 1rem;
 }
 
+/* Organization Logos
+-------------------------------------------------- */
+.logosSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+  gap: 2rem;
+}
+
+/* Logo sizing */
+.logo {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+}
+
+.logovt {
+  width: 300px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Typography
+-------------------------------------------------- */
+h2 {
+  color: #0f3460;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive Design
+-------------------------------------------------- */
 @media (max-width: 768px) {
+  /* Stack introduction on mobile */
+  .introSection {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .headshot {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  /* Full-width projects on mobile */
+  .projectsContainer {
+    flex-direction: column;
+  }
+
+  .projectCard {
+    width: 100%;
+  }
+
+  /* Fixed height project images on mobile */
+  .projectImage {
+    height: 200px;
+  }
+
+  /* Full-width certifications on mobile */
   .certificationCard {
     width: 100%;
   }
 
   .certificationImage {
     max-width: 100%;
+  }
+
+  /* Stack logos on mobile */
+  .logosSection {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .logo {
+    width: 80px;
   }
 }
