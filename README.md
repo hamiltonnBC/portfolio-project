@@ -130,4 +130,4 @@ portfolio-project/
 
 Nicholas Hamilton - [hamiltonn428@gmail.com](mailto:hamiltonn428@gmail.com)
 
-Project Link: [https://github.com/yourusername/portfolio-project](https://github.com/yourusername/portfolio-project)
+Project Link: [https://github.com/yourusername/portfolio-project](https://github.com/hamiltonnBC/portfolio-project)
