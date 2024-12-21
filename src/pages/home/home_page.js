@@ -1,11 +1,11 @@
 import React from 'react';
 import styles from './home_styles.module.css';
-import personalHeadshot from '/Users/hamiltonn/portfolio-project/src/images/PERSONAL_HEADSHOT.png';
-import bereaLogo from '/Users/hamiltonn/portfolio-project/src/images/BereaCollegeLogo.png';
-import vtdspgLogo from '/Users/hamiltonn/portfolio-project/src/images/VTDSPGIntroduction.jpeg';
-import upCoverImage from '/Users/hamiltonn/portfolio-project/src/images/UP_Cover_Image.png';
-import posterImage from '/Users/hamiltonn/portfolio-project/src/images/PosterImage.jpg';
-import dataLiteracyCertification from '/Users/hamiltonn/portfolio-project/src/images/DataLitCert.png';
+import personalHeadshot from '../../images/PERSONAL_HEADSHOT.png';
+import bereaLogo from '../../images/BereaCollegeLogo.png';
+import vtdspgLogo from '../../images/VTDSPGIntroduction.jpeg';
+import upCoverImage from '../../images/UP_Cover_Image.png';
+import posterImage from '../../images/PosterImage.jpg';
+import dataLiteracyCertification from '../../images/DataLitCert.png';
 
 const HomePage = () => {
   return (

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import styles from './Layout.module.css';
-import resumePDF from '/Users/hamiltonn/portfolio-project/src/Resume_Hamilton_Nicholas.pdf';
-
-
+const resumePDF = process.env.PUBLIC_URL + '/Resume_Hamilton_Nicholas.pdf';
 const Layout = () => {
   const [showGreeting, setShowGreeting] = useState(false);
   const [showName, setShowName] = useState(false);
