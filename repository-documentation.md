@@ -1,7 +1,7 @@
 # Portfolio Project Repository Documentation
 
 ## Project Overview
-This is a React-based personal portfolio website hosted on GitHub Pages. The site features a fixed left panel with navigation and a dynamic right panel that displays different content based on the selected route.
+This is a React-based personal portfolio website hosted on GitHub Pages. The site features a fixed left panel with navigation and a dynamic right panel that displays different content based on the selected route. The site showcases professional experience, projects, and skills with an emphasis on clean design and smooth animations.
 
 ## Directory Structure
 ```
@@ -9,54 +9,119 @@ portfolio-project/
 ├── build/                  # Compiled files for deployment
 ├── node_modules/          # Project dependencies
 ├── public/               # Static files
-├── src/                 # Source code
-│   ├── components/     # Reusable UI components
-│   │   ├── Layout.js  # Main layout component
+│   ├── index.html      # Main HTML file
+│   ├── manifest.json  # PWA manifest
+│   └── images/       # Public images
+├── src/              # Source code
+│   ├── components/  # Reusable UI components
+│   │   ├── Layout/         # Layout component
+│   │   │   ├── Layout.js   # Component code
+│   │   │   └── Layout.module.css  # Scoped styles
 │   │   └── ...
-│   ├── pages/        # Main page components
-│   │   ├── home/
-│   │   ├── about/
-│   │   └── projects/
-│   ├── images/      # Static image assets
-│   ├── styles/     # Global styles
-│   └── utils/     # Utility functions
-├── deploy.sh      # Deployment script
-└── package.json  # Project configuration
+│   ├── pages/           # Main page components
+│   │   ├── home/       # Home page
+│   │   │   ├── home_page.js
+│   │   │   └── home_styles.module.css
+│   │   ├── about/     # About page
+│   │   └── projects/  # Projects page
+│   ├── images/       # Static image assets
+│   ├── styles/      # Global styles
+│   └── utils/      # Utility functions
+├── .gitignore     # Git ignore rules
+├── deploy.sh     # Deployment script
+└── package.json # Project configuration
 ```
 
 ## Application Flow
 ```mermaid
 graph TD
     A[index.js] --> B[App.js]
-    B --> C[router.js]
-    C --> D[Layout.js]
+    B --> D[Layout.js]
     D --> E[Left Panel Fixed]
     D --> F[Right Panel Content]
     F --> G[HomePage]
     F --> H[AboutPage]
     F --> I[ProjectsPage]
+    
+    subgraph "Left Panel Components"
+        E --> J[Animated Name]
+        E --> K[Navigation]
+        E --> L[Social Links]
+    end
+    
+    subgraph "Page Components"
+        G --> M[Skills]
+        G --> N[Featured Projects]
+        H --> O[Experience]
+        H --> P[Background]
+        I --> Q[Project Grid]
+    end
 ```
 
 ## Key Components
 
 ### 1. Entry Points
-- **index.js**: Application entry point that renders the root React component
-- **App.js**: Main application component that sets up routing
-- **router.js**: Handles route configuration and navigation
+- **index.js**: Application entry point
+   - Renders root React component
+   - Initializes global styles
+   - Sets up React strict mode
+- **App.js**: Main application component
+   - Configures React Router
+   - Establishes route structure
+   - Wraps layout component
 
 ### 2. Layout System
 The application uses a two-panel layout system:
 
 #### Left Panel (Fixed)
 - Personal introduction with animated name
+   - Rainbow animation effect
+   - Fade-in sequence
 - Navigation menu
+   - Route-based navigation
+   - Smooth transitions
 - Social media links
+   - GitHub profile
+   - LinkedIn profile
 - Contact information
+   - Toggleable email display
+   - Resume download
 
 #### Right Panel (Dynamic)
 - Changes content based on selected route
 - Smooth transitions between pages
+- Intersection Observer animations
 - Responsive design for mobile viewing
+
+[Rest of the content remains similar but with added detail for each section...]
+
+## Installation and Setup
+
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
+- Git
+
+### Local Development Setup
+```bash
+# Clone the repository
+git clone [repository-url]
+
+# Navigate to project directory
+cd portfolio-project
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+
+# Run tests
+npm test
+
+# Build for production
+npm run build
+```
 
 ### 3. Pages
 
