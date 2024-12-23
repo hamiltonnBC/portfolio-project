@@ -62,7 +62,7 @@ const HomePage = () => {
                 <div className={styles.introText}>
                     <ul>
                         <li>
-                            Computer Science Lead Teaching Assistant at
+                            Computer Science Lead Teaching Assistant at{' '}
                             <a
                                 href="https://www.berea.edu/"
                                 target="_blank"
@@ -72,7 +72,7 @@ const HomePage = () => {
                             </a>
                         </li>
                         <li>
-                            Data Science Intern at
+                            Data Science Intern at{' '}
                             <a
                                 href="https://aaec.vt.edu/academics/undergraduate/dspg.html"
                                 target="_blank"
