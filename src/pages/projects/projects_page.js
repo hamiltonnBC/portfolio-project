@@ -110,6 +110,7 @@ const ProjectsPage = () => {
             title: "CS Department Website",
             description: "Leading a team of 15+ developers to create a comprehensive platform for the CS department. Features include evening lab hours scheduling system, student work portfolio showcase, centralized information hub for department resources, and interactive features for student and faculty engagement.",
             githubLink: "https://github.com/BC-CS-Website-Team/CS_TA_Website",
+            link: "https://bereacshub.live/",
             status: "In Progress",
             date: "2024 - Present"
         },

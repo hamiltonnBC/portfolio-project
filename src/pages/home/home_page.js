@@ -138,7 +138,7 @@ const HomePage = () => {
 
             {/* Certifications Section */}
             <section className={styles.certificationsSection}>
-                <h2>Certifications</h2>
+                <h2>Certifications and Publications</h2>
                 <div className={styles.certificationCard}>
                     <h3>Data Literacy Certification</h3>
                     <img
@@ -148,7 +148,36 @@ const HomePage = () => {
                     />
                     <p>Certification in Data Literacy, demonstrating proficiency in understanding and interpreting data.</p>
                 </div>
-            </section>
+                <div className={styles.certificationCard}>
+        <h3>Level I International Tutor Certification</h3>
+        <img
+            src={process.env.PUBLIC_URL + '/CRLA ITTPC Nicholas Hamilton.png'}
+            alt="Level I International Tutor Certification"
+            className={styles.certificationImage}
+        />
+        
+        <p>
+            Earned Level I certification by completing training through Berea College’s Center for Teaching and Learning. Certification requirements included 25+ hours of active tutoring, 10 hours of instructional training, a written tutoring philosophy, and an observed tutoring session.
+        </p>
+    </div>
+    <div className={styles.certificationCard}>
+        <h3>Food Insecurity in Southwest Virginia</h3>
+        <img
+            src={process.env.PUBLIC_URL + '/research_paper_title.png'}
+            alt="Food Insecurity in Southwest Virginia Publication Title"
+            className={styles.certificationImage}
+        />
+        <a href={process.env.PUBLIC_URL + '/FoodInsecurityinSouthwestVirginia.pdf'} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
+            View Publication (PDF)
+        </a>
+        <a href="https://www.pubs.ext.vt.edu/ALCE/alce-323/alce-323.html" target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
+            View Online Publication
+        </a>
+        <p>
+            This publication examines food insecurity in Southwest Virginia using statistical and machine learning analysis. It evaluates contributing socioeconomic factors, regional trends, and the impact of policy and community-based interventions. As a co-author, I contributed to data analysis, interpretation, and writing as part of the Data Science for the Public Good internship at Virginia Tech.
+        </p>
+    </div>
+</section>
 
             {/* Organization Logos Section */}
             <section className={styles.logosSection}>
