@@ -57,6 +57,36 @@
   100% { color: violet; }
 }
 
+@-webkit-keyframes rainbow {
+  0% { color: red; }
+  16.67% { color: orange; }
+  33.33% { color: yellow; }
+  50% { color: green; }
+  66.67% { color: blue; }
+  83.33% { color: indigo; }
+  100% { color: violet; }
+}
+
+@-moz-keyframes rainbow {
+  0% { color: red; }
+  16.67% { color: orange; }
+  33.33% { color: yellow; }
+  50% { color: green; }
+  66.67% { color: blue; }
+  83.33% { color: indigo; }
+  100% { color: violet; }
+}
+
+@-o-keyframes rainbow {
+  0% { color: red; }
+  16.67% { color: orange; }
+  33.33% { color: yellow; }
+  50% { color: green; }
+  66.67% { color: blue; }
+  83.33% { color: indigo; }
+  100% { color: violet; }
+}
+
 /* Introduction Elements
 -------------------------------------------------- */
 .introduction {
@@ -80,6 +110,15 @@
   font-weight: 700;
   margin-bottom: 0.5rem;
   opacity: 0;
+  -webkit-animation:
+          fadeIn 0.5s ease-out 0.35s forwards,
+          rainbow 10s linear 0.5s infinite;
+  -moz-animation:
+          fadeIn 0.5s ease-out 0.35s forwards,
+          rainbow 10s linear 0.5s infinite;
+  -o-animation:
+          fadeIn 0.5s ease-out 0.35s forwards,
+          rainbow 10s linear 0.5s infinite;
   animation:
           fadeIn 0.5s ease-out 0.35s forwards,
           rainbow 10s linear 0.5s infinite;
