@@ -110,18 +110,13 @@
   font-weight: 700;
   margin-bottom: 0.5rem;
   opacity: 0;
-  -webkit-animation:
-          fadeIn 0.5s ease-out 0.35s forwards,
-          rainbow 10s linear 0.5s infinite;
-  -moz-animation:
-          fadeIn 0.5s ease-out 0.35s forwards,
-          rainbow 10s linear 0.5s infinite;
-  -o-animation:
-          fadeIn 0.5s ease-out 0.35s forwards,
-          rainbow 10s linear 0.5s infinite;
   animation:
           fadeIn 0.5s ease-out 0.35s forwards,
           rainbow 10s linear 0.5s infinite;
+}
+
+.name.noAnimation {
+  animation: fadeIn 0.5s ease-out 0.35s forwards;
 }
 
 .nameLink {
@@ -133,6 +128,27 @@
 .nameLink:hover {
   color: #0f3460;
 }
+
+
+
+.toggleButton {
+  background: none;
+  border: 1px solid #7a7a7a;
+  color: #7a7a7a;
+  padding: 0.1rem 0.3rem;
+  font-size: 0.6rem;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.toggleButton:hover {
+  background-color: #7a7a7a;
+  color: #1a1a2e;
+}
+
+
 
 /* Content Sections
 -------------------------------------------------- */

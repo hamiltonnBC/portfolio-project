@@ -48,6 +48,7 @@ const Layout = () => {
   const [showName, setShowName] = useState(false);
   const [showContent, setShowContent] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
+  const [isAnimationEnabled, setIsAnimationEnabled] = useState(true);
 
   /**
    * Animation Sequence Effect
@@ -85,6 +86,10 @@ const Layout = () => {
     setShowEmail(!showEmail);
   };
 
+  const toggleAnimation = () => {
+    setIsAnimationEnabled(!isAnimationEnabled);
+  };
+
   return (
       <div className={styles.container}>
         {/* Left Panel - Fixed Navigation and Introduction */}
@@ -100,11 +105,16 @@ const Layout = () => {
 
             {/* Name with Home Link - Second to appear */}
             {showName && (
-                <h1 className={styles.name}>
+              <>
+                <h1 className={`${styles.name} ${!isAnimationEnabled ? styles.noAnimation : ''}`}>
                   <Link to="/" className={styles.nameLink}>
                     Nicholas Hamilton
                   </Link>
                 </h1>
+                <button onClick={toggleAnimation} className={styles.toggleButton}>
+                  {isAnimationEnabled ? '✨' : '💫'}
+                </button>
+              </>
             )}
           </div>
 
