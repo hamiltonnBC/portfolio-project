@@ -129,6 +129,7 @@ const Layout = () => {
                   <Link to="/">Home</Link>
                   <Link to="/about">About</Link>
                   <Link to="/projects">Projects</Link>
+                  <Link to="/certifications">Certifications</Link>
                   <a
                       href={resumePDF}
                       target="_blank"

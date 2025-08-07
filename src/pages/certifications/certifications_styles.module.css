@@ -1,0 +1,102 @@
+/*************************************************
+ * Filename: certifications_styles.module.css
+ *
+ * Purpose: Styling for the Certifications and Publications page component.
+ * Provides layout and visual styling for certification cards, images, and links.
+ * Matches the dark theme styling from the original home page design.
+ *
+ * Project Role:
+ * - Defines the visual appearance of the certifications page
+ * - Ensures consistent styling with other pages
+ * - Provides responsive layout for certification cards
+ *************************************************/
+
+/* Main Layout - matches home page rightPanel */
+.certificationsContainer {
+    padding: 2rem;
+}
+
+.certificationsContainer h1 {
+    color: #0f3460;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.certificationsSection {
+    margin-bottom: 3rem;
+}
+
+/* Certification Cards - matches original home page styling */
+.certificationCard {
+    background-color: #16213e;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.certificationCard:hover {
+    transform: translateY(-5px);
+}
+
+/* Certification content styling - matches original */
+.certificationCard h3 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.certificationCard p {
+    color: #e0e0e0;
+    margin-top: 1rem;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Certification image styling - matches original */
+.certificationImage {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Project link styling - matches original home page */
+.projectLink {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    color: #4a90e2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.projectLink:hover {
+    color: #3a7bc8;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .certificationsContainer {
+        padding: 1rem;
+    }
+    
+    .certificationsContainer h1 {
+        font-size: 2rem;
+    }
+    
+    .certificationCard {
+        padding: 1rem;
+        width: 100%;
+    }
+    
+    .certificationImage {
+        max-width: 100%;
+    }
+}

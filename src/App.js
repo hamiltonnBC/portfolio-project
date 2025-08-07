@@ -31,6 +31,7 @@ import Layout from './components/Layout';
 import HomePage from './pages/home/home_page';
 import ProjectsPage from './pages/projects/projects_page';
 import AboutPage from './pages/about/about_page';
+import CertificationsPage from './pages/certifications/certifications_page';
 
 /**
  * Main Application Component
@@ -78,6 +79,13 @@ function App() {
             - Displays personal information and background
           */}
                     <Route path="about" element={<AboutPage />} />
+
+                    {/*
+            Certifications Page Route
+            - Matches "/certifications"
+            - Displays certifications and publications
+          */}
+                    <Route path="certifications" element={<CertificationsPage />} />
                 </Route>
             </Routes>
         </Router>
