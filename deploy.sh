@@ -22,7 +22,7 @@ echo 'nicholastreyhamilton.com' > CNAME
 git init
 
 # Add remote origin
-git remote add origin git@github.com:hamiltonnBC/portfolio-project.git
+git remote add origin https://github.com/hamiltonnBC/portfolio-project.git
 
 # Create and switch to the gh-pages branch
 git checkout -b gh-pages
