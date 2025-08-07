@@ -16,7 +16,7 @@ cd build
 touch .nojekyll
 
 # If you are deploying to a custom domain
-echo 'nicholastreyhamilton.me' > CNAME
+echo 'nicholastreyhamilton.com' > CNAME
 
 # Initialize a new Git repository
 git init
