@@ -35,10 +35,11 @@ import './projects_styles.css';
  * @param {string} [props.link] - Optional live project link
  * @param {string} [props.githubLink] - Optional GitHub repository link
  * @param {string} [props.youtubeLink] - Optional YouTube video link
+ * @param {string} [props.designProcessLink] - Optional design process link
  * @param {string} props.date - Project date or duration
  * @returns {JSX.Element} A project card component
  */
-const ProjectCard = ({ title, description, image, link, githubLink, youtubeLink, date }) => (
+const ProjectCard = ({ title, description, image, link, githubLink, youtubeLink, designProcessLink, date }) => (
     <div className="project_card">
         {/* Optional project image */}
         {image && <img src={image} alt={title} className="project_image" />}
@@ -85,6 +86,18 @@ const ProjectCard = ({ title, description, image, link, githubLink, youtubeLink,
                     YouTube
                 </a>
             )}
+
+            {/* Design process link */}
+            {designProcessLink && (
+                <a
+                    href={designProcessLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="project_link design_process_link"
+                >
+                    Design Process
+                </a>
+            )}
         </div>
     </div>
 );
@@ -118,6 +131,7 @@ const ProjectsPage = () => {
             title: "CensusConnect",
             description: "Developing a research tool to streamline US Census data retrieval, addressing common data access challenges and implementing solutions for data consistency and accessibility.",
             githubLink: "https://github.com/hamiltonnBC/CensusConnect.git",
+            designProcessLink: "https://sites.google.com/view/nicholas-hamilton/project-portfolio-blog-post?authuser=1",
             status: "In Development",
             date: "2024 - Present"
         },
