@@ -195,10 +195,10 @@ const AboutPage = () => {
             </section>
 
             {/* Contact Section */}
-            <section ref={el => sectionRefs.current[7] = el} className={styles.section}>
+            {/* <section ref={el => sectionRefs.current[7] = el} className={styles.section}>
                 <h3>Let's Connect</h3>
                 <p>I'm always excited to connect with like-minded individuals who share my passion for technology, data science, and privacy engineering. Whether you're interested in collaboration, have questions about my work, or just want to chat about the latest in tech, feel free to reach out. Let's explore how we can build secure and impactful technology together!</p>
-            </section>
+            </section> */}
         </div>
     );
 };

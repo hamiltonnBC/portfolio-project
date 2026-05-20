@@ -143,9 +143,9 @@ const Layout = () => {
                 <NavLink to="/certifications" className={({ isActive }) => isActive ? styles.activeNavLink : ''}>
                   Certifications
                 </NavLink>
-                <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeNavLink : ''}>
+                {/* <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeNavLink : ''}>
                   Contact
-                </NavLink>
+                </NavLink> */}
                 <a href={resumePDF} target="_blank" rel="noopener noreferrer" className={styles.resumeBtn}>
                   Resume
                 </a>

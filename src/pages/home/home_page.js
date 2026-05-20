@@ -69,9 +69,9 @@ const HomePage = () => {
               <Link to="/projects" className={styles.primaryAction}>
                 View Projects
               </Link>
-              <Link to="/contact" className={styles.secondaryAction}>
+              <a href="mailto:hamiltonn428@gmail.com" className={styles.secondaryAction}>
                 Get in Touch
-              </Link>
+              </a>
             </div>
           </div>
         </div>

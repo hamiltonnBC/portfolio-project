@@ -10,7 +10,6 @@ import styles from './contact_form_styles.module.css';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     subject: '',
     message: ''
@@ -46,7 +45,6 @@ const ContactForm = () => {
 
   const validate = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = 'Name is required';
     
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
@@ -66,18 +64,50 @@ const ContactForm = () => {
     if (!validate()) return;
 
     setIsSubmitting(true);
-
-    // Simulate API Submission
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitSuccess(true);
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: ''
+    
+    // Clear any previous submit error
+    if (errors.submit) {
+      setErrors(prev => {
+        const { submit, ...rest } = prev;
+        return rest;
       });
-    }, 1500);
+    }
+
+    fetch("https://formsubmit.co/ajax/hamiltonn428@gmail.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message
+      })
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`Server returned status ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(data => {
+        setIsSubmitting(false);
+        setSubmitSuccess(true);
+        setFormData({
+          email: '',
+          subject: '',
+          message: ''
+        });
+      })
+      .catch(err => {
+        console.error("Form submission failed:", err);
+        setIsSubmitting(false);
+        setErrors(prev => ({
+          ...prev,
+          submit: `Submission failed: ${err.message}. Please check your connection or email directly at hamiltonn428@gmail.com.`
+        }));
+      });
   };
 
   return (
@@ -98,7 +128,12 @@ const ContactForm = () => {
           </p>
 
           <div className={styles.infoItem}>
-            <div className={styles.infoIcon}>✉</div>
+            <div className={styles.infoIcon}>
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+            </div>
             <div className={styles.infoText}>
               <span className={styles.infoLabel}>Email</span>
               <a href="mailto:hamiltonn428@gmail.com" className={styles.infoLink}>
@@ -108,7 +143,12 @@ const ContactForm = () => {
           </div>
 
           <div className={styles.infoItem}>
-            <div className={styles.infoIcon}>📍</div>
+            <div className={styles.infoIcon}>
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+            </div>
             <div className={styles.infoText}>
               <span className={styles.infoLabel}>Locations</span>
               <span className={styles.infoValue}>Berea, KY / Blacksburg, VA</span>
@@ -116,7 +156,12 @@ const ContactForm = () => {
           </div>
 
           <div className={styles.infoItem}>
-            <div className={styles.infoIcon}>🤝</div>
+            <div className={styles.infoIcon}>
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+              </svg>
+            </div>
             <div className={styles.infoText}>
               <span className={styles.infoLabel}>Availability</span>
               <span className={styles.infoValue}>Open to research & development roles</span>
@@ -129,7 +174,9 @@ const ContactForm = () => {
           {submitSuccess ? (
             <div className={styles.successState}>
               <div className={styles.checkmarkWrapper}>
-                <div className={styles.checkmark}>✓</div>
+                <svg viewBox="0 0 24 24" width="32" height="32" stroke="currentColor" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" className={styles.checkmarkIcon}>
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
               </div>
               <h3>Message Sent!</h3>
               <p>
@@ -144,23 +191,6 @@ const ContactForm = () => {
             </div>
           ) : (
             <form onSubmit={handleSubmit} className={styles.form} noValidate>
-              {/* Name Field */}
-              <div className={`${styles.fieldGroup} ${errors.name ? styles.fieldError : ''}`}>
-                <div className={styles.inputWrapper}>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    placeholder=" "
-                    className={styles.input}
-                  />
-                  <label htmlFor="name" className={styles.label}>Full Name</label>
-                </div>
-                {errors.name && <span className={styles.errorMessage}>{errors.name}</span>}
-              </div>
 
               {/* Email Field */}
               <div className={`${styles.fieldGroup} ${errors.email ? styles.fieldError : ''}`}>
@@ -223,6 +253,21 @@ const ContactForm = () => {
                   </span>
                 </div>
               </div>
+
+              {/* Submit Error Message */}
+              {errors.submit && (
+                <div className={styles.errorContainer}>
+                  <div className={styles.submitError}>
+                    {errors.submit}
+                  </div>
+                  <a 
+                    href={`mailto:hamiltonn428@gmail.com?subject=${encodeURIComponent(formData.subject || 'Portfolio Contact')}&body=${encodeURIComponent(formData.message)}`}
+                    className={styles.fallbackMailtoBtn}
+                  >
+                    <span>Send Email Directly</span>
+                  </a>
+                </div>
+              )}
 
               {/* Submit Button */}
               <button 

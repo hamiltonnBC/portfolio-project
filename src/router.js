@@ -29,7 +29,7 @@ import HomePage from './pages/home/home_page';
 import ProjectsPage from './pages/projects/projects_page';
 import AboutPage from './pages/about/about_page';
 import CertificationsPage from './pages/certifications/certifications_page';
-import ContactForm from './components/contact_form/contact_form_component';
+// import ContactForm from './components/contact_form/contact_form_component';
 
 /**
  * Application Router Component
@@ -64,7 +64,7 @@ function AppRouter() {
                 <Route path="certifications" element={<CertificationsPage />} />
 
                 {/* Contact Page */}
-                <Route path="contact" element={<ContactForm />} />
+                {/* <Route path="contact" element={<ContactForm />} /> */}
             </Route>
         </Routes>
     );

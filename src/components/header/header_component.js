@@ -80,12 +80,12 @@ const MobileHeader = ({ theme, setTheme }) => {
           >
             Certifications
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/contact"
             className={({ isActive }) => (isActive ? styles.activeLink : '')}
           >
             Contact
-          </NavLink>
+          </NavLink> */}
           <a href={resumePDF} target="_blank" rel="noopener noreferrer">
             Resume
           </a>
