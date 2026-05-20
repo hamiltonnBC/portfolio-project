@@ -18,11 +18,10 @@
 
 // External Dependencies
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 // Style Imports
 import './index.css';
-import './global.css';
 
 // Component Imports
 import App from './App';
@@ -37,11 +36,12 @@ console.log('Node Env:', process.env.NODE_ENV);
  * Mounts the application to the DOM element with id 'root'.
  * Uses StrictMode for additional development checks and warnings.
  */
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
     <React.StrictMode>
         <App />
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.StrictMode>
 );
 
 // Confirmation log for debugging

@@ -1,0 +1,194 @@
+.header {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    padding: 0 24px;
+    background: var(--bg-panel);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+  }
+
+  .logoLink {
+    font-family: var(--font-title);
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.02em;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* Hamburger Menu Button */
+  .hamburger {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 26px;
+    height: 20px;
+    padding: 0;
+    z-index: 1100;
+  }
+
+  .line {
+    width: 100%;
+    height: 2px;
+    background-color: var(--text-main);
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hamburgerActive .line:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+    background-color: var(--accent-primary);
+  }
+
+  .hamburgerActive .line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburgerActive .line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: var(--accent-primary);
+  }
+
+  /* Drawer Menu */
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    background: rgba(10, 14, 28, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-left: 1px solid var(--border-color);
+    padding: 100px 32px 32px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1050;
+  }
+
+  .drawerOpen {
+    transform: translateX(0);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .navMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .navMenu a {
+    font-family: var(--font-title);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    transition: var(--transition-fast);
+  }
+
+  .navMenu a:hover,
+  .navMenu .activeLink {
+    color: var(--accent-primary);
+    transform: translateX(4px);
+  }
+
+  /* Theme Section in Mobile Drawer */
+  .mobileThemeSection {
+    border-top: 1px solid var(--border-color);
+    padding-top: 24px;
+  }
+
+  .sectionTitle {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .themeSelector {
+    display: flex;
+    gap: 16px;
+  }
+
+  .themeDot {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: var(--transition-fast);
+  }
+
+  .themeDot:hover {
+    transform: scale(1.15);
+  }
+
+  .activeDot {
+    border-color: var(--text-main);
+    transform: scale(1.1);
+  }
+
+  .cyberpunkDot {
+    background: linear-gradient(135deg, oklch(0.78 0.16 200), oklch(0.68 0.22 310));
+  }
+
+  .emeraldDot {
+    background: linear-gradient(135deg, oklch(0.79 0.14 145), oklch(0.72 0.12 180));
+  }
+
+  .sapphireDot {
+    background: linear-gradient(135deg, oklch(0.65 0.18 250), oklch(0.75 0.13 210));
+  }
+
+  /* Mobile Socials */
+  .mobileSocials {
+    margin-top: auto;
+    display: flex;
+    gap: 16px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 24px;
+  }
+
+  .mobileSocials a {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    transition: var(--transition-fast);
+  }
+
+  .mobileSocials a:hover {
+    color: var(--accent-primary);
+  }
+
+  /* Overlay */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    z-index: 1020;
+  }
+}

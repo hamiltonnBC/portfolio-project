@@ -73,14 +73,17 @@ const AboutPage = () => {
         // Create and setup the observer
         const observer = new IntersectionObserver(observerCallback, observerOptions);
 
+        // Copy ref current to local variable for cleanup safety
+        const currentSections = sectionRefs.current;
+
         // Start observing all section references
-        sectionRefs.current.forEach((ref) => {
+        currentSections.forEach((ref) => {
             if (ref) observer.observe(ref);
         });
 
         // Cleanup function to remove observers
         return () => {
-            sectionRefs.current.forEach((ref) => {
+            currentSections.forEach((ref) => {
                 if (ref) observer.unobserve(ref);
             });
         };
@@ -108,7 +111,7 @@ const AboutPage = () => {
                         <p>As a Teaching Assistant and Manager in the Computer Science Department, I've discovered my passion for education. I've had the opportunity to develop curricula, mentor fellow students, and manage educational programs. These experiences have not only deepened my technical knowledge but also honed my communication and leadership skills.</p>
                     </div>
                 </div>
-                <img src={bereaCoverPhoto} alt="Berea cover photo" className={styles.fullWidthImage} />
+                <img src={bereaCoverPhoto} alt="Berea campus cover" className={styles.fullWidthImage} />
             </section>
 
             {/* Nonprofit Work Section */}
@@ -117,7 +120,7 @@ const AboutPage = () => {
                     <h3>Nonprofit Initiative</h3>
                     <p>One of my most rewarding experiences has been applying my skills to support a local nonprofit initiative. I developed a full-stack application using Vue.js, Flask, and PostgreSQL, which reinforced my belief in technology's power to drive positive change in communities.</p>
                 </div>
-                <img src={coverImage} alt="app cover photo" className={styles.sectionImage} />
+                <img src={coverImage} alt="UP Initiative database dashboard mockup" className={styles.sectionImage} />
             </section>
 
             {/* Data Science Experience Section */}
@@ -139,7 +142,7 @@ const AboutPage = () => {
             </section>
 
             {/* Contact Section */}
-            <section ref={el => sectionRefs.current[8] = el} className={styles.section}>
+            <section ref={el => sectionRefs.current[7] = el} className={styles.section}>
                 <h3>Let's Connect</h3>
                 <p>I'm always excited to connect with like-minded individuals who share my passion for technology and social impact. Whether you're interested in collaboration, have questions about my work, or just want to chat about the latest in tech and data science, feel free to reach out. Let's explore how we can use technology to make a difference!</p>
             </section>

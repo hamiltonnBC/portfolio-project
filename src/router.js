@@ -28,6 +28,8 @@ import Layout from './components/Layout';
 import HomePage from './pages/home/home_page';
 import ProjectsPage from './pages/projects/projects_page';
 import AboutPage from './pages/about/about_page';
+import CertificationsPage from './pages/certifications/certifications_page';
+import ContactForm from './components/contact_form/contact_form_component';
 
 /**
  * Application Router Component
@@ -39,17 +41,15 @@ import AboutPage from './pages/about/about_page';
  * Route Structure:
  * / (root)          -> HomePage
  * /projects         -> ProjectsPage
- * /about           -> AboutPage
+ * /about            -> AboutPage
+ * /certifications   -> CertificationsPage
+ * /contact          -> ContactForm
  *
  * @returns {JSX.Element} The configured router component with all application routes
  */
 function AppRouter() {
     return (
         <Routes>
-            {/*
-        Main Layout Route:
-        All child routes will be rendered within the Layout component
-      */}
             <Route path="/" element={<Layout />}>
                 {/* Home Page - shown at root URL */}
                 <Route index element={<HomePage />} />
@@ -59,6 +59,12 @@ function AppRouter() {
 
                 {/* About Page */}
                 <Route path="about" element={<AboutPage />} />
+
+                {/* Certifications Page */}
+                <Route path="certifications" element={<CertificationsPage />} />
+
+                {/* Contact Page */}
+                <Route path="contact" element={<ContactForm />} />
             </Route>
         </Routes>
     );
