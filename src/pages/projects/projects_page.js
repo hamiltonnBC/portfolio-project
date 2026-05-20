@@ -8,11 +8,15 @@
 
 import React, { useState } from 'react';
 import styles from './ProjectsPage.module.css';
+import censusPoster from '../../images/Poster_CensusConnect_User_Authentication_System.pdf';
+import foodInsecurityPoster from '../../images/PosterImage.jpg';
+import nextGenPoster from '../../images/nextGenPoster.jpeg';
+import marimoodPoster from '../../images/marimood.png';
 
 /**
  * Project Card Component
  */
-const ProjectCard = ({ title, description, link, githubLink, youtubeLink, designProcessLink, date, status, tags }) => (
+const ProjectCard = ({ title, description, link, githubLink, youtubeLink, designProcessLink, posterLink, posterLabel = "Research Poster", date, status, tags }) => (
   <div className={styles.projectCard}>
     <div className={styles.cardHeader}>
       <span className={styles.projectDate}>{date}</span>
@@ -83,6 +87,18 @@ const ProjectCard = ({ title, description, link, githubLink, youtubeLink, design
           Design Process <span>→</span>
         </a>
       )}
+
+      {/* Research/Application Poster link */}
+      {posterLink && (
+        <a
+          href={posterLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${styles.projectLink} ${styles.posterLink}`}
+        >
+          {posterLabel} <span>→</span>
+        </a>
+      )}
     </div>
   </div>
 );
@@ -94,6 +110,28 @@ const ProjectsPage = () => {
   const [filter, setFilter] = useState('all');
 
   const projects = [
+    {
+      title: "Marimood",
+      description: "A full-stack, data-driven mood tracking Progressive Web App (PWA) and proof of concept named after Japan's Marimo algae, developed to give users complete data customization and statistical analyses. Built following a literature review on Experience Sampling Methodology (ESM), user observations, and a heuristic evaluation. Features multi-variable regression with VIF collinearity detection, point-biserial correlation impact analysis, and real-time co-occurrence visualizations using Recharts.",
+      link: "https://marimood.com",
+      posterLink: marimoodPoster,
+      posterLabel: "Application Poster",
+      status: "Completed",
+      date: "2025",
+      category: "fullstack",
+      tags: ["React & PWA", "Recharts", "Statistical Analysis", "Heuristic Evaluation"]
+    },
+    {
+      title: "Engineering a Full-Stack AI System for Legal Tech",
+      description: "Comprehensive AI-powered legal technology platform with modular RAG system, PostgreSQL with pgvector, React TypeScript frontend, and Docker containerization. Developed during NextGen Justice LLC internship to democratize access to legal representation.",
+      link: "https://www.lyralegal.com/",
+      posterLink: nextGenPoster,
+      posterLabel: "Application Poster",
+      status: "Completed",
+      date: "June 2025 - August 2025",
+      category: "fullstack",
+      tags: ["AI & RAG", "React", "pgvector", "Docker"]
+    },
     {
       title: "CS Department Website",
       description: "Leading a team of 15+ student developers to build a comprehensive platform for the Berea College Computer Science department. Features include an evening lab hours scheduling application, student work portfolio directory, and a centralized hub for tutoring resources.",
@@ -109,6 +147,7 @@ const ProjectsPage = () => {
       description: "Developing a research tool in R to streamline and standardize the retrieval of US Census data, addressing access bottlenecks and formatting discrepancies for public policy researchers.",
       githubLink: "https://github.com/hamiltonnBC/CensusConnect.git",
       designProcessLink: "https://sites.google.com/view/nicholas-hamilton/project-portfolio-blog-post?authuser=1",
+      posterLink: censusPoster,
       status: "In Development",
       date: "2024 - Present",
       category: "datascience",
@@ -118,6 +157,7 @@ const ProjectsPage = () => {
       title: "Projecting Food Insecurity",
       description: "A machine learning and interactive forecasting platform. Built as a Shiny web application in R, it projects future county-level food insecurity levels across the Continental US to help Feeding America optimize resource distributions.",
       link: "https://virginiatechdatascienceforthepublicgood2024foodinsecurity.shinyapps.io/VTDSPGPFI/",
+      posterLink: foodInsecurityPoster,
       status: "Completed",
       date: "May 2024 - July 2024",
       category: "datascience",

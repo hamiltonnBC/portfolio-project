@@ -28,6 +28,9 @@ import codingPhoto from '../../images/CodingPhoto.jpeg';
 import coverImage from '../../images/UP_Cover_Image.png';
 import bereaCoverPhoto from '../../images/BereaCoverPhoto.jpeg';
 import vtdsCohort from '../../images/VTDSPG_Cohort.png';
+import nextGenImage from '../../images/ngj2.jpeg';
+import mahidolImage from '../../images/Mahidol.png';
+import privacyIcon from '../../images/05_ICON_FOREST.png';
 
 /**
  * About Page Component
@@ -40,6 +43,7 @@ import vtdsCohort from '../../images/VTDSPG_Cohort.png';
  * - Multiple content sections with images
  * - Professional background information
  * - Teaching and research experience
+ * - Privacy engineering and study abroad history
  *
  * @returns {JSX.Element} The About page component
  */
@@ -92,59 +96,108 @@ const AboutPage = () => {
     return (
         <div className={styles.aboutContainer}>
             {/* Introduction Section */}
-            <section ref={el => sectionRefs.current[0] = el} className={styles.section}>
-                <h2>About Me</h2>
-                <p>Hello! I'm Nicholas, a Computer Science student and Teaching Assistant with a passion for leveraging technology to address societal challenges. My journey in tech is driven by a desire to make a positive impact on the world.</p>
-            </section>
-
-            {/* Technical Background Section */}
-            <section ref={el => sectionRefs.current[1] = el} className={`${styles.section} ${styles.imageSection}`}>
-                <img src={codingPhoto} alt="Nicholas coding" className={styles.sectionImage} />
-                <p>My academic path has equipped me with a strong foundation in Python, C++, R and SQL. But beyond just coding, I'm fascinated by how these tools can be applied to real-world problems.</p>
-            </section>
-
-            {/* Teaching Experience Section */}
-            <section ref={el => sectionRefs.current[2] = el} className={`${styles.section} ${styles.teachingSection}`}>
-                <h3>Teaching and Mentoring</h3>
-                <div className={styles.teachingContent}>
-                    <div className={styles.teachingText}>
-                        <p>As a Teaching Assistant and Manager in the Computer Science Department, I've discovered my passion for education. I've had the opportunity to develop curricula, mentor fellow students, and manage educational programs. These experiences have not only deepened my technical knowledge but also honed my communication and leadership skills.</p>
-                    </div>
+            <section ref={el => sectionRefs.current[0] = el} className={`${styles.section} ${styles.nonprofitSection}`}>
+                <div className={styles.nonprofitContent}>
+                    <h2>About Me</h2>
+                    <p>
+                        Hello, I am Nicholas. As a software developer, data researcher, and privacy engineer, I build applications that sit at the intersection of complex data systems, artificial intelligence, and user security. I am currently pursuing my degree in Computer Science at Berea College, with an academic and professional path shaped by experiences ranging from leading teaching assistant cohorts in Kentucky to studying advanced data engineering in Thailand.
+                    </p>
+                    <p style={{ marginTop: '1rem' }}>
+                        My approach to technology is defined by a commitment to solving practical, real-world problems. Whether building full-stack platforms for legal professionals or analyzing public health datasets, I focus on constructing systems that are robust, secure, and respectful of the individuals whose data they process.
+                    </p>
                 </div>
-                <img src={bereaCoverPhoto} alt="Berea campus cover" className={styles.fullWidthImage} />
+                <img src={codingPhoto} alt="Nicholas Hamilton coding" className={styles.sectionImage} />
+            </section>
+
+            {/* Software Engineering and AI Systems */}
+            <section ref={el => sectionRefs.current[1] = el} className={`${styles.section} ${styles.nonprofitSection}`}>
+                <img src={nextGenImage} alt="NextGen Justice Development" className={styles.sectionImage} />
+                <div className={styles.nonprofitContent}>
+                    <h3>Software Engineering and AI Systems</h3>
+                    <p>
+                        During my time as a full stack engineer at NextGen Justice in San Jose, California, I contributed to the development of LyraLegal, a legal assistance platform for attorneys. The application integrates fine-tuned artificial intelligence models with a modular Retrieval-Augmented Generation (RAG) pipeline to deliver context-aware legal responses, source citations, and document-based reasoning.
+                    </p>
+                    <p style={{ marginTop: '1rem' }}>
+                        I led the design and implementation of the database architecture using PostgreSQL with the pgvector extension and Prisma ORM, enabling high-performance semantic search with HNSW indexing. I built an AI chatbot system with persistent memory, sliding context windows, and dynamic summarization, allowing attorneys to embed their own documents into the platform's legal corpus. Additionally, I designed user-facing pages and workflows in React and TypeScript, implemented secure authentication and role-based access control with Clerk, and deployed scalable AWS S3 storage integrated via Docker.
+                    </p>
+                </div>
             </section>
 
             {/* Nonprofit Work Section */}
-            <section ref={el => sectionRefs.current[3] = el} className={`${styles.section} ${styles.nonprofitSection}`}>
+            <section ref={el => sectionRefs.current[2] = el} className={`${styles.section} ${styles.nonprofitSection}`}>
                 <div className={styles.nonprofitContent}>
                     <h3>Nonprofit Initiative</h3>
-                    <p>One of my most rewarding experiences has been applying my skills to support a local nonprofit initiative. I developed a full-stack application using Vue.js, Flask, and PostgreSQL, which reinforced my belief in technology's power to drive positive change in communities.</p>
+                    <p>
+                        One of my most rewarding experiences has been applying my skills to support a local nonprofit initiative. I developed a full-stack application using Vue.js, Flask, and PostgreSQL, which reinforced my belief in technology's power to drive positive change in communities.
+                    </p>
                 </div>
                 <img src={coverImage} alt="UP Initiative database dashboard mockup" className={styles.sectionImage} />
             </section>
 
             {/* Data Science Experience Section */}
-            <section ref={el => sectionRefs.current[4] = el} className={styles.section}>
-                <h3>Data Science Journey</h3>
-                <p>My recent role as a Data Science Intern at Virginia Tech's Data Science for the Public Good program has been a turning point in my career. This experience has deepened my expertise in machine learning, predictive modeling, and time series analysis using R. I've had the opportunity to work on impactful projects, such as analyzing food insecurity trends and developing forecasting models.</p>
-            </section>
-
-            {/* Data Science Impact Section */}
-            <section ref={el => sectionRefs.current[5] = el} className={`${styles.section} ${styles.imageSection}`}>
+            <section ref={el => sectionRefs.current[3] = el} className={`${styles.section} ${styles.nonprofitSection}`}>
                 <img src={vtdsCohort} alt="Virginia Tech Cohort" className={styles.sectionImage} />
-                <p>Working with real-world data to address societal issues has been incredibly fulfilling. It's shown me the tangible impact that data-driven approaches can have on understanding and addressing complex social problems.</p>
+                <div className={styles.nonprofitContent}>
+                    <h3>Data Science for the Public Good</h3>
+                    <p>
+                        As a Data Science Intern in Virginia Tech's Data Science for the Public Good program, I collaborated with a research team to address food insecurity. We conducted extensive research on food insecurity and its related socioeconomic factors, developing a machine learning model to analyze these determinants and utilizing ARIMA modeling to forecast future regional trends.
+                    </p>
+                    <p style={{ marginTop: '1rem' }}>
+                        Our team built a predictive model to estimate food insecurity levels for a five-year period beyond available data across the continental United States. A significant part of our work involved performing targeted research for Southwest Virginia, providing actionable insights to Feeding Southwest Virginia, a subsidiary of Feeding America. This project highlighted how predictive data modeling and public health research can combine to address critical social welfare challenges.
+                    </p>
+                </div>
             </section>
 
-            {/* Interdisciplinary Focus Section */}
-            <section ref={el => sectionRefs.current[6] = el} className={styles.section}>
-                <h3>Interdisciplinary Passion</h3>
-                <p>What truly excites me is the intersection of computer science, data analysis, and sociology. I believe that by combining these disciplines, we can gain deeper insights into societal issues and develop more effective solutions. Whether it's through research, tech development, or data science, I'm committed to using my skills to drive positive change.</p>
+            {/* Teaching Experience Section */}
+            <section ref={el => sectionRefs.current[4] = el} className={`${styles.section} ${styles.teachingSection}`}>
+                <h3>Academic Mentorship and Leadership</h3>
+                <div className={styles.teachingContent}>
+                    <div className={styles.teachingText}>
+                        <p>
+                            Mentorship and academic leadership are central to my work in the Computer Science Department at Berea College. As the Lead Teaching Assistant and Manager, I balanced educational instruction, grading, and administrative responsibilities. I supported student learning by assisting with course instruction, creating educational materials such as mock assignments, practice exams, and study guides, and offering individual and group tutoring for complex programming concepts.
+                        </p>
+                        <p style={{ marginTop: '1rem' }}>
+                            On the managerial side, I organized schedules for the teaching assistant cohort, facilitated communication between students, teaching assistants, and faculty, and standardized teaching materials. I also mentored junior teaching assistants and managed feedback systems to continuously improve course delivery, ensuring our methods effectively met curriculum objectives and student needs.
+                        </p>
+                    </div>
+                </div>
+                <img src={bereaCoverPhoto} alt="Berea campus cover" className={styles.fullWidthImage} />
+            </section>
+
+            {/* Data Engineering Abroad */}
+            <section ref={el => sectionRefs.current[5] = el} className={`${styles.section} ${styles.nonprofitSection}`}>
+                <img src={mahidolImage} alt="Mahidol University Study Abroad" className={styles.sectionImage} />
+                <div className={styles.nonprofitContent}>
+                    <h3>Data Engineering and International Collaboration</h3>
+                    <p>
+                        In the fall of 2025, I studied abroad at Mahidol University International College in Thailand. This opportunity allowed me to complete coursework in data engineering, econometrics, Thai language, and philosophy and religion.
+                    </p>
+                    <p style={{ marginTop: '1rem' }}>
+                        While abroad, I worked on cross-cultural teams on a tourism econometrics project and a large-scale data engineering project focused on sentiment analysis. This work involved distributed data processing concepts and advanced algorithmic techniques, including frequent itemset mining using the Park-Chen-Yu (PCY) optimization of the Apriori algorithm, locality-sensitive hashing, and iterative data workflows. This experience was facilitated by the Berea College Center for International Education, expanding my technical toolkit and my ability to collaborate in global environments.
+                    </p>
+                </div>
+            </section>
+
+            {/* Privacy Engineering Section */}
+            <section ref={el => sectionRefs.current[6] = el} className={`${styles.section} ${styles.nonprofitSection}`}>
+                <div className={styles.nonprofitContent}>
+                    <h3>Privacy Engineering</h3>
+                    <p>
+                        Recently, I began my role as a Privacy Engineer at Integrative Privacy. This position represents a natural intersection of my work across software development, data science, and artificial intelligence. My experiences in full-stack engineering and legal technology showed me the complexities of managing sensitive client documents and maintaining strict data isolation boundaries. Similarly, my research in data science demonstrated how easily personal details can be exposed within large datasets.
+                    </p>
+                    <p style={{ marginTop: '1rem' }}>
+                        These experiences shaped my interest in users' data privacy. I believe that privacy cannot merely be a legal review checklist at the end of a product cycle. Instead, privacy must be built directly into the codebase. I am focused on privacy-by-design and privacy engineering, developing technical solutions that protect user information and secure data flows directly within the software architecture.
+                    </p>
+                </div>
+                <a href="https://www.integrativeprivacy.com/" target="_blank" rel="noopener noreferrer" className={styles.privacyLink}>
+                    <img src={privacyIcon} alt="Integrative Privacy Logo" className={styles.privacyLogo} />
+                </a>
             </section>
 
             {/* Contact Section */}
             <section ref={el => sectionRefs.current[7] = el} className={styles.section}>
                 <h3>Let's Connect</h3>
-                <p>I'm always excited to connect with like-minded individuals who share my passion for technology and social impact. Whether you're interested in collaboration, have questions about my work, or just want to chat about the latest in tech and data science, feel free to reach out. Let's explore how we can use technology to make a difference!</p>
+                <p>I'm always excited to connect with like-minded individuals who share my passion for technology, data science, and privacy engineering. Whether you're interested in collaboration, have questions about my work, or just want to chat about the latest in tech, feel free to reach out. Let's explore how we can build secure and impactful technology together!</p>
             </section>
         </div>
     );

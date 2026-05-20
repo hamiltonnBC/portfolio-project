@@ -5,10 +5,12 @@
  * and a status indicator.
  *************************************************/
 
-import React from 'react';
-import styles from './footer_styles.module.css';
+// import React from 'react';
+// import styles from './footer_styles.module.css';
 
 const Footer = () => {
+  return null;
+  /*
   const currentYear = new Date().getFullYear();
 
   return (
@@ -45,6 +47,7 @@ const Footer = () => {
       </div>
     </footer>
   );
+  */
 };
 
 export default Footer;
