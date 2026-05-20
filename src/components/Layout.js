@@ -47,7 +47,7 @@ const resumePDF = process.env.PUBLIC_URL + '/Resume_Hamilton_Nicholas.pdf';
  */
 const Layout = () => {
   // State Management for Themes and Toggleable Elements
-  const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'cyberpunk');
+  const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'sapphire');
   const [showEmail, setShowEmail] = useState(false);
   
   // Animation states for progressive loading
@@ -180,9 +180,9 @@ const Layout = () => {
                 <span className={styles.themeLabel}>Theme Accent</span>
                 <div className={styles.themeSelector}>
                   <button
-                    className={`${styles.themeDot} ${styles.cyberpunkDot} ${theme === 'cyberpunk' ? styles.activeDot : ''}`}
-                    onClick={() => setTheme('cyberpunk')}
-                    title="Cyberpunk Theme"
+                    className={`${styles.themeDot} ${styles.sapphireDot} ${theme === 'sapphire' ? styles.activeDot : ''}`}
+                    onClick={() => setTheme('sapphire')}
+                    title="Sapphire Theme"
                   />
                   <button
                     className={`${styles.themeDot} ${styles.emeraldDot} ${theme === 'emerald' ? styles.activeDot : ''}`}
@@ -190,9 +190,9 @@ const Layout = () => {
                     title="Emerald Theme"
                   />
                   <button
-                    className={`${styles.themeDot} ${styles.sapphireDot} ${theme === 'sapphire' ? styles.activeDot : ''}`}
-                    onClick={() => setTheme('sapphire')}
-                    title="Sapphire Theme"
+                    className={`${styles.themeDot} ${styles.cyberpunkDot} ${theme === 'cyberpunk' ? styles.activeDot : ''}`}
+                    onClick={() => setTheme('cyberpunk')}
+                    title="Cyberpunk Theme"
                   />
                 </div>
               </div>

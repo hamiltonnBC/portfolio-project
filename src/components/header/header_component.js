@@ -96,9 +96,9 @@ const MobileHeader = ({ theme, setTheme }) => {
           <p className={styles.sectionTitle}>Theme Accent</p>
           <div className={styles.themeSelector}>
             <button
-              className={`${styles.themeDot} ${styles.cyberpunkDot} ${theme === 'cyberpunk' ? styles.activeDot : ''}`}
-              onClick={() => setTheme('cyberpunk')}
-              title="Cyberpunk Theme"
+              className={`${styles.themeDot} ${styles.sapphireDot} ${theme === 'sapphire' ? styles.activeDot : ''}`}
+              onClick={() => setTheme('sapphire')}
+              title="Sapphire Theme"
             />
             <button
               className={`${styles.themeDot} ${styles.emeraldDot} ${theme === 'emerald' ? styles.activeDot : ''}`}
@@ -106,9 +106,9 @@ const MobileHeader = ({ theme, setTheme }) => {
               title="Emerald Theme"
             />
             <button
-              className={`${styles.themeDot} ${styles.sapphireDot} ${theme === 'sapphire' ? styles.activeDot : ''}`}
-              onClick={() => setTheme('sapphire')}
-              title="Sapphire Theme"
+              className={`${styles.themeDot} ${styles.cyberpunkDot} ${theme === 'cyberpunk' ? styles.activeDot : ''}`}
+              onClick={() => setTheme('cyberpunk')}
+              title="Cyberpunk Theme"
             />
           </div>
         </div>

@@ -25,6 +25,8 @@ import styles from './certifications_styles.module.css';
 
 // Image Imports
 import dataLiteracyCertification from '../../images/DataLitCert.png';
+import privacyEngineerCert from '../../images/privacyEngineerCert.png';
+import apiSecCert from '../../images/API_SEC_CERT.png';
 
 /**
  * Certifications and Publications Page Component
@@ -66,13 +68,15 @@ const CertificationsPage = () => {
                 </div>
                 
                 <div className={styles.certificationCard}>
-                    <h3>Data Literacy Certification</h3>
+                    <h3>Technical Privacy Masterclass</h3>
                     <img
-                        src={dataLiteracyCertification}
-                        alt="Data Literacy Certification"
+                        src={privacyEngineerCert}
+                        alt="Technical Privacy Masterclass Certificate"
                         className={styles.certificationImage}
                     />
-                    <p>Certification in Data Literacy, demonstrating proficiency in understanding and interpreting data.</p>
+                    <p>
+                        Completed the Technical Privacy Masterclass from Privado AI, focusing on the concepts of privacy engineering and privacy-by-code. The course covered advanced privacy frameworks beyond standard GDPR and CCPA checklists, emphasizing integration of automated data privacy checks directly into software pipelines.
+                    </p>
                 </div>
                 
                 <div className={styles.certificationCard}>
@@ -108,6 +112,28 @@ const CertificationsPage = () => {
                     />
                     <p>
                         Initiated into Epsilon Pi Tau, the International Honor Society for Professions in Technology, as a member of the Gamma Mu Chapter at Berea College.
+                    </p>
+                </div>
+
+                <div className={styles.certificationCard}>
+                    <h3>Data Literacy Certification</h3>
+                    <img
+                        src={dataLiteracyCertification}
+                        alt="Data Literacy Certification"
+                        className={styles.certificationImage}
+                    />
+                    <p>Certification in Data Literacy, demonstrating proficiency in understanding and interpreting data.</p>
+                </div>
+
+                <div className={styles.certificationCard}>
+                    <h3>OWASP API Security Top 10</h3>
+                    <img
+                        src={apiSecCert}
+                        alt="OWASP API Security Top 10 Certificate"
+                        className={styles.certificationImage}
+                    />
+                    <p>
+                        Completed the OWASP API Security Top 10 course at APIsec University, which reviews critical API vulnerabilities and demonstrates real-world threat mitigation strategies and security best practices for API endpoints.
                     </p>
                 </div>
             </section>
