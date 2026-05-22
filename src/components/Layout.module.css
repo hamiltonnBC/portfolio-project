@@ -28,7 +28,8 @@
 
 /* Left Panel - Fixed Glass Sidebar */
 .leftPanel {
-  width: 30%;
+  width: 24%;
+  max-width: 320px;
   padding: 1.5rem;
   position: fixed;
   height: 100vh;
@@ -44,7 +45,7 @@
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-lg);
-  padding: 3rem 2.2rem;
+  padding: 2.5rem 1.8rem;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -59,8 +60,8 @@
 
 /* Right Panel - Scrollable Content Layout */
 .rightPanel {
-  width: 70%;
-  margin-left: 30%;
+  width: 76%;
+  margin-left: 24%;
   padding: 2.5rem 2rem 0 2rem;
   overflow-y: auto;
   height: 100vh;
@@ -70,7 +71,7 @@
 }
 
 .rightPanelContent {
-  max-width: 900px;
+  max-width: 1180px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -95,9 +96,9 @@
 
 /* Shimmering Title Text */
 .name {
-  font-size: 2.4rem;
+  font-size: 1.85rem;
   font-weight: 800;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   font-family: var(--font-title);
   line-height: 1.15;
 }
@@ -314,11 +315,12 @@
 /* Responsive Overrides */
 @media (max-width: 1024px) {
   .leftPanel {
-    width: 35%;
+    width: 30%;
+    max-width: none;
   }
   .rightPanel {
-    width: 65%;
-    margin-left: 35%;
+    width: 70%;
+    margin-left: 30%;
   }
 }
 

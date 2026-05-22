@@ -57,8 +57,8 @@ const HomePage = () => {
             <div className={styles.glowRing}></div>
           </div>
           <div className={styles.heroText}>
-            <span className={styles.badge}>Welcome to my Portfolio</span>
-            <h1 className={styles.heroTitle}>Nicholas Hamilton</h1>
+            {/* <span className={styles.badge}>Welcome to my Portfolio</span> */}
+            <h1 className={styles.heroTitle}>Welcome to my Portfolio</h1>
             <p className={styles.heroSubtitle}>
               <a href="https://www.berea.edu/" target="_blank" rel="noopener noreferrer">Berea College</a> Graduate & Privacy Engineer at <a href="https://www.integrativeprivacy.com/" target="_blank" rel="noopener noreferrer">Integrative Privacy</a>.
             </p>

@@ -19,7 +19,7 @@
 
 // External Dependencies
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 
 // Style Imports
 import styles from './Layout.module.css';
@@ -56,12 +56,23 @@ const Layout = () => {
   const [showContent, setShowContent] = useState(false);
 
   const containerRef = useRef(null);
+  const rightPanelRef = useRef(null);
+  const location = useLocation();
 
   // Apply theme to document element
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('portfolio-theme', theme);
   }, [theme]);
+
+  // Reset scroll position to the top whenever the route changes.
+  // Desktop scrolls inside .rightPanel; mobile scrolls the window.
+  useEffect(() => {
+    if (rightPanelRef.current) {
+      rightPanelRef.current.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    }
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
 
   // Track mouse coordinates for background radial glow
   useEffect(() => {
@@ -175,7 +186,8 @@ const Layout = () => {
                 <p className={styles.emailDisplay}>hamiltonn428@gmail.com</p>
               )}
 
-              {/* Theme Selector Widget */}
+              {/* Theme Selector Widget — temporarily hidden, keep for future use */}
+              {/*
               <div className={styles.themeSection}>
                 <span className={styles.themeLabel}>Theme Accent</span>
                 <div className={styles.themeSelector}>
@@ -196,13 +208,14 @@ const Layout = () => {
                   />
                 </div>
               </div>
+              */}
             </div>
           )}
         </div>
       </div>
 
       {/* Right Panel - Dynamic Content */}
-      <div className={styles.rightPanel}>
+      <div ref={rightPanelRef} className={styles.rightPanel}>
         <main className={styles.rightPanelContent}>
           <Outlet />
           <Footer />

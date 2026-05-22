@@ -13,11 +13,24 @@
     right: 0;
     height: 70px;
     padding: 0 24px;
-    background: var(--bg-panel);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: var(--bg-dark);
     border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
     z-index: 1000;
+  }
+
+  /* Subtle accent tint over the solid base so it still feels themed */
+  .header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-panel);
+    pointer-events: none;
+  }
+
+  .header > * {
+    position: relative;
+    z-index: 1;
   }
 
   .logoLink {
@@ -74,9 +87,7 @@
     right: 0;
     bottom: 0;
     width: 280px;
-    background: rgba(10, 14, 28, 0.98);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    background: var(--bg-dark);
     border-left: 1px solid var(--border-color);
     padding: 100px 32px 32px 32px;
     display: flex;
@@ -85,6 +96,21 @@
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 1050;
+    overflow-y: auto;
+  }
+
+  /* Themed tint layer — sits on top of the solid bg, behind the content */
+  .drawer::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--bg-panel);
+    pointer-events: none;
+  }
+
+  .drawer > * {
+    position: relative;
+    z-index: 1;
   }
 
   .drawerOpen {
@@ -187,8 +213,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.65);
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     z-index: 1020;
   }
 }

@@ -91,7 +91,8 @@ const MobileHeader = ({ theme, setTheme }) => {
           </a>
         </nav>
 
-        {/* Theme Selectors inside Mobile Menu */}
+        {/* Theme Selectors inside Mobile Menu — temporarily hidden, keep for future use */}
+        {/*
         <div className={styles.mobileThemeSection}>
           <p className={styles.sectionTitle}>Theme Accent</p>
           <div className={styles.themeSelector}>
@@ -112,6 +113,7 @@ const MobileHeader = ({ theme, setTheme }) => {
             />
           </div>
         </div>
+        */}
 
         {/* Social Links inside Mobile Menu */}
         <div className={styles.mobileSocials}>
