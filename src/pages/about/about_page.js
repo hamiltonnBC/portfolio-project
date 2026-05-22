@@ -229,10 +229,15 @@ const AboutPage = () => {
                     <div className={styles.nonprofitContent}>
                         <h2>About Me</h2>
                         <p>
-                            Hello, I am Nicholas. As a software developer, data researcher, and privacy engineer, I build applications that sit at the intersection of complex data systems, artificial intelligence, and user security. I am currently pursuing my degree in Computer Science at Berea College, with an academic and professional path shaped by experiences ranging from leading teaching assistant cohorts in Kentucky to studying advanced data engineering in Thailand.
+                            Hi, I'm Nicholas. I'm a computer science graduate from Berea College, 
+                            and most of what I work on lives somewhere in the overlap between software
+                             engineering, data, and privacy. I have detailed some of my key moments here. 
+                             These include leading the CS TA department at my college, learning big data engineering algorithms in Thailand,
+                            and working in legal tech for an AI startup.
                         </p>
                         <p style={{ marginTop: '1rem' }}>
-                            My approach to technology is defined by a commitment to solving practical, real-world problems. Whether building full-stack platforms for legal professionals or analyzing public health datasets, I focus on constructing systems that are robust, secure, and respectful of the individuals whose data they process.
+                            It is a priority for me that the software I work on and the data that I work with are for used for the public good, and I am lucky enough to 
+                            have the learning and work experiences that have supported this priority.
                         </p>
                     </div>
                     <img src={codingPhoto} alt="Nicholas Hamilton coding" className={styles.sectionImage} />
@@ -248,10 +253,13 @@ const AboutPage = () => {
                     <div className={styles.teachingContent}>
                         <div className={styles.teachingText}>
                             <p>
-                                Mentorship and academic leadership are central to my work in the Computer Science Department at Berea College. As the Lead Teaching Assistant and Manager, I balanced educational instruction, grading, and administrative responsibilities. I supported student learning by assisting with course instruction, creating educational materials such as mock assignments, practice exams, and study guides, and offering individual and group tutoring for complex programming concepts.
+                                A lot of what I did at Berea happened inside the Computer Science Department, where I worked as the Lead Teaching Assistant and Manager.
+                                 The role was part teaching, part operations. On any given week I might be sitting next to a student assisting with a data structures & algorithms course, 
+                                 writing a mock exam to help a class prep for finals, or developing visualizations for more complex topics.
                             </p>
                             <p style={{ marginTop: '1rem' }}>
-                                On the managerial side, I organized schedules for the teaching assistant cohort, facilitated communication between students, teaching assistants, and faculty, and standardized teaching materials. I also mentored junior teaching assistants and managed feedback systems to continuously improve course delivery, ensuring our methods effectively met curriculum objectives and student needs.
+                                The management piece consisted of a variety tasks. These included crafting the schedule for our TA cohort,
+                                 assisting in the communication between students, TAs, and faculty, and leading our weekly meetings.
                             </p>
                         </div>
                     </div>
@@ -267,7 +275,10 @@ const AboutPage = () => {
                     <div className={styles.nonprofitContent}>
                         <h3>Nonprofit Initiative</h3>
                         <p>
-                            One of my most rewarding experiences has been applying my skills to support a local nonprofit initiative. I developed a full-stack application using Vue.js, Flask, and PostgreSQL, which reinforced my belief in technology's power to drive positive change in communities.
+                            One of the projects that really helped allow me to see the impact that software and data infastructure can have for the public good,
+                            was building a data tracking platform for a local nonprofit.
+                            The UP initiative was focused on providing a variety of resources to the unhoused population in our county.
+                            I led a team of four to build them a full-stack application using Vue.js, Flask, and PostgreSQL.
                         </p>
                     </div>
                     <img src={coverImage} alt="UP Initiative database dashboard mockup" className={styles.sectionImage} />
@@ -283,10 +294,13 @@ const AboutPage = () => {
                     <div className={styles.nonprofitContent}>
                         <h3>Data Science for the Public Good</h3>
                         <p>
-                            As a Data Science Intern in Virginia Tech's Data Science for the Public Good program, I collaborated with a research team to address food insecurity. We conducted extensive research on food insecurity and its related socioeconomic factors, developing a machine learning model to analyze these determinants and utilizing ARIMA modeling to forecast future regional trends.
+                            The following summer, I spent as a Data Science Intern with Virginia Tech's Data Science for the Public Good program. 
+                            I worked alongside an exceedingly talented group of researchers in a multi-discplinary team 
+                             We dug into the socioeconomic factors that drive food insecurity and trained a machine learning model based on a large dataset we crafted. 
+                            We used ARIMA modeling to project regional trends forward so our stakeholders could use our findings for better resource allocation.
                         </p>
                         <p style={{ marginTop: '1rem' }}>
-                            Our team built a predictive model to estimate food insecurity levels for a five-year period beyond available data across the continental United States. A significant part of our work involved performing targeted research for Southwest Virginia, providing actionable insights to Feeding Southwest Virginia, a subsidiary of Feeding America. This project highlighted how predictive data modeling and public health research can combine to address critical social welfare challenges.
+                            We ended up building a predictive model that estimated food insecurity levels across the continental U.S. for a five-year window past the available data. 
                         </p>
                     </div>
                 </section>
@@ -301,10 +315,16 @@ const AboutPage = () => {
                     <div className={styles.nonprofitContent}>
                         <h3>Software Engineering and AI Systems</h3>
                         <p>
-                            During my time as a full stack engineer at NextGen Justice in San Jose, California, I contributed to the development of LyraLegal, a legal assistance platform for attorneys. The application integrates fine-tuned artificial intelligence models with a modular Retrieval-Augmented Generation (RAG) pipeline to deliver context-aware legal responses, source citations, and document-based reasoning.
+                            From there I moved out to San Jose to work as a full stack engineer at NextGen Justice, where I joined the team building LyraLegal.
+                             The product is a legal assistance platform for attorneys,
+                            pairing fine-tuned AI models with a modular Retrieval-Augmented Generation pipeline.
                         </p>
                         <p style={{ marginTop: '1rem' }}>
-                            I led the design and implementation of the database architecture using PostgreSQL with the pgvector extension and Prisma ORM, enabling high-performance semantic search with HNSW indexing. I built an AI chatbot system with persistent memory, sliding context windows, and dynamic summarization, allowing attorneys to embed their own documents into the platform's legal corpus. Additionally, I designed user-facing pages and workflows in React and TypeScript, implemented secure authentication and role-based access control with Clerk, and deployed scalable AWS S3 storage integrated via Docker.
+                            I owned the database side of that system. I designed the schema in PostgreSQL with the pgvector extension and Prisma on top, 
+                            and tuned it for semantic search using HNSW indexes so queries stayed fast as the corpus grew. On the AI side, I built the chatbot's 
+                            memory layer with sliding context windows and dynamic summarization, which is what lets attorneys upload their own documents and have the 
+                            assistant reason over them alongside the broader legal corpus. I also built out a lot of the user-facing experience in React and TypeScript, 
+                            set up authentication and role-based access through Clerk, and wired up the AWS S3 storage layer behind a Docker deployment.
                         </p>
                     </div>
                 </section>
@@ -319,11 +339,16 @@ const AboutPage = () => {
                     <div className={styles.nonprofitContent}>
                         <h3>Data Engineering and International Collaboration</h3>
                         <p>
-                            In the fall of 2025, I studied abroad at Mahidol University International College in Thailand. This opportunity allowed me to complete coursework in data engineering, econometrics, Thai language, and philosophy and religion.
+                            In the fall of 2025 I studied abroad at Mahidol University International College in Thailand.
+                             Coursework spanned data engineering, econometrics, Thai language, and philosophy and religion, 
+                             which is a stranger combination on paper than it felt in practice. 
                         </p>
                         <p style={{ marginTop: '1rem' }}>
-                            While abroad, I worked on cross-cultural teams on a tourism econometrics project and a large-scale data engineering project focused on sentiment analysis. This work involved distributed data processing concepts and advanced algorithmic techniques, including frequent itemset mining using the Park-Chen-Yu (PCY) optimization of the Apriori algorithm, locality-sensitive hashing, and iterative data workflows. This experience was facilitated by the Berea College Center for International Education, expanding my technical toolkit and my ability to collaborate in global environments.
-                        </p>
+                            I worked on a couple of projects with cross-cultural teams while I was there. 
+                            One was a tourism econometrics study, and the other was a larger data engineering project on sentiment analysis where we got into the weeds of distributed processing.
+                             We used the Park-Chen-Yu (PCY) optimization of the Apriori algorithm for frequent itemset mining and
+                             locality-sensitive hashing for near-duplicate detection. 
+                             </p>
                     </div>
                 </section>
 
@@ -336,10 +361,17 @@ const AboutPage = () => {
                     <div className={styles.nonprofitContent}>
                         <h3>Privacy Engineering</h3>
                         <p>
-                            Recently, I began my role as a Privacy Engineer at Integrative Privacy. This position represents a natural intersection of my work across software development, data science, and artificial intelligence. My experiences in full-stack engineering and legal technology showed me the complexities of managing sensitive client documents and maintaining strict data isolation boundaries. Similarly, my research in data science demonstrated how easily personal details can be exposed within large datasets.
+                            Most recently I started as a Privacy Engineer at Integrative Privacy, 
+                            and in a lot of ways this role pulls together the threads of everything that came before it. 
+                            Working in legal tech taught me how careful you have to be with sensitive client documents and 
+                            how easily data isolation boundaries can get fuzzy when a system grows. The data science work 
+                            taught me the flip side of that, which is how much personal information can leak out of a dataset that, 
+                            on the surface, looks anonymous.
                         </p>
                         <p style={{ marginTop: '1rem' }}>
-                            These experiences shaped my interest in users' data privacy. I believe that privacy cannot merely be a legal review checklist at the end of a product cycle. Instead, privacy must be built directly into the codebase. I am focused on privacy-by-design and privacy engineering, developing technical solutions that protect user information and secure data flows directly within the software architecture.
+                            That combination is what pushed me toward privacy as a discipline.
+                            I belive strongly in Privacy-by-design, and the work
+                              I'm doing now is building software that assists other engineers in abiding by this. 
                         </p>
                     </div>
                     <a
