@@ -13,7 +13,7 @@ import styles from './ProjectsPage.module.css';
 import censusPoster from '../../images/Poster_CensusConnect_User_Authentication_System.pdf';
 import foodInsecurityPoster from '../../images/PosterImage.jpg';
 import nextGenPoster from '../../images/nextGenPoster.jpeg';
-import marimoodPoster from '../../images/marimood.png';
+import marimoodPoster from '../../images/marimood.jpg';
 
 /**
  * Project Card Component

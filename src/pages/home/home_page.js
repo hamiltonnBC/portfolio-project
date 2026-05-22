@@ -12,12 +12,12 @@ import { Link } from 'react-router-dom';
 import styles from './home_styles.module.css';
 
 // Image Imports
-import personalHeadshot from '../../images/PERSONAL_HEADSHOT.png';
+import personalHeadshot from '../../images/PERSONAL_HEADSHOT.jpg';
 import whiteBereaLogo from '../../images/whiteBereaCollegeLogo.png';
-import upCoverImage from '../../images/UP_Cover_Image.png';
+import upCoverImage from '../../images/UP_Cover_Image.jpg';
 import posterImage from '../../images/PosterImage.jpg';
 import nextGenPoster from '../../images/nextGenPoster.jpeg';
-import marimoodPoster from '../../images/marimood.png';
+import marimoodPoster from '../../images/marimood.jpg';
 
 const HomePage = () => {
   const [activeImage, setActiveImage] = React.useState(null);
@@ -53,6 +53,7 @@ const HomePage = () => {
               src={personalHeadshot}
               alt="Nicholas Hamilton"
               className={styles.headshot}
+              decoding="async"
             />
             <div className={styles.glowRing}></div>
           </div>
@@ -156,6 +157,8 @@ const HomePage = () => {
                 src={marimoodPoster}
                 alt="Marimood PWA"
                 className={styles.cardImage}
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className={styles.cardContent}>
@@ -188,6 +191,8 @@ const HomePage = () => {
                 src={nextGenPoster}
                 alt="Engineering a Full-Stack AI System for Legal Tech"
                 className={styles.cardImage}
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className={styles.cardContent}>
@@ -220,6 +225,8 @@ const HomePage = () => {
                 src={posterImage}
                 alt="Food Insecurity Poster"
                 className={styles.cardImage}
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className={styles.cardContent}>
@@ -251,6 +258,8 @@ const HomePage = () => {
                 src={upCoverImage}
                 alt="UP Initiative Cover"
                 className={styles.cardImage}
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className={styles.cardContent}>
@@ -289,6 +298,8 @@ const HomePage = () => {
             src={whiteBereaLogo}
             alt="Berea College Logo"
             className={styles.bereaLogo}
+            loading="lazy"
+            decoding="async"
           />
           <div className={styles.graduateInfo}>
             <span className={styles.graduateTitle}>Berea College Graduate</span>
@@ -305,7 +316,7 @@ const HomePage = () => {
           </button>
           <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
             <a href={activeImage} target="_blank" rel="noopener noreferrer" title="Click to open image in new tab to zoom further">
-              <img src={activeImage} alt={activeTitle} className={styles.lightboxImage} />
+              <img src={activeImage} alt={activeTitle} className={styles.lightboxImage} decoding="async" />
             </a>
             {activeTitle && (
               <div className={styles.lightboxFooter}>

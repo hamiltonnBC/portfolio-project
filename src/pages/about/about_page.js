@@ -28,11 +28,11 @@ import styles from './AboutPage.module.css';
 
 // Image Imports
 import codingPhoto from '../../images/CodingPhoto.jpeg';
-import coverImage from '../../images/UP_Cover_Image.png';
+import coverImage from '../../images/UP_Cover_Image.jpg';
 import bereaCoverPhoto from '../../images/BereaCoverPhoto.jpeg';
-import vtdsCohort from '../../images/VTDSPG_Cohort.png';
+import vtdsCohort from '../../images/VTDSPG_Cohort.jpg';
 import nextGenImage from '../../images/ngj2.jpeg';
-import mahidolImage from '../../images/Mahidol.png';
+import mahidolImage from '../../images/Mahidol.jpg';
 import privacyIcon from '../../images/05_ICON_FOREST.png';
 
 /**
@@ -240,7 +240,7 @@ const AboutPage = () => {
                             have the learning and work experiences that have supported this priority.
                         </p>
                     </div>
-                    <img src={codingPhoto} alt="Nicholas Hamilton coding" className={styles.sectionImage} />
+                    <img src={codingPhoto} alt="Nicholas Hamilton coding" className={styles.sectionImage} loading="lazy" decoding="async" />
                 </section>
 
                 {/* 2. Academic Mentorship and Leadership */}
@@ -263,7 +263,7 @@ const AboutPage = () => {
                             </p>
                         </div>
                     </div>
-                    <img src={bereaCoverPhoto} alt="Berea campus cover" className={styles.fullWidthImage} />
+                    <img src={bereaCoverPhoto} alt="Berea campus cover" className={styles.fullWidthImage} loading="lazy" decoding="async" />
                 </section>
 
                 {/* 3. Nonprofit Initiative */}
@@ -281,7 +281,7 @@ const AboutPage = () => {
                             I led a team of four to build them a full-stack application using Vue.js, Flask, and PostgreSQL.
                         </p>
                     </div>
-                    <img src={coverImage} alt="UP Initiative database dashboard mockup" className={styles.sectionImage} />
+                    <img src={coverImage} alt="UP Initiative database dashboard mockup" className={styles.sectionImage} loading="lazy" decoding="async" />
                 </section>
 
                 {/* 4. Data Science for the Public Good */}
@@ -290,7 +290,7 @@ const AboutPage = () => {
                     ref={(el) => (sectionRefs.current[3] = el)}
                     className={`${styles.section} ${styles.nonprofitSection}`}
                 >
-                    <img src={vtdsCohort} alt="Virginia Tech Cohort" className={styles.sectionImage} />
+                    <img src={vtdsCohort} alt="Virginia Tech Cohort" className={styles.sectionImage} loading="lazy" decoding="async" />
                     <div className={styles.nonprofitContent}>
                         <h3>Data Science for the Public Good</h3>
                         <p>
@@ -311,7 +311,7 @@ const AboutPage = () => {
                     ref={(el) => (sectionRefs.current[4] = el)}
                     className={`${styles.section} ${styles.nonprofitSection}`}
                 >
-                    <img src={nextGenImage} alt="NextGen Justice Development" className={styles.sectionImage} />
+                    <img src={nextGenImage} alt="NextGen Justice Development" className={styles.sectionImage} loading="lazy" decoding="async" />
                     <div className={styles.nonprofitContent}>
                         <h3>Software Engineering and AI Systems</h3>
                         <p>
@@ -335,7 +335,7 @@ const AboutPage = () => {
                     ref={(el) => (sectionRefs.current[5] = el)}
                     className={`${styles.section} ${styles.nonprofitSection}`}
                 >
-                    <img src={mahidolImage} alt="Mahidol University Study Abroad" className={styles.sectionImage} />
+                    <img src={mahidolImage} alt="Mahidol University Study Abroad" className={styles.sectionImage} loading="lazy" decoding="async" />
                     <div className={styles.nonprofitContent}>
                         <h3>Data Engineering and International Collaboration</h3>
                         <p>
@@ -380,7 +380,7 @@ const AboutPage = () => {
                         rel="noopener noreferrer"
                         className={styles.privacyLink}
                     >
-                        <img src={privacyIcon} alt="Integrative Privacy Logo" className={styles.privacyLogo} />
+                        <img src={privacyIcon} alt="Integrative Privacy Logo" className={styles.privacyLogo} loading="lazy" decoding="async" />
                     </a>
                 </section>
             </div>

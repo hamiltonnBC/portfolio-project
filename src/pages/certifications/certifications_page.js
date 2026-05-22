@@ -55,6 +55,8 @@ const CertificationsPage = () => {
                         src={process.env.PUBLIC_URL + '/research_paper_title.png'}
                         alt="Food Insecurity in Southwest Virginia Publication Title"
                         className={styles.certificationImage}
+                        loading="lazy"
+                        decoding="async"
                     />
                     <a href={process.env.PUBLIC_URL + '/FoodInsecurityinSouthwestVirginia.pdf'} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
                         View Publication (PDF)
@@ -73,6 +75,8 @@ const CertificationsPage = () => {
                         src={privacyEngineerCert}
                         alt="Technical Privacy Masterclass Certificate"
                         className={styles.certificationImage}
+                        loading="lazy"
+                        decoding="async"
                     />
                     <p>
                         Completed the Technical Privacy Masterclass from Privado AI, focusing on the concepts of privacy engineering and privacy-by-code. The course covered advanced privacy frameworks beyond standard GDPR and CCPA checklists, emphasizing integration of automated data privacy checks directly into software pipelines.
@@ -85,6 +89,8 @@ const CertificationsPage = () => {
                         src={process.env.PUBLIC_URL + '/CRLA ITTPC Nicholas Hamilton.png'}
                         alt="Level I International Tutor Certification"
                         className={styles.certificationImage}
+                        loading="lazy"
+                        decoding="async"
                     />
                     <p>
                         Earned Level I certification by completing training through Berea College's Center for Teaching and Learning. Certification requirements included 25+ hours of active tutoring, 10 hours of instructional training, a written tutoring philosophy, and an observed tutoring session.
@@ -97,6 +103,8 @@ const CertificationsPage = () => {
                         src={process.env.PUBLIC_URL + '/Nicholas_Hamilton_Silicon_Valley_Accelerator_Program_certificate_summer25.png'}
                         alt="Silicon Valley Accelerator Program Certificate"
                         className={styles.certificationImage}
+                        loading="lazy"
+                        decoding="async"
                     />
                     <p>
                         Joined fellow AI Startup interns in attending talks and workshops led by experts across AI, entrepreneurship, venture capital, and product design. We've also pitched our own startup ideas, learning to frame them for both investors and end users - whether in B2B or B2C contexts.
@@ -109,6 +117,8 @@ const CertificationsPage = () => {
                         src={process.env.PUBLIC_URL + '/EpsilonCert.jpeg'}
                         alt="Epsilon Pi Tau Honor Society Certificate"
                         className={styles.certificationImage}
+                        loading="lazy"
+                        decoding="async"
                     />
                     <p>
                         Initiated into Epsilon Pi Tau, the International Honor Society for Professions in Technology, as a member of the Gamma Mu Chapter at Berea College.
@@ -121,6 +131,8 @@ const CertificationsPage = () => {
                         src={dataLiteracyCertification}
                         alt="Data Literacy Certification"
                         className={styles.certificationImage}
+                        loading="lazy"
+                        decoding="async"
                     />
                     <p>Certification in Data Literacy, demonstrating proficiency in understanding and interpreting data.</p>
                 </div>
@@ -131,6 +143,8 @@ const CertificationsPage = () => {
                         src={apiSecCert}
                         alt="OWASP API Security Top 10 Certificate"
                         className={styles.certificationImage}
+                        loading="lazy"
+                        decoding="async"
                     />
                     <p>
                         Completed the OWASP API Security Top 10 course at APIsec University, which reviews critical API vulnerabilities and demonstrates real-world threat mitigation strategies and security best practices for API endpoints.
