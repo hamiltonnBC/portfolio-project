@@ -62,16 +62,19 @@ const HomePage = () => {
             <p className={styles.heroSubtitle}>
               <a href="https://www.berea.edu/" target="_blank" rel="noopener noreferrer">Berea College</a> Graduate & Privacy Engineer at <a href="https://www.integrativeprivacy.com/" target="_blank" rel="noopener noreferrer">Integrative Privacy</a>.
             </p>
-            <p className={styles.heroBio}>
+            {/* <p className={styles.heroBio}>
               I build elegant full-stack web applications, conduct predictive data modeling, and leverage software engineering and machine learning to address complex real-world challenges.
-            </p>
+            </p> */}
             <div className={styles.heroActions}>
               <Link to="/projects" className={styles.primaryAction}>
                 View Projects
               </Link>
+              {/* Get in Touch — temporarily hidden, keep for future use */}
+              {/*
               <a href="mailto:hamiltonn428@gmail.com" className={styles.secondaryAction}>
                 Get in Touch
               </a>
+              */}
             </div>
           </div>
         </div>
@@ -80,59 +83,58 @@ const HomePage = () => {
       {/* Skills & Expertise Section */}
       <section className={styles.skillsSection}>
         <h2 className={styles.sectionTitle}>Technical Expertise</h2>
-        <div className={styles.skillsGrid}>
-          <div className={styles.skillCard}>
-            <div className={styles.skillHeader}>
-              <div className={`${styles.skillIcon} ${styles.blue}`}>
-                <svg viewBox="0 0 24 24" width="24" height="24">
-                  <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
-                </svg>
-              </div>
-              <h3>Privacy Engineering</h3>
-            </div>
-            <p>Evaluating data flow vulnerabilities, implementing privacy-by-design patterns, and automating code-level scanning for privacy compliance.</p>
-            <ul className={styles.skillTags}>
-              <li>Privacy-by-Design</li>
-              <li>Data Minimization</li>
-              <li>GDPR / CCPA Audit</li>
-              <li>Privado AI</li>
-            </ul>
-          </div>
 
-          <div className={styles.skillCard}>
-            <div className={styles.skillHeader}>
-              <div className={`${styles.skillIcon} ${styles.purple}`}>
-                <svg viewBox="0 0 24 24" width="24" height="24">
-                  <path fill="currentColor" d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5.89 12.5L12 15.8l6.11-3.3L12 9.2l-6.11 3.3z"/>
-                </svg>
-              </div>
-              <h3>Software Engineering</h3>
+        {/* Bar 1 — Languages, grouped by proficiency */}
+        <div className={styles.skillBar}>
+          <span className={styles.skillBarLabel}>Languages</span>
+          <div className={styles.skillBarBody}>
+            <div className={styles.skillGroup}>
+              <span className={`${styles.skillTier} ${styles.tierProficient}`}>Proficient</span>
+              <span className={styles.skillItem}>Python <em>(3 yrs)</em></span>
+              <span className={styles.skillSeparator}>·</span>
+              <span className={styles.skillItem}>SQL <em>(3 yrs)</em></span>
             </div>
-            <p>Building scalable web architectures, API integration, and secure frontend/backend solutions using modern frameworks.</p>
-            <ul className={styles.skillTags}>
-              <li>React & Vue</li>
-              <li>Node.js</li>
-              <li>Python / Flask</li>
-              <li>SQL / PostgreSQL</li>
-            </ul>
+            <div className={styles.skillGroup}>
+              <span className={`${styles.skillTier} ${styles.tierIntermediate}`}>Intermediate</span>
+              <span className={styles.skillItem}>JavaScript <em>(2 yrs)</em></span>
+              <span className={styles.skillSeparator}>·</span>
+              <span className={styles.skillItem}>TypeScript <em>(2 yrs)</em></span>
+            </div>
+            <div className={styles.skillGroup}>
+              <span className={`${styles.skillTier} ${styles.tierBeginner}`}>Beginner</span>
+              <span className={styles.skillItem}>C++ <em>(2 yrs)</em></span>
+              <span className={styles.skillSeparator}>·</span>
+              <span className={styles.skillItem}>Go <em>(1 yr)</em></span>
+            </div>
           </div>
+        </div>
 
-          <div className={styles.skillCard}>
-            <div className={styles.skillHeader}>
-              <div className={`${styles.skillIcon} ${styles.emerald}`}>
-                <svg viewBox="0 0 24 24" width="24" height="24">
-                  <path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
-                </svg>
-              </div>
-              <h3>Data Science & ML</h3>
+        {/* Bar 2 — Software & tools */}
+        <div className={styles.skillBar}>
+          <span className={styles.skillBarLabel}>Software</span>
+          <div className={styles.skillBarBody}>
+            <div className={styles.skillGroup}>
+              {[
+                'Git',
+                'FastAPI',
+                'Flask',
+                'Docker',
+                'Ollama',
+                'Langchain',
+                'TensorFlow',
+                'Nest.js',
+                'React.js',
+                'Bash',
+                'Jupyter Notebook',
+              ].map((tool, i, arr) => (
+                <React.Fragment key={tool}>
+                  <span className={styles.skillItem}>{tool}</span>
+                  {i < arr.length - 1 && (
+                    <span className={styles.skillSeparator}>·</span>
+                  )}
+                </React.Fragment>
+              ))}
             </div>
-            <p>Creating predictive models, designing interactive data analytics dashboards, and processing high-dimensional datasets.</p>
-            <ul className={styles.skillTags}>
-              <li>R Shiny</li>
-              <li>Machine Learning</li>
-              <li>Regression & Stats</li>
-              <li>Data Visualization</li>
-            </ul>
           </div>
         </div>
       </section>

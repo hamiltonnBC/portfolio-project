@@ -58,7 +58,7 @@ STYLING:
 <conn>
   live-site: https://nicholastreyhamilton.com
   github-repo: https://github.com/hamiltonnBC/portfolio-project.git
-  resume-pdf: /public/Resume_Hamilton_Nicholas.pdf (referenced as process.env.PUBLIC_URL + '/Resume_Hamilton_Nicholas.pdf')
+  resume-pdf: /public/HamiltonNicholasResume.pdf (referenced as process.env.PUBLIC_URL + '/HamiltonNicholasResume.pdf')
 </conn>
 
 <ref label="On-Demand Read Only">

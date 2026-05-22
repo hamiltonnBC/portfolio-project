@@ -6,7 +6,9 @@
  * live websites, YouTube demos, and design process documentation.
  *************************************************/
 
-import React, { useState } from 'react';
+import React from 'react';
+// useState was used for the disabled category filter — re-add when restoring it
+// import React, { useState } from 'react';
 import styles from './ProjectsPage.module.css';
 import censusPoster from '../../images/Poster_CensusConnect_User_Authentication_System.pdf';
 import foodInsecurityPoster from '../../images/PosterImage.jpg';
@@ -107,7 +109,8 @@ const ProjectCard = ({ title, description, link, githubLink, youtubeLink, design
  * Projects Page Component
  */
 const ProjectsPage = () => {
-  const [filter, setFilter] = useState('all');
+  // Project category filter — temporarily disabled, keep for future use
+  // const [filter, setFilter] = useState('all');
 
   const projects = [
     {
@@ -194,9 +197,11 @@ const ProjectsPage = () => {
     }
   ];
 
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(p => p.category === filter);
+  // Filter behavior temporarily disabled — show all projects
+  // const filteredProjects = filter === 'all'
+  //   ? projects
+  //   : projects.filter(p => p.category === filter);
+  const filteredProjects = projects;
 
   return (
     <div className={styles.projectsPage}>
@@ -207,7 +212,8 @@ const ProjectsPage = () => {
         </p>
       </div>
 
-      {/* Filter Navigation Tabs */}
+      {/* Filter Navigation Tabs — temporarily hidden, keep for future use */}
+      {/*
       <div className={styles.filterContainer}>
         <button 
           className={`${styles.filterBtn} ${filter === 'all' ? styles.activeFilter : ''}`}
@@ -234,6 +240,7 @@ const ProjectsPage = () => {
           Software Design
         </button>
       </div>
+      */}
 
       {/* Projects Grid */}
       <div className={styles.projectsGrid}>

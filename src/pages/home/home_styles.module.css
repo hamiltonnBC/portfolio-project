@@ -176,61 +176,100 @@
   letter-spacing: -0.01em;
 }
 
-.skillsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-}
-
-.skillCard {
+/* Horizontal skill bars */
+.skillBar {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
   background: var(--bg-panel);
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius-md);
-  padding: 1.75rem;
   transition: var(--transition-smooth);
 }
 
-.skillCard:hover {
+.skillBar:hover {
   border-color: var(--border-color-hover);
   box-shadow: var(--shadow-sm), var(--accent-glow);
-  transform: translateY(-4px);
 }
 
-.skillCard h3 {
-  font-size: 1.15rem;
-  font-weight: 600;
-  margin-bottom: 1.25rem;
+.skillBarLabel {
   font-family: var(--font-title);
-  color: var(--text-main);
-  border-bottom: 1px solid var(--border-color);
-  padding-bottom: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  min-width: 96px;
+  border-right: 1px solid var(--border-color);
+  padding-right: 1.25rem;
 }
 
-.skillTags {
+.skillBarBody {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.5rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.skillGroup {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
   gap: 0.5rem;
+  white-space: nowrap;
 }
 
-.skillTags span {
-  font-size: 0.8rem;
-  font-weight: 500;
-  padding: 6px 12px;
+.skillTier {
+  font-family: var(--font-title);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 3px 9px;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-color);
-  color: var(--text-muted);
-  transition: var(--transition-fast);
+  background: rgba(255, 255, 255, 0.03);
+  margin-right: 0.25rem;
 }
 
-.skillCard:hover .skillTags span {
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-.skillTags span:hover {
-  background: rgba(255, 255, 255, 0.07);
+.tierProficient {
   color: var(--accent-primary);
-  border-color: var(--accent-primary);
+  border-color: color-mix(in oklch, var(--accent-primary) 50%, transparent);
+}
+
+.tierIntermediate {
+  color: var(--accent-secondary);
+  border-color: color-mix(in oklch, var(--accent-secondary) 45%, transparent);
+}
+
+.tierBeginner {
+  color: var(--text-muted);
+}
+
+.skillItem {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.skillItem em {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-left: 0.25rem;
+  font-size: 0.85em;
+}
+
+.skillSeparator {
+  color: var(--text-muted);
+  opacity: 0.5;
+  user-select: none;
 }
 
 /* Featured Projects Section */
@@ -272,9 +311,11 @@
 .featuredGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
-  max-width: 800px;
+  gap: 1.75rem;
   width: 100%;
+  margin: 0 auto;
+  /* Cap the row width so cards stay readable on ultrawide displays */
+  max-width: 1280px;
 }
 
 .featuredCard {
@@ -298,9 +339,14 @@
   width: 100%;
   height: 220px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.01);
+  /* Subtle backdrop so transparent / mismatched-ratio images sit cleanly */
+  background:
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.04), transparent 70%),
+    rgba(255, 255, 255, 0.015);
   border-bottom: 1px solid var(--border-color);
   cursor: zoom-in;
+  padding: 12px;
+  box-sizing: border-box;
 }
 
 .cardImageWrapper::after {
@@ -330,7 +376,7 @@
 .cardImage {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -339,7 +385,7 @@
 }
 
 .cardContent {
-  padding: 1.75rem;
+  padding: 1.4rem 1.6rem 1.5rem 1.6rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -485,10 +531,6 @@
 
 /* Responsive Breakpoints */
 @media (max-width: 1024px) {
-  .skillsGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
   .featuredGrid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -518,6 +560,45 @@
   .logoCard {
     width: 100%;
     max-width: 300px;
+  }
+
+  /* Skill bars stack vertically on phones */
+  .skillBar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.1rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .skillBarLabel {
+    border-right: none;
+    border-bottom: 1px solid var(--border-color);
+    padding-right: 0;
+    padding-bottom: 0.5rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .skillBarBody {
+    gap: 0.5rem 1.1rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* On phones, drop the nowrap constraint so a tier's languages can
+     wrap onto the next line instead of overflowing the bar. */
+  .skillGroup {
+    flex-wrap: wrap;
+    white-space: normal;
+    width: 100%;
+  }
+
+  .skillItem {
+    font-size: 0.88rem;
   }
 }
 

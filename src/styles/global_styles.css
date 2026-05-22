@@ -79,6 +79,13 @@ a {
 
 /* Mobile Scroll Fix */
 @media (max-width: 768px) {
+  /* Allow vertical scrolling but clamp horizontal overflow so nothing
+     inside can produce a stray sideways scrollbar. */
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   body {
     overflow-y: auto !important;
   }

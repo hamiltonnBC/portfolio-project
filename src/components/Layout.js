@@ -18,7 +18,7 @@
  *************************************************/
 
 // External Dependencies
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 
 // Style Imports
@@ -29,7 +29,7 @@ import MobileHeader from './header/header_component';
 import Footer from './footer/footer_component';
 
 // Environment Variables and Constants
-const resumePDF = process.env.PUBLIC_URL + '/Resume_Hamilton_Nicholas.pdf';
+const resumePDF = process.env.PUBLIC_URL + '/HamiltonNicholasResume.pdf';
 
 /**
  * Main Layout Component
@@ -66,12 +66,25 @@ const Layout = () => {
   }, [theme]);
 
   // Reset scroll position to the top whenever the route changes.
-  // Desktop scrolls inside .rightPanel; mobile scrolls the window.
-  useEffect(() => {
+  // Different elements scroll on different breakpoints:
+  //  - Desktop (>768px): the inner `.rightPanel` div is the scroll container.
+  //  - Mobile (<=768px): `body` and/or `documentElement` is the scroll container,
+  //    depending on the browser's `scrollingElement` choice.
+  // Reset all of them and use useLayoutEffect so it runs before paint to avoid
+  // a visible flash of mid-page content.
+  useLayoutEffect(() => {
     if (rightPanelRef.current) {
-      rightPanelRef.current.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      rightPanelRef.current.scrollTop = 0;
+      rightPanelRef.current.scrollLeft = 0;
     }
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    if (typeof window !== 'undefined') {
+      window.scrollTo(0, 0);
+    }
+    if (typeof document !== 'undefined') {
+      if (document.documentElement) document.documentElement.scrollTop = 0;
+      if (document.body) document.body.scrollTop = 0;
+      if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+    }
   }, [location.pathname]);
 
   // Track mouse coordinates for background radial glow
