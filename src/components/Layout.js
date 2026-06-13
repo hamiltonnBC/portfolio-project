@@ -49,6 +49,11 @@ const Layout = () => {
   // State Management for Themes and Toggleable Elements
   const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') || 'sapphire');
   const [showEmail, setShowEmail] = useState(false);
+
+  // Mobile navigation drawer open state. Lifted here so it can be opened both
+  // from the MobileHeader hamburger and from in-page signifiers (e.g. the
+  // "View other pages" button at the bottom of the home page).
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   
   // Animation states for progressive loading
   const [showGreeting, setShowGreeting] = useState(false);
@@ -126,7 +131,12 @@ const Layout = () => {
       <div className={styles.mouseGlow} />
 
       {/* Responsive Mobile Header */}
-      <MobileHeader theme={theme} setTheme={setTheme} />
+      <MobileHeader
+        theme={theme}
+        setTheme={setTheme}
+        isOpen={mobileNavOpen}
+        setIsOpen={setMobileNavOpen}
+      />
 
       {/* Left Panel - Fixed Navigation and Introduction (Desktop) */}
       <div className={styles.leftPanel}>
@@ -230,7 +240,7 @@ const Layout = () => {
       {/* Right Panel - Dynamic Content */}
       <div ref={rightPanelRef} className={styles.rightPanel}>
         <main className={styles.rightPanelContent}>
-          <Outlet />
+          <Outlet context={{ openMobileNav: () => setMobileNavOpen(true) }} />
           <Footer />
         </main>
       </div>

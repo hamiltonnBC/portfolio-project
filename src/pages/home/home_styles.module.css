@@ -517,6 +517,57 @@
   font-weight: 500;
 }
 
+/* "View other pages" signifier — hidden on desktop (sidebar nav is always
+   visible there), revealed on mobile where the nav lives in a drawer. */
+.morePagesSection {
+  display: none;
+}
+
+.morePagesHint {
+  font-size: 0.85rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.morePagesButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 14px 28px;
+  font-family: var(--font-title);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-inverse);
+  background: var(--accent-gradient);
+  border: none;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--accent-glow);
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.morePagesButton:hover,
+.morePagesButton:focus-visible {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4), var(--accent-glow);
+}
+
+.morePagesButton svg {
+  animation: morePagesNudge 1.8s ease-in-out infinite;
+}
+
+@keyframes morePagesNudge {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
 /* Keyframes */
 @keyframes fadeIn {
   from {
@@ -599,6 +650,16 @@
 
   .skillItem {
     font-size: 0.88rem;
+  }
+
+  /* Reveal the "more pages" signifier on mobile, where nav is in the drawer */
+  .morePagesSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2.5rem;
   }
 }
 

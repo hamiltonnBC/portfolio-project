@@ -8,7 +8,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 import styles from './home_styles.module.css';
 
 // Image Imports
@@ -20,6 +20,7 @@ import nextGenPoster from '../../images/nextGenPoster.jpeg';
 import marimoodPoster from '../../images/marimood.jpg';
 
 const HomePage = () => {
+  const { openMobileNav } = useOutletContext();
   const [activeImage, setActiveImage] = React.useState(null);
   const [activeTitle, setActiveTitle] = React.useState('');
 
@@ -306,6 +307,34 @@ const HomePage = () => {
             <span className={styles.graduateDetails}>B.A. in Computer Science</span>
           </div>
         </a>
+      </section>
+
+      {/* Mobile-only signifier that more pages exist — opens the nav drawer */}
+      <section className={styles.morePagesSection}>
+        <span className={styles.morePagesHint}>There's more to explore</span>
+        <button
+          type="button"
+          className={styles.morePagesButton}
+          onClick={openMobileNav}
+        >
+          View other pages
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
       </section>
 
       {/* Lightbox Modal */}

@@ -5,20 +5,19 @@
  * Only visible on mobile viewports.
  *************************************************/
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import styles from './header_styles.module.css';
 
 const resumePDF = process.env.PUBLIC_URL + '/HamiltonNicholasResume.pdf';
 
-const MobileHeader = ({ theme, setTheme }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const MobileHeader = ({ theme, setTheme, isOpen, setIsOpen }) => {
   const location = useLocation();
 
   // Close drawer when route changes
   useEffect(() => {
     setIsOpen(false);
-  }, [location]);
+  }, [location, setIsOpen]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -33,7 +32,6 @@ const MobileHeader = ({ theme, setTheme }) => {
   }, [isOpen]);
 
   const toggleMenu = () => setIsOpen(!isOpen);
-
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
