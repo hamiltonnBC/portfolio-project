@@ -18,6 +18,7 @@ import upCoverImage from '../../images/UP_Cover_Image.jpg';
 import posterImage from '../../images/PosterImage.jpg';
 import nextGenPoster from '../../images/nextGenPoster.jpeg';
 import marimoodPoster from '../../images/marimood.jpg';
+import privacyIcon from '../../images/05_ICON_FOREST.png';
 
 const HomePage = () => {
   const { openMobileNav } = useOutletContext();
@@ -59,24 +60,43 @@ const HomePage = () => {
             <div className={styles.glowRing}></div>
           </div>
           <div className={styles.heroText}>
-            <span className={styles.eyebrow}>Software · Data · Privacy</span>
-            <h1 className={styles.heroTitle}>Engineering for the public good.</h1>
-            <p className={styles.heroSubtitle}>
-              <a href="https://www.berea.edu/" target="_blank" rel="noopener noreferrer">Berea College</a> graduate and Privacy Engineer at <a href="https://www.integrativeprivacy.com/" target="_blank" rel="noopener noreferrer">Integrative Privacy</a>.
-            </p>
-            {/* <p className={styles.heroBio}>
-              I build elegant full-stack web applications, conduct predictive data modeling, and leverage software engineering and machine learning to address complex real-world challenges.
-            </p> */}
-            <div className={styles.heroActions}>
-              <Link to="/projects" className={styles.primaryAction}>
-                View Projects
-              </Link>
-              {/* Get in Touch — temporarily hidden, keep for future use */}
-              {/*
-              <a href="mailto:hamiltonn428@gmail.com" className={styles.secondaryAction}>
-                Get in Touch
+            <h1 className={styles.heroTitle}>
+              Privacy Engineer at{' '}
+              <a
+                href="https://www.integrativeprivacy.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.heroTitleLink}
+              >
+                Integrative Privacy
               </a>
-              */}
+              <img
+                src={privacyIcon}
+                alt="Integrative Privacy logo"
+                className={styles.heroTitleLogo}
+                loading="lazy"
+                decoding="async"
+              />
+            </h1>
+            <div className={styles.heroActions}>
+              <a
+                href="https://www.berea.edu/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.graduateCard}
+              >
+                <img
+                  src={whiteBereaLogo}
+                  alt="Berea College logo"
+                  className={styles.bereaLogo}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className={styles.graduateInfo}>
+                  <span className={styles.graduateTitle}>Berea College Graduate</span>
+                  <span className={styles.graduateDetails}>B.A. in Computer Science</span>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -285,28 +305,6 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Graduate Highlight Section */}
-      <section className={styles.graduateSection}>
-        <a
-          href="https://www.berea.edu/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.graduateCard}
-        >
-          <img
-            src={whiteBereaLogo}
-            alt="Berea College Logo"
-            className={styles.bereaLogo}
-            loading="lazy"
-            decoding="async"
-          />
-          <div className={styles.graduateInfo}>
-            <span className={styles.graduateTitle}>Berea College Graduate</span>
-            <span className={styles.graduateDetails}>B.A. in Computer Science</span>
-          </div>
-        </a>
       </section>
 
       {/* Mobile-only signifier that more pages exist — opens the nav drawer */}

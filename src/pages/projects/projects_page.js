@@ -29,7 +29,6 @@ const ProjectCard = ({ title, description, link, githubLink, youtubeLink, design
       )}
     </div>
 
-    {featured && <span className={styles.featuredTag}>Featured</span>}
     <h3>{title}</h3>
     <p className={styles.description}>{description}</p>
 

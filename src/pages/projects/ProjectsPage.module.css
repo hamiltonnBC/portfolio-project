@@ -89,11 +89,30 @@
   transform: translateY(-4px);
 }
 
-/* Featured project — full-width with an accent edge */
+/* Featured project — full-width with an accent edge and a slow gradient drift */
 .projectCardFeatured {
   grid-column: 1 / -1;
   border-left: 2px solid var(--accent-primary);
   background: linear-gradient(100deg, var(--accent-soft), transparent 55%), var(--bg-panel);
+  background-size: 220% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  animation: featuredDrift 18s ease-in-out infinite alternate;
+  /* Scope the transition so the moving gradient isn't caught by `all` on hover */
+  transition:
+    transform 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+    border-color 0.4s cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes featuredDrift {
+  from { background-position: 0% 0, 0 0; }
+  to   { background-position: 100% 0, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .projectCardFeatured {
+    animation: none;
+  }
 }
 
 .projectCardFeatured h3 {
