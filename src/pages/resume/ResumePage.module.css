@@ -1,0 +1,153 @@
+/* Resume Page */
+.resumePage {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding: 0 0 2rem 0;
+  animation: fadeIn 0.8s cubic-bezier(0.32, 0.72, 0, 1);
+  min-height: 0;
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.resumePage h1 {
+  font-family: var(--font-title);
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  margin: 0.35rem 0 0 0;
+}
+
+/* Action buttons */
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-title);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 10px 18px;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text-main);
+  transition: var(--transition-smooth);
+}
+
+.actionBtn:hover {
+  border-color: var(--border-color-hover);
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.actionBtn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.primaryBtn {
+  background: var(--accent-primary);
+  border-color: transparent;
+  color: var(--text-inverse);
+}
+
+.primaryBtn:hover {
+  filter: brightness(1.06);
+  background: var(--accent-primary);
+  box-shadow: var(--shadow-md);
+}
+
+/* PDF viewer frame */
+.viewerFrame {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  background: var(--bg-raised);
+  box-shadow: var(--shadow-md);
+  height: calc(100dvh - 12rem);
+  min-height: 520px;
+}
+
+.viewer {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Fallback shown when the browser can't render the PDF inline */
+.fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+}
+
+.fallback p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .resumePage h1 {
+    font-size: 2.2rem;
+  }
+
+  .pageHeader {
+    align-items: flex-start;
+  }
+
+  .actions {
+    width: 100%;
+  }
+
+  .actionBtn {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .viewerFrame {
+    height: auto;
+    min-height: 0;
+  }
+
+  /* On phones, inline PDF embedding is unreliable — show a compact fallback
+     height so the "open" action inside the object is reachable. */
+  .viewer {
+    height: 70vh;
+  }
+}

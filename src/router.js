@@ -29,6 +29,7 @@ import HomePage from './pages/home/home_page';
 import ProjectsPage from './pages/projects/projects_page';
 import AboutPage from './pages/about/about_page';
 import CertificationsPage from './pages/certifications/certifications_page';
+import ResumePage from './pages/resume/resume_page';
 // import ContactForm from './components/contact_form/contact_form_component';
 
 /**
@@ -62,6 +63,9 @@ function AppRouter() {
 
                 {/* Certifications Page */}
                 <Route path="certifications" element={<CertificationsPage />} />
+
+                {/* Resume Page */}
+                <Route path="resume" element={<ResumePage />} />
 
                 {/* Contact Page */}
                 {/* <Route path="contact" element={<ContactForm />} /> */}

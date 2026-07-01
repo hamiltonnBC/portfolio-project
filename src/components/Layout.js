@@ -28,9 +28,6 @@ import styles from './Layout.module.css';
 import MobileHeader from './header/header_component';
 import Footer from './footer/footer_component';
 
-// Environment Variables and Constants
-const resumePDF = process.env.PUBLIC_URL + '/HamiltonNicholasResume.pdf';
-
 /**
  * Main Layout Component
  *
@@ -161,9 +158,9 @@ const Layout = () => {
                 {/* <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeNavLink : ''}>
                   Contact
                 </NavLink> */}
-                <a href={resumePDF} target="_blank" rel="noopener noreferrer" className={styles.resumeBtn}>
+                <NavLink to="/resume" className={styles.resumeBtn}>
                   Resume
-                </a>
+                </NavLink>
               </nav>
 
               {/* Social Media Section */}

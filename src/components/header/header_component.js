@@ -9,8 +9,6 @@ import React, { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import styles from './header_styles.module.css';
 
-const resumePDF = process.env.PUBLIC_URL + '/HamiltonNicholasResume.pdf';
-
 const MobileHeader = ({ theme, setTheme, isOpen, setIsOpen }) => {
   const location = useLocation();
 
@@ -84,9 +82,12 @@ const MobileHeader = ({ theme, setTheme, isOpen, setIsOpen }) => {
           >
             Contact
           </NavLink> */}
-          <a href={resumePDF} target="_blank" rel="noopener noreferrer">
+          <NavLink
+            to="/resume"
+            className={({ isActive }) => (isActive ? styles.activeLink : '')}
+          >
             Resume
-          </a>
+          </NavLink>
         </nav>
 
         {/* Theme Selectors inside Mobile Menu — temporarily hidden, keep for future use */}
