@@ -236,7 +236,7 @@ const AboutPage = () => {
                             and working in legal tech for an AI startup.
                         </p>
                         <p style={{ marginTop: '1rem' }}>
-                            It is a priority for me that the software I work on and the data that I work with are for used for the public good, and I am lucky enough to 
+                            It is a priority for me that the software I work on and the data that I work with are used for the public good, and I am lucky enough to 
                             have the learning and work experiences that have supported this priority.
                         </p>
                     </div>
@@ -275,7 +275,7 @@ const AboutPage = () => {
                     <div className={styles.nonprofitContent}>
                         <h3>Nonprofit Initiative</h3>
                         <p>
-                            One of the projects that really helped allow me to see the impact that software and data infastructure can have for the public good,
+                            One of the projects that really helped allow me to see the impact that software and data infrastructure can have for the public good,
                             was building a data tracking platform for a local nonprofit.
                             The UP initiative was focused on providing a variety of resources to the unhoused population in our county.
                             I led a team of four to build them a full-stack application using Vue.js, Flask, and PostgreSQL.
@@ -295,7 +295,7 @@ const AboutPage = () => {
                         <h3>Data Science for the Public Good</h3>
                         <p>
                             The following summer, I spent as a Data Science Intern with Virginia Tech's Data Science for the Public Good program. 
-                            I worked alongside an exceedingly talented group of researchers in a multi-discplinary team 
+                            I worked alongside an exceedingly talented group of researchers in a multidisciplinary team.
                              We dug into the socioeconomic factors that drive food insecurity and trained a machine learning model based on a large dataset we crafted. 
                             We used ARIMA modeling to project regional trends forward so our stakeholders could use our findings for better resource allocation.
                         </p>
@@ -370,7 +370,7 @@ const AboutPage = () => {
                         </p>
                         <p style={{ marginTop: '1rem' }}>
                             That combination is what pushed me toward privacy as a discipline.
-                            I belive strongly in Privacy-by-design, and the work
+                            I believe strongly in privacy-by-design, and the work
                               I'm doing now is building software that assists other engineers in abiding by this. 
                         </p>
                     </div>

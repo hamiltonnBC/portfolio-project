@@ -26,10 +26,6 @@ import './index.css';
 // Component Imports
 import App from './App';
 
-// Log environment variables for debugging purposes
-console.log('Public URL:', process.env.PUBLIC_URL);
-console.log('Node Env:', process.env.NODE_ENV);
-
 /**
  * Root Render Function
  *
@@ -43,6 +39,3 @@ root.render(
         <App />
     </React.StrictMode>
 );
-
-// Confirmation log for debugging
-console.log('Index.js is running');

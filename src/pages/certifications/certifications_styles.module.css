@@ -10,11 +10,9 @@
 .certificationsContainer h1 {
   font-family: var(--font-title);
   font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--text-main);
   display: inline-block;
   margin: 0;
 }
@@ -107,16 +105,15 @@
 }
 
 .projectLink:first-of-type {
-  background: var(--accent-gradient);
+  background: var(--accent-primary);
   border-color: transparent;
   color: var(--text-inverse);
-  box-shadow: var(--accent-glow);
 }
 
 .projectLink:first-of-type:hover {
-  filter: brightness(1.1);
+  filter: brightness(1.06);
   color: var(--text-inverse);
-  box-shadow: 0 4px 12px rgba(var(--accent-glow), 0.3), var(--accent-glow);
+  box-shadow: var(--shadow-sm);
 }
 
 /* Fade in Animation keyframes */

@@ -16,11 +16,9 @@
 .container h1 {
   font-family: var(--font-title);
   font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--text-main);
   display: inline-block;
   margin: 0;
 }
@@ -264,12 +262,11 @@
   font-size: 0.95rem;
   font-weight: 600;
   padding: 14px 24px;
-  background: var(--accent-gradient);
+  background: var(--accent-primary);
   color: var(--text-inverse);
   border: none;
   border-radius: var(--border-radius-sm);
   cursor: pointer;
-  box-shadow: var(--accent-glow);
   display: flex;
   align-items: center;
   justify-content: center;

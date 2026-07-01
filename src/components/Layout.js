@@ -39,9 +39,8 @@ const resumePDF = process.env.PUBLIC_URL + '/HamiltonNicholasResume.pdf';
  *
  * Features:
  * - Dynamic Theme Accent Switching (Cyberpunk, Emerald, Sapphire)
- * - Mouse-following radial accent glow
  * - Slide-out drawer Mobile Navigation
- * - Glassmorphic layouts and shimmering gradients
+ * - Glassmorphic layouts
  *
  * @returns {JSX.Element} The main layout structure of the application
  */
@@ -92,21 +91,6 @@ const Layout = () => {
     }
   }, [location.pathname]);
 
-  // Track mouse coordinates for background radial glow
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        containerRef.current.style.setProperty('--mouse-x', `${x}px`);
-        containerRef.current.style.setProperty('--mouse-y', `${y}px`);
-      }
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   // Staggered loading animation
   useEffect(() => {
     const greetingTimer = setTimeout(() => setShowGreeting(true), 100);
@@ -127,9 +111,6 @@ const Layout = () => {
 
   return (
     <div ref={containerRef} className={styles.container}>
-      {/* Interactive Background Glow */}
-      <div className={styles.mouseGlow} />
-
       {/* Responsive Mobile Header */}
       <MobileHeader
         theme={theme}

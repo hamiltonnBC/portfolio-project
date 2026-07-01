@@ -59,10 +59,10 @@ const HomePage = () => {
             <div className={styles.glowRing}></div>
           </div>
           <div className={styles.heroText}>
-            {/* <span className={styles.badge}>Welcome to my Portfolio</span> */}
-            <h1 className={styles.heroTitle}>Welcome to my Portfolio</h1>
+            <span className={styles.eyebrow}>Software · Data · Privacy</span>
+            <h1 className={styles.heroTitle}>Engineering for the public good.</h1>
             <p className={styles.heroSubtitle}>
-              <a href="https://www.berea.edu/" target="_blank" rel="noopener noreferrer">Berea College</a> Graduate & Privacy Engineer at <a href="https://www.integrativeprivacy.com/" target="_blank" rel="noopener noreferrer">Integrative Privacy</a>.
+              <a href="https://www.berea.edu/" target="_blank" rel="noopener noreferrer">Berea College</a> graduate and Privacy Engineer at <a href="https://www.integrativeprivacy.com/" target="_blank" rel="noopener noreferrer">Integrative Privacy</a>.
             </p>
             {/* <p className={styles.heroBio}>
               I build elegant full-stack web applications, conduct predictive data modeling, and leverage software engineering and machine learning to address complex real-world challenges.
@@ -151,8 +151,8 @@ const HomePage = () => {
         </div>
         
         <div className={styles.featuredGrid}>
-          {/* Marimood Project Card */}
-          <div className={styles.featuredCard}>
+          {/* Marimood Project Card — wide feature */}
+          <div className={`${styles.featuredCard} ${styles.featuredCardWide}`}>
             <div className={styles.cardImageWrapper} onClick={() => openLightbox(marimoodPoster, "Marimood")}>
               <img
                 src={marimoodPoster}

@@ -16,11 +16,9 @@
 .projectsPage h1 {
   font-family: var(--font-title);
   font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--text-main);
   display: inline-block;
   margin: 0;
 }
@@ -87,8 +85,33 @@
 
 .projectCard:hover {
   border-color: var(--border-color-hover);
-  box-shadow: var(--shadow-md), var(--accent-glow);
+  box-shadow: var(--shadow-md);
   transform: translateY(-4px);
+}
+
+/* Featured project — full-width with an accent edge */
+.projectCardFeatured {
+  grid-column: 1 / -1;
+  border-left: 2px solid var(--accent-primary);
+  background: linear-gradient(100deg, var(--accent-soft), transparent 55%), var(--bg-panel);
+}
+
+.projectCardFeatured h3 {
+  font-size: 1.7rem;
+}
+
+.projectCardFeatured .description {
+  max-width: 68ch;
+}
+
+.featuredTag {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent-secondary);
 }
 
 .cardHeader {
@@ -188,14 +211,13 @@
 }
 
 .liveLink {
-  background: var(--accent-gradient);
+  background: var(--accent-primary);
   color: var(--text-inverse);
-  box-shadow: var(--accent-glow);
 }
 
 .liveLink:hover {
-  filter: brightness(1.1);
-  box-shadow: 0 4px 12px rgba(var(--accent-glow), 0.3), var(--accent-glow);
+  filter: brightness(1.06);
+  box-shadow: var(--shadow-sm);
 }
 
 .githubLink {

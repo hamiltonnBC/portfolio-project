@@ -1,61 +1,58 @@
-/* Design Token System */
+/* Design Token System
+ *
+ * Direction: "privacy / data engineer" — a tinted-ink dark surface with a single,
+ * desaturated teal accent. One hue family for neutrals (cool, faintly green).
+ * Accents stay below ~0.10 chroma so they blend with the neutrals instead of
+ * screaming. Shadows are tinted with the background hue, never pure black.
+ *
+ * The multi-theme switcher is currently hidden in the UI, so :root and the
+ * "sapphire" slot both resolve to the refined teal palette (existing
+ * localStorage values default to "sapphire"). The emerald / cyberpunk slots are
+ * kept dormant for potential future use.
+ */
 
-:root, [data-theme="sapphire"] {
-  --bg-dark: #030612;
-  --bg-panel: rgba(8, 15, 35, 0.45);
-  --bg-panel-hover: rgba(14, 24, 52, 0.65);
-  --border-color: rgba(255, 255, 255, 0.05);
-  --border-color-hover: rgba(255, 255, 255, 0.12);
-  --accent-primary: oklch(0.65 0.18 250); /* Royal Blue */
-  --accent-secondary: oklch(0.75 0.13 210); /* Ice Blue */
-  --accent-gradient: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-  --accent-glow: 0 0 25px rgba(59, 130, 246, 0.12);
-  --accent-glow-strong: 0 0 35px rgba(99, 102, 241, 0.25);
-  --text-main: #f8fafc;
-  --text-muted: #94a3b8;
-  --text-inverse: #030612;
-}
+:root, [data-theme="sapphire"], [data-theme="emerald"], [data-theme="cyberpunk"] {
+  /* Surfaces — tinted ink, lifted by tone rather than glow */
+  --bg-dark: #0a0f0e;
+  --bg-panel: rgba(20, 32, 30, 0.42);
+  --bg-panel-hover: rgba(27, 42, 39, 0.62);
+  --bg-raised: #101917;
 
-[data-theme="emerald"] {
-  --bg-dark: #040806;
-  --bg-panel: rgba(10, 20, 15, 0.45);
-  --bg-panel-hover: rgba(16, 30, 22, 0.65);
-  --border-color: rgba(255, 255, 255, 0.04);
-  --border-color-hover: rgba(255, 255, 255, 0.1);
-  --accent-primary: oklch(0.79 0.14 145); /* Emerald Green */
-  --accent-secondary: oklch(0.72 0.12 180); /* Teal Green */
-  --accent-gradient: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-  --accent-glow: 0 0 25px rgba(74, 222, 128, 0.1);
-  --accent-glow-strong: 0 0 35px rgba(34, 197, 94, 0.22);
-  --text-main: #ecfdf5;
-  --text-muted: #86efac;
-  --text-inverse: #040806;
-}
+  /* Hairlines tinted with the surface hue */
+  --border-color: rgba(180, 220, 210, 0.07);
+  --border-color-hover: rgba(180, 220, 210, 0.16);
 
-[data-theme="cyberpunk"] {
-  --bg-dark: #060812;
-  --bg-panel: rgba(13, 18, 38, 0.45);
-  --bg-panel-hover: rgba(20, 27, 54, 0.65);
-  --border-color: rgba(255, 255, 255, 0.05);
-  --border-color-hover: rgba(255, 255, 255, 0.12);
-  --accent-primary: oklch(0.78 0.16 200); /* Neon Cyan */
-  --accent-secondary: oklch(0.68 0.22 310); /* Neon Purple */
+  /* Single desaturated teal accent */
+  --accent-primary: oklch(0.74 0.078 180);   /* muted teal */
+  --accent-secondary: oklch(0.82 0.055 168); /* soft sage-teal */
   --accent-gradient: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-  --accent-glow: 0 0 25px rgba(0, 229, 255, 0.12);
-  --accent-glow-strong: 0 0 35px rgba(224, 64, 251, 0.25);
-  --text-main: #f1f5f9;
-  --text-muted: #94a3b8;
-  --text-inverse: #060812;
+  --accent-soft: rgba(94, 194, 172, 0.10);   /* faint accent wash for chips/CTAs */
+
+  /* Glow kept intentionally faint — elevation should mean something */
+  --accent-glow: 0 0 22px rgba(94, 194, 172, 0.08);
+  --accent-glow-strong: 0 0 30px rgba(94, 194, 172, 0.16);
+
+  /* Text — soft off-white with a faint cool-green tint, one muted gray family */
+  --text-main: #e9f1ee;
+  --text-muted: #8ea39d;
+  --text-inverse: #06100d;
 }
 
 :root {
-  --font-title: 'Outfit', 'Quicksand', sans-serif;
-  --font-body: 'Inter', -apple-system, sans-serif;
-  --shadow-sm: 0 2px 8px -2px rgba(0, 0, 0, 0.5);
-  --shadow-md: 0 8px 30px -10px rgba(0, 0, 0, 0.7);
-  --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-fast: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Type — engineered display face + clean grotesk body + mono for figures */
+  --font-title: 'Space Grotesk', 'Sora', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* Shadows tinted with the ink hue (never pure black) */
+  --shadow-sm: 0 2px 10px -3px rgba(2, 10, 8, 0.6);
+  --shadow-md: 0 12px 36px -14px rgba(2, 10, 8, 0.82);
+
+  --transition-smooth: all 0.4s cubic-bezier(0.32, 0.72, 0, 1);
+  --transition-fast: all 0.2s cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* Varied radii — softer on containers, tighter on inner elements */
   --border-radius-sm: 8px;
-  --border-radius-md: 16px;
-  --border-radius-lg: 24px;
+  --border-radius-md: 14px;
+  --border-radius-lg: 22px;
 }

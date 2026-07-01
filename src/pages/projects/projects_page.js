@@ -18,10 +18,10 @@ import marimoodPoster from '../../images/marimood.jpg';
 /**
  * Project Card Component
  */
-const ProjectCard = ({ title, description, link, githubLink, youtubeLink, designProcessLink, posterLink, posterLabel = "Research Poster", date, status, tags }) => (
-  <div className={styles.projectCard}>
+const ProjectCard = ({ title, description, link, githubLink, youtubeLink, designProcessLink, posterLink, posterLabel = "Research Poster", date, status, tags, featured }) => (
+  <div className={`${styles.projectCard} ${featured ? styles.projectCardFeatured : ''}`}>
     <div className={styles.cardHeader}>
-      <span className={styles.projectDate}>{date}</span>
+      <span className={`${styles.projectDate} tabular-nums`}>{date}</span>
       {status && (
         <span className={`${styles.statusBadge} ${status === 'In Progress' || status === 'In Development' ? styles.inProgress : styles.completed}`}>
           {status}
@@ -29,6 +29,7 @@ const ProjectCard = ({ title, description, link, githubLink, youtubeLink, design
       )}
     </div>
 
+    {featured && <span className={styles.featuredTag}>Featured</span>}
     <h3>{title}</h3>
     <p className={styles.description}>{description}</p>
 
@@ -245,7 +246,7 @@ const ProjectsPage = () => {
       {/* Projects Grid */}
       <div className={styles.projectsGrid}>
         {filteredProjects.map((project, index) => (
-          <ProjectCard key={index} {...project} />
+          <ProjectCard key={index} {...project} featured={index === 0} />
         ))}
       </div>
     </div>

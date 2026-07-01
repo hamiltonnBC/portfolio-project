@@ -6,6 +6,10 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body, #root {
   height: 100%;
   margin: 0;
@@ -20,20 +24,37 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   line-height: 1.6;
-  transition: background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.5s cubic-bezier(0.32, 0.72, 0, 1), color 0.5s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-title);
   color: var(--text-main);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* Numeric data (years, dates, stats) reads cleaner with tabular figures */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 a {
   color: var(--accent-primary);
   text-decoration: none;
   transition: var(--transition-fast);
+}
+
+/* Accessible focus ring for keyboard users */
+:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+  border-radius: 3px;
 }
 
 /* Custom Scrollbars */
