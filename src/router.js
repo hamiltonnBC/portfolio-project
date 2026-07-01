@@ -30,6 +30,7 @@ import ProjectsPage from './pages/projects/projects_page';
 import AboutPage from './pages/about/about_page';
 import CertificationsPage from './pages/certifications/certifications_page';
 import ResumePage from './pages/resume/resume_page';
+import DataJourneyPage from './pages/data_journey/data_journey_page';
 // import ContactForm from './components/contact_form/contact_form_component';
 
 /**
@@ -66,6 +67,9 @@ function AppRouter() {
 
                 {/* Resume Page */}
                 <Route path="resume" element={<ResumePage />} />
+
+                {/* "Where does your data go?" — interactive privacy demo */}
+                <Route path="where-your-data-goes" element={<DataJourneyPage />} />
 
                 {/* Contact Page */}
                 {/* <Route path="contact" element={<ContactForm />} /> */}
