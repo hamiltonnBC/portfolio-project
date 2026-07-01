@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.00cf5a1a.css",
+    "main.js": "/static/js/main.051373d6.js",
+    "static/media/BereaCoverPhoto.jpeg": "/static/media/BereaCoverPhoto.92e8f8bec9a829984b4f.jpeg",
+    "static/media/privacyEngineerCert.png": "/static/media/privacyEngineerCert.1374b42d14eb45b4da62.png",
+    "static/media/Poster_CensusConnect_User_Authentication_System.pdf": "/static/media/Poster_CensusConnect_User_Authentication_System.01556268f58cdebaa29e.pdf",
+    "static/media/PosterImage.jpg": "/static/media/PosterImage.15157291a095bc59cea1.jpg",
+    "static/media/nextGenPoster.jpeg": "/static/media/nextGenPoster.9525b894453447626d10.jpeg",
+    "static/media/marimood.jpg": "/static/media/marimood.87f9b2da014f40c65330.jpg",
+    "static/media/Mahidol.jpg": "/static/media/Mahidol.84587463a8917c331f86.jpg",
+    "static/media/VTDSPG_Cohort.jpg": "/static/media/VTDSPG_Cohort.bc3c152a670189e28492.jpg",
+    "static/media/DataLitCert.png": "/static/media/DataLitCert.29408a951a846c94a092.png",
+    "static/media/UP_Cover_Image.jpg": "/static/media/UP_Cover_Image.b82705b351556c0c3d90.jpg",
+    "static/media/PERSONAL_HEADSHOT.jpg": "/static/media/PERSONAL_HEADSHOT.e42a618175593e7486c9.jpg",
+    "static/media/API_SEC_CERT.png": "/static/media/API_SEC_CERT.8f5976832e2a81e89bc1.png",
+    "static/media/CodingPhoto.jpeg": "/static/media/CodingPhoto.9d75aa983d79704e939d.jpeg",
+    "static/media/ngj2.jpeg": "/static/media/ngj2.16a512b5f604d1a83372.jpeg",
+    "static/media/whiteBereaCollegeLogo.png": "/static/media/whiteBereaCollegeLogo.71e63d90b6539c27b1be.png",
+    "static/media/05_ICON_FOREST.png": "/static/media/05_ICON_FOREST.5d8dad0fe1876e61699d.png",
+    "index.html": "/index.html",
+    "main.00cf5a1a.css.map": "/static/css/main.00cf5a1a.css.map",
+    "main.051373d6.js.map": "/static/js/main.051373d6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.00cf5a1a.css",
+    "static/js/main.051373d6.js"
+  ]
+}
