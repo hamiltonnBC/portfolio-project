@@ -74,6 +74,11 @@ const CARDS = [
     detail: 'Encrypted snapshot', status: 'Tombstoned', tone: 'pending',
     note: 'You can’t edit a sealed backup, so it gets flagged for deletion on restore.',
   },
+  {
+    id: 'more', label: 'and so many more!', system: '', icon: 'more',
+    when: '', order: 8, from: 'signup', pos: { col: '9 / 13', row: 4 },
+    payload: null, extra: true,
+  },
 ];
 
 const ORDERED = [...CARDS].sort((a, b) => a.order - b.order);
@@ -88,11 +93,12 @@ const ICON_PATHS = {
   card: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 10h18" /><path d="M7 15h4" /></>,
   bolt: <><path d="M13 2 5 13h6l-1 9 8-11h-6z" /></>,
   terminal: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M7 9l3 3-3 3" /><path d="M13 15h4" /></>,
+  more: <><circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none" /><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" /><circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none" /></>,
 };
 
 const Icon = ({ name }) => (
   <svg viewBox="0 0 24 24" className={styles.icon} fill="none" stroke="currentColor"
-       strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
     {ICON_PATHS[name]}
   </svg>
 );
@@ -132,7 +138,7 @@ const Payload = ({ card, on }) => {
       <div className={styles.chips}>
         {p.items.map((c, i) => (
           <span key={i} className={`${styles.miniChip} ${on ? styles.chipIn : ''}`}
-                style={{ transitionDelay: `${i * 0.18}s` }}>{c}</span>
+            style={{ transitionDelay: `${i * 0.18}s` }}>{c}</span>
         ))}
       </div>
     );
@@ -257,7 +263,7 @@ const DataJourneyPage = () => {
         <span className={styles.eyebrow}>Privacy by design</span>
         <h1 className={styles.title}>Where does your data go?</h1>
         <p className={styles.dek}>
-          Signing up takes two seconds. Cleaning it back up can take a month, if you can
+          Signing up takes two seconds. Cleaning it back up can be exceedingly difficult, if you can
           even find it all. Sign up below, then watch one row spread across a system before
           the same person asks to be deleted.
         </p>
@@ -304,7 +310,7 @@ const DataJourneyPage = () => {
               {signedUp ? 'Signed up ✓' : 'Sign up'}
             </button>
             <p className={styles.sceneHint}>
-              {signedUp ? 'Following the trail…' : 'Go ahead. It is only three fields.'}
+              {signedUp ? 'Following the trail…' : 'Click Sign up for a demo!'}
             </p>
           </form>
 
@@ -316,18 +322,20 @@ const DataJourneyPage = () => {
                 <article
                   key={c.id}
                   ref={(el) => { cardRefs.current[c.id] = el; }}
-                  className={`${styles.systemCard} ${on ? styles.cardOn : ''}`}
+                  className={`${styles.systemCard} ${c.extra ? styles.cardExtra : ''} ${on ? styles.cardOn : ''}`}
                   style={{ gridColumn: c.pos.col, gridRow: c.pos.row }}
                 >
                   <header className={styles.cardHead}>
                     <span className={styles.cardIcon}><Icon name={c.icon} /></span>
                     <span className={styles.cardTitles}>
                       <span className={styles.cardLabel}>{c.label}</span>
-                      <span className={styles.cardSystem}>{c.system}</span>
+                      {c.system && <span className={styles.cardSystem}>{c.system}</span>}
                     </span>
-                    <span className={`${styles.whenBadge} ${on ? styles.whenOn : ''}`}>{c.when}</span>
+                    {c.when && (
+                      <span className={`${styles.whenBadge} ${on ? styles.whenOn : ''}`}>{c.when}</span>
+                    )}
                   </header>
-                  <Payload card={c} on={on} />
+                  {c.payload && <Payload card={c} on={on} />}
                 </article>
               );
             })}
@@ -364,7 +372,7 @@ const DataJourneyPage = () => {
           can only flag. Some you do not control, and some you are not even allowed to erase.
         </p>
         <div className={styles.huntGrid}>
-          {CARDS.map((c, i) => (
+          {CARDS.filter((c) => !c.extra).map((c, i) => (
             <div
               key={c.id}
               className={`${styles.huntCard} ${huntInView ? styles.huntIn : ''}`}

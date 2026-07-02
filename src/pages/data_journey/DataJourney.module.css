@@ -256,6 +256,28 @@
   box-shadow: var(--shadow-md);
 }
 
+/* "and so many more" card — centered, dashed, no payload */
+.cardExtra {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-style: dashed;
+}
+
+.cardExtra .cardHead {
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.cardExtra .cardLabel {
+  font-size: 1.15rem;
+  color: var(--accent-secondary);
+}
+
+.cardExtra.cardOn {
+  border-color: color-mix(in oklch, var(--accent-secondary) 45%, transparent);
+}
+
 .cardHead {
   display: flex;
   align-items: center;
