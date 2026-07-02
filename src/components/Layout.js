@@ -60,6 +60,9 @@ const Layout = () => {
   const rightPanelRef = useRef(null);
   const location = useLocation();
 
+  // Immersive routes hide the sidebar (it slides off-screen) for a full-bleed view.
+  const immersive = location.pathname === '/where-your-data-goes';
+
   // Apply theme to document element
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -117,7 +120,7 @@ const Layout = () => {
       />
 
       {/* Left Panel - Fixed Navigation and Introduction (Desktop) */}
-      <div className={styles.leftPanel}>
+      <div className={`${styles.leftPanel} ${immersive ? styles.leftPanelHidden : ''}`}>
         <div className={styles.panelGlassCard}>
           {/* Animated Introduction Section */}
           <div className={styles.introduction}>
@@ -154,6 +157,9 @@ const Layout = () => {
                 </NavLink>
                 <NavLink to="/certifications" className={({ isActive }) => isActive ? styles.activeNavLink : ''}>
                   Certifications
+                </NavLink>
+                <NavLink to="/where-your-data-goes" className={({ isActive }) => isActive ? styles.activeNavLink : ''}>
+                  Where does your data go?
                 </NavLink>
                 {/* <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeNavLink : ''}>
                   Contact
@@ -216,7 +222,7 @@ const Layout = () => {
       </div>
 
       {/* Right Panel - Dynamic Content */}
-      <div ref={rightPanelRef} className={styles.rightPanel}>
+      <div ref={rightPanelRef} className={`${styles.rightPanel} ${immersive ? styles.rightPanelFull : ''}`}>
         <main className={styles.rightPanelContent}>
           <Outlet context={{ openMobileNav: () => setMobileNavOpen(true) }} />
           <Footer />

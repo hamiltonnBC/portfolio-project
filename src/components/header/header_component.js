@@ -76,6 +76,12 @@ const MobileHeader = ({ theme, setTheme, isOpen, setIsOpen }) => {
           >
             Certifications
           </NavLink>
+          <NavLink
+            to="/where-your-data-goes"
+            className={({ isActive }) => (isActive ? styles.activeLink : '')}
+          >
+            Where does your data go?
+          </NavLink>
           {/* <NavLink
             to="/contact"
             className={({ isActive }) => (isActive ? styles.activeLink : '')}

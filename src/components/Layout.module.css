@@ -20,6 +20,12 @@
   flex-direction: column;
   box-sizing: border-box;
   z-index: 10;
+  transition: transform 0.55s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Immersive routes slide the sidebar off to the left */
+.leftPanelHidden {
+  transform: translateX(-110%);
 }
 
 .panelGlassCard {
@@ -51,6 +57,15 @@
   box-sizing: border-box;
   z-index: 5;
   position: relative;
+  transition: margin-left 0.55s cubic-bezier(0.32, 0.72, 0, 1),
+              width 0.55s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* Immersive routes expand content to the full width once the sidebar slides away.
+   Combined selector keeps it winning over the responsive width overrides below. */
+.rightPanel.rightPanelFull {
+  width: 100%;
+  margin-left: 0;
 }
 
 .rightPanelContent {

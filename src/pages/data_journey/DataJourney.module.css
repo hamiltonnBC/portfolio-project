@@ -3,7 +3,7 @@
 .page {
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: 3.25rem;
   padding: 0 0 5rem 0;
   position: relative;
 }
@@ -70,10 +70,10 @@
 
 /* ---------- Hero ---------- */
 .hero {
-  min-height: 62dvh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 0.5rem;
 }
 
 .eyebrow {
@@ -104,17 +104,43 @@
   margin: 0;
 }
 
-/* ---------- Signup scene ---------- */
-.signupScene {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
+/* ---------- Signup + live fan-out stage ---------- */
+.flowScene {
+  width: 100%;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+}
+
+/* Wire overlay sits behind the cards */
+.wires {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: visible;
+}
+
+.wire {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-width: 2;
+  opacity: 0.55;
+  stroke-dasharray: 1;
+  transition: stroke-dashoffset 1.15s cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .signupCard {
+  position: relative;
+  z-index: 2;
   width: 100%;
-  max-width: 380px;
+  max-width: 360px;
+  margin: 0 auto 3rem auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -190,61 +216,262 @@
   font-size: 0.82rem;
   color: var(--text-muted);
   letter-spacing: 0.02em;
+  text-align: center;
+  margin-top: 0.25rem;
 }
 
-/* ---------- Fan-out diagram ---------- */
-.diagramWrap {
-  width: 100%;
-  overflow-x: auto;
+/* ---------- System cards grid ---------- */
+.cardsGrid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2.5rem 2rem;
+  align-items: start;
 }
 
-.diagram {
-  width: 100%;
-  min-width: 640px;
-  height: auto;
-  display: block;
+.systemCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1.25rem 1.35rem;
+  min-height: 150px;
+  /* Opaque so the wires routed behind a card are hidden, not showing through */
+  background: var(--bg-raised);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  opacity: 0.28;
+  transform: translateY(10px);
+  transition:
+    opacity 0.6s cubic-bezier(0.32, 0.72, 0, 1),
+    transform 0.6s cubic-bezier(0.32, 0.72, 0, 1),
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
 }
 
-.connector {
-  fill: none;
-  stroke: var(--accent-primary);
-  stroke-width: 2;
-  opacity: 0.55;
-  stroke-dasharray: 1;
-  transition: stroke-dashoffset 0.9s cubic-bezier(0.32, 0.72, 0, 1);
-}
-
-.svgNode rect {
-  fill: var(--bg-raised);
-  stroke: var(--border-color-hover);
-  stroke-width: 1;
-}
-
-.signupNode rect {
-  fill: color-mix(in oklch, var(--accent-primary) 22%, var(--bg-raised));
-  stroke: var(--accent-primary);
-}
-
-.svgNode {
-  opacity: 0;
-  transition: opacity 0.6s cubic-bezier(0.32, 0.72, 0, 1);
-}
-
-.svgNode.nodeIn {
+.systemCard.cardOn {
   opacity: 1;
+  transform: translateY(0);
+  border-color: var(--border-color-hover);
+  box-shadow: var(--shadow-md);
 }
 
-.svgNodeLabel {
-  fill: var(--text-main);
+.cardHead {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.cardIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  color: var(--accent-primary);
+  background: var(--accent-soft);
+  border: 1px solid var(--border-color);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.cardTitles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.cardLabel {
   font-family: var(--font-title);
-  font-size: 15px;
+  font-size: 1.02rem;
   font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.2;
 }
 
-.svgNodeSub {
-  fill: var(--text-muted);
+.cardSystem {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.whenBadge {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 100px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+  opacity: 0.5;
+  transition: opacity 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+}
+
+.whenBadge.whenOn {
+  opacity: 1;
+  color: var(--accent-secondary);
+  border-color: color-mix(in oklch, var(--accent-secondary) 40%, transparent);
+}
+
+/* ----- Payload: mini table ----- */
+.miniTable {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+}
+
+.miniHead,
+.miniRow {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 0.5rem;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.miniHead {
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 6px 6px 0 0;
+}
+
+.miniRow {
+  color: var(--text-main);
+  background: var(--accent-soft);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.5s ease 0.25s, transform 0.5s cubic-bezier(0.32, 0.72, 0, 1) 0.25s;
+}
+
+.miniRow.rowIn {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.miniRow span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.snapChip {
+  align-self: flex-start;
+  margin-top: 0.15rem;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: 100px;
+  color: #fbbf24;
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.5s ease 0.5s, transform 0.5s ease 0.5s;
+}
+
+.snapChip.chipIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ----- Payload: key / value ----- */
+.kv {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+}
+
+.kv.kvIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.kv > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 5px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.kv > div span:first-child {
+  color: var(--text-muted);
+}
+
+.kv > div span:last-child {
+  color: var(--text-main);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ----- Payload: event / log line ----- */
+.eventLine {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--accent-secondary);
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 12px;
+  word-break: break-word;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+}
+
+.eventLine.eventIn {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ----- Payload: chips ----- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.miniChip {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  border-radius: 100px;
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-color);
+  opacity: 0;
+  transform: translateY(4px) scale(0.96);
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.miniChip.chipIn {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 /* ---------- Erasure request ---------- */
@@ -474,14 +701,39 @@
 @media (prefers-reduced-motion: reduce) {
   .reveal,
   .huntCard,
-  .svgNode {
+  .systemCard,
+  .miniRow,
+  .snapChip,
+  .kv,
+  .eventLine,
+  .miniChip {
     transition: none;
     opacity: 1;
     transform: none;
   }
-  .connector {
+  .wire {
     transition: none;
     stroke-dashoffset: 0 !important;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Below the wide layout, stack the cards in one column and drop the wires
+     (measured connectors get messy on a narrow single column). */
+  .cardsGrid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+  .systemCard {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+    min-height: 0;
+  }
+  .wires {
+    display: none;
+  }
+  .signupCard {
+    margin-bottom: 2rem;
   }
 }
 
@@ -490,7 +742,7 @@
     gap: 4rem;
   }
   .hero {
-    min-height: 54dvh;
+    padding-top: 0.5rem;
   }
   .dek {
     font-size: 1.05rem;
