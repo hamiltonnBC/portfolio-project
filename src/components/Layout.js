@@ -61,7 +61,8 @@ const Layout = () => {
   const location = useLocation();
 
   // Immersive routes hide the sidebar (it slides off-screen) for a full-bleed view.
-  const immersive = location.pathname === '/where-your-data-goes';
+  const immersive = location.pathname === '/where-your-data-goes'
+    || location.pathname === '/privacy-engineering/where-your-data-goes';
 
   // Apply theme to document element
   useEffect(() => {
@@ -158,8 +159,8 @@ const Layout = () => {
                 <NavLink to="/certifications" className={({ isActive }) => isActive ? styles.activeNavLink : ''}>
                   Certifications
                 </NavLink>
-                <NavLink to="/where-your-data-goes" className={({ isActive }) => isActive ? styles.activeNavLink : ''}>
-                  Where does your data go?
+                <NavLink to="/privacy-engineering" className={({ isActive }) => isActive ? styles.activeNavLink : ''}>
+                  Privacy Engineering
                 </NavLink>
                 {/* <NavLink to="/contact" className={({ isActive }) => isActive ? styles.activeNavLink : ''}>
                   Contact

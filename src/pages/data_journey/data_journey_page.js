@@ -9,7 +9,7 @@
  *
  * Connected Files:
  * - DataJourney.module.css: Styling for this component
- * - router.js: Registers the /where-your-data-goes route under <Layout />
+ * - router.js: Registers the nested Privacy Engineering route and legacy redirect
  *************************************************/
 
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
@@ -27,6 +27,10 @@ const CARDS = [
     when: 'on signup', order: 0, from: 'signup', pos: { col: '1 / 5', row: 1 },
     payload: { kind: 'table', head: ['id', 'name'], row: ['usr_8f3a', 'Nicholas Hamilton'] },
     detail: 'Primary users row', status: 'Deleted', tone: 'done',
+    identifier: 'usr_8f3a + email', control: 'First-party system',
+    action: 'Delete the primary row', actionLabel: 'Delete primary record',
+    lesson: 'Start with the canonical account, but never mistake the primary row for the whole person.',
+    verify: 'Search again by user ID and email; both queries must return zero account rows.',
   },
   {
     id: 'payments', label: 'Payments', system: 'Stripe', icon: 'card',
@@ -34,24 +38,40 @@ const CARDS = [
     payload: { kind: 'kv', rows: [['customer', 'cus_9Fh2Kd'], ['status', 'active']] },
     detail: 'Customer object', status: 'Retained', tone: 'retained',
     note: 'Kept under a legal obligation. Erasure does not override tax and financial record law.',
+    identifier: 'cus_9Fh2Kd + email', control: 'Processor with legal records',
+    action: 'Restrict and retain lawfully', actionLabel: 'Record retention exception',
+    lesson: 'Erasure has exceptions. Keep only the minimum financial record, lock it from other uses, and document why.',
+    verify: 'Confirm the customer cannot be used for marketing or product access, and record the retention end date.',
   },
   {
     id: 'cache', label: 'Session Cache', system: 'Redis', icon: 'bolt',
     when: 'instantly', order: 2, from: 'signup', pos: { col: '1 / 5', row: 3 },
     payload: { kind: 'kv', rows: [['key', 'session:usr_8f3a'], ['ttl', '24h']] },
     detail: 'Login session', status: 'Expired', tone: 'done',
+    identifier: 'session:usr_8f3a', control: 'First-party ephemeral store',
+    action: 'Revoke and expire the key', actionLabel: 'Revoke active session',
+    lesson: 'Short-lived data still matters. Revoke it now instead of waiting for the normal time-to-live.',
+    verify: 'Attempt to read the session key and confirm the old access token can no longer authenticate.',
   },
   {
     id: 'logs', label: 'Application Logs', system: 'stdout', icon: 'terminal',
     when: 'instantly', order: 3, from: 'signup', pos: { col: '9 / 13', row: 3 },
     payload: { kind: 'event', line: 'POST /signup 201  usr_8f3a' },
     detail: 'Request log with email', status: 'Purged', tone: 'done',
+    identifier: 'usr_8f3a + request trace', control: 'First-party observability',
+    action: 'Purge identifying log fields', actionLabel: 'Purge identifying fields',
+    lesson: 'Logs are often missed because they are treated as infrastructure, even when they contain account identifiers.',
+    verify: 'Search hot logs and the archive index; the trace may remain only after its identity fields are removed.',
   },
   {
     id: 'analytics', label: 'Analytics', system: 'Warehouse', icon: 'chart',
     when: '+2 seconds', order: 4, from: 'signup', pos: { col: '5 / 9', row: 2 },
     payload: { kind: 'event', line: 'track user_signed_up { plan: "free" }' },
     detail: 'Event keyed to user_id', status: 'Deleted', tone: 'done',
+    identifier: 'user_id + device_id', control: 'First-party warehouse',
+    action: 'Delete linked event history', actionLabel: 'Erase linked events',
+    lesson: 'Identity resolution matters: events may use a user ID, device ID, or an anonymous ID that was later merged.',
+    verify: 'Run the identity graph and warehouse query again; no event should resolve back to this person.',
   },
   {
     id: 'crm', label: 'Email / CRM', system: 'Mailchimp', icon: 'mail',
@@ -59,6 +79,10 @@ const CARDS = [
     payload: { kind: 'chips', items: ['welcome email queued', 'audience: Newsletter'] },
     detail: 'Marketing audience', status: 'Forwarded', tone: 'forwarded',
     note: 'A processor you have to instruct, not your own database.',
+    identifier: 'email + subscriber hash', control: 'External processor',
+    action: 'Send and track deletion', actionLabel: 'Instruct the processor',
+    lesson: 'A contract does not delete data. Your system must send the instruction and retain evidence that it completed.',
+    verify: 'Receive a completion result, then query the audience by email and subscriber hash.',
   },
   {
     id: 'adpixel', label: 'Ad Pixel', system: 'adnetwork.com', icon: 'broadcast',
@@ -66,6 +90,10 @@ const CARDS = [
     payload: { kind: 'chips', items: ['tag fired', 'shared off-site'] },
     detail: 'Third-party tag', status: 'Forwarded', tone: 'forwarded',
     note: 'That data already left with a third party.',
+    identifier: 'cookie ID + event timestamp', control: 'External recipient',
+    action: 'Notify and document the boundary', actionLabel: 'Notify the recipient',
+    lesson: 'Once data leaves your environment, you may not be able to recall it directly. The transfer still belongs in the case.',
+    verify: 'Record the recipient, instruction, response, and any limitation you must explain to the requester.',
   },
   {
     id: 'backups', label: 'Nightly Backups', system: 'S3 Glacier', icon: 'backup',
@@ -73,6 +101,10 @@ const CARDS = [
     payload: { kind: 'table', head: ['id', 'name'], row: ['usr_8f3a', 'Nicholas Hamilton'], tag: 'immutable snapshot' },
     detail: 'Encrypted snapshot', status: 'Tombstoned', tone: 'pending',
     note: 'You can’t edit a sealed backup, so it gets flagged for deletion on restore.',
+    identifier: 'usr_8f3a + snapshot date', control: 'First-party immutable backup',
+    action: 'Create a restore tombstone', actionLabel: 'Add restore tombstone',
+    lesson: 'Editing a sealed backup can destroy its integrity. Instead, prevent the record from returning during a restore.',
+    verify: 'Run a restore drill and confirm the deletion ledger removes the row before the recovered system goes live.',
   },
   {
     id: 'more', label: 'and so many more!', system: '', icon: 'more',
@@ -82,6 +114,27 @@ const CARDS = [
 ];
 
 const ORDERED = [...CARDS].sort((a, b) => a.order - b.order);
+const INVESTIGATION_CARDS = CARDS.filter((card) => !card.extra);
+
+/**
+ * Real GDPR / CCPA enforcement actions. Every figure verified against a primary
+ * source (issuing DPA press release, EDPB, California AG / CPPA) in 2026.
+ * Amounts shown as issued; Amazon's €746M is omitted as it was annulled on appeal.
+ */
+const FINES = [
+  { company: 'Meta', amount: '€1.2B', law: 'GDPR', regulator: 'Ireland DPC', year: 2023, reason: 'Sent EU user data to the US without adequate safeguards.' },
+  { company: 'TikTok', amount: '€530M', law: 'GDPR', regulator: 'Ireland DPC', year: 2025, reason: 'Transferred European user data to China.' },
+  { company: 'Instagram', amount: '€405M', law: 'GDPR', regulator: 'Ireland DPC', year: 2022, reason: 'Exposed children’s contact details by default.' },
+  { company: 'LinkedIn', amount: '€310M', law: 'GDPR', regulator: 'Ireland DPC', year: 2024, reason: 'Targeted ads with no valid lawful basis.' },
+  { company: 'Uber', amount: '€290M', law: 'GDPR', regulator: 'Dutch DPA', year: 2024, reason: 'Moved driver data to the US without safeguards.' },
+  { company: 'WhatsApp', amount: '€225M', law: 'GDPR', regulator: 'Ireland DPC', year: 2021, reason: 'Failed to explain how it used people’s data.' },
+  { company: 'Google', amount: '€50M', law: 'GDPR', regulator: 'France CNIL', year: 2019, reason: 'No valid consent for ad personalization.' },
+  { company: 'Clearview AI', amount: '€30.5M', law: 'GDPR', regulator: 'Dutch DPA', year: 2024, reason: 'Scraped faces into a biometric database.' },
+  { company: 'Healthline', amount: '$1.55M', law: 'CCPA', regulator: 'California AG', year: 2025, reason: 'Shared readers’ health-related data for ads.' },
+  { company: 'Sephora', amount: '$1.2M', law: 'CCPA', regulator: 'California AG', year: 2022, reason: 'Ignored opt-outs and sold personal data.' },
+  { company: 'Honda', amount: '$632.5K', law: 'CCPA', regulator: 'CPPA', year: 2025, reason: 'Made opt-out and deletion needlessly hard.' },
+  { company: 'DoorDash', amount: '$375K', law: 'CCPA', regulator: 'California AG', year: 2024, reason: 'Sold personal info without an opt-out.' },
+];
 
 /* ------------------------------- Icons ------------------------------- */
 const ICON_PATHS = {
@@ -137,8 +190,7 @@ const Payload = ({ card, on }) => {
     return (
       <div className={styles.chips}>
         {p.items.map((c, i) => (
-          <span key={i} className={`${styles.miniChip} ${on ? styles.chipIn : ''}`}
-            style={{ transitionDelay: `${i * 0.18}s` }}>{c}</span>
+          <span key={i} className={`${styles.miniChip} ${on ? styles.chipIn : ''}`}>{c}</span>
         ))}
       </div>
     );
@@ -177,6 +229,8 @@ const DataJourneyPage = () => {
   const [signedUp, setSignedUp] = useState(false);
   const [active, setActive] = useState(() => new Set());
   const [huntRef, huntInView] = useInView(0.2);
+  const [selectedSystem, setSelectedSystem] = useState(INVESTIGATION_CARDS[0].id);
+  const [resolvedSystems, setResolvedSystems] = useState(() => new Set());
 
   const stageRef = useRef(null);
   const sourceRef = useRef(null);
@@ -188,7 +242,7 @@ const DataJourneyPage = () => {
   // Own tab title, restored on unmount.
   useEffect(() => {
     const previous = document.title;
-    document.title = 'Where does your data go?';
+    document.title = 'Where does your data go? | Privacy Engineering';
     return () => { document.title = previous; };
   }, []);
 
@@ -252,10 +306,26 @@ const DataJourneyPage = () => {
     });
   };
 
+  const selectedCard = INVESTIGATION_CARDS.find((card) => card.id === selectedSystem);
+  const resolvedCount = resolvedSystems.size;
+  const investigationComplete = resolvedCount === INVESTIGATION_CARDS.length;
+
+  const handleResolve = () => {
+    const next = new Set(resolvedSystems).add(selectedSystem);
+    const nextOpenCard = INVESTIGATION_CARDS.find((card) => !next.has(card.id));
+    setResolvedSystems(next);
+    if (nextOpenCard) setSelectedSystem(nextOpenCard.id);
+  };
+
+  const resetInvestigation = () => {
+    setResolvedSystems(new Set());
+    setSelectedSystem(INVESTIGATION_CARDS[0].id);
+  };
+
   return (
     <div className={styles.page}>
-      <Link to="/" className={styles.backButton}>
-        <span aria-hidden="true">←</span> Return to portfolio
+      <Link to="/privacy-engineering" className={styles.backButton}>
+        <span aria-hidden="true">←</span> Back to Privacy Engineering
       </Link>
 
       {/* Hero */}
@@ -263,9 +333,9 @@ const DataJourneyPage = () => {
         <span className={styles.eyebrow}>Privacy by design</span>
         <h1 className={styles.title}>Where does your data go?</h1>
         <p className={styles.dek}>
-          Signing up takes two seconds. Cleaning it back up can be exceedingly difficult, if you can
-          even find it all. Sign up below, then watch one row spread across a system before
-          the same person asks to be deleted.
+          One form creates a person in seconds. Then identifiers, events, and copies scatter
+          across systems with different owners and rules. Follow one signup outward, then work
+          the deletion request yourself.
         </p>
       </Reveal>
 
@@ -285,9 +355,8 @@ const DataJourneyPage = () => {
               <path
                 key={c.id}
                 d={wires[c.id] || ''}
-                className={styles.wire}
+                className={`${styles.wire} ${active.has(c.id) ? styles.wireOn : ''}`}
                 pathLength="1"
-                style={{ strokeDashoffset: active.has(c.id) ? 0 : 1 }}
               />
             ))}
           </svg>
@@ -323,7 +392,7 @@ const DataJourneyPage = () => {
                   key={c.id}
                   ref={(el) => { cardRefs.current[c.id] = el; }}
                   className={`${styles.systemCard} ${c.extra ? styles.cardExtra : ''} ${on ? styles.cardOn : ''}`}
-                  style={{ gridColumn: c.pos.col, gridRow: c.pos.row }}
+                  data-system={c.id}
                 >
                   <header className={styles.cardHead}>
                     <span className={styles.cardIcon}><Icon name={c.icon} /></span>
@@ -361,32 +430,167 @@ const DataJourneyPage = () => {
         </div>
       </Reveal>
 
+      {/* Enforcement fines marquee */}
+      <Reveal className={styles.finesScene}>
+        <p className={styles.finesLead}>Getting it wrong is expensive.</p>
+        <div
+          className={styles.marquee}
+          role="group"
+          aria-label="Real GDPR and CCPA enforcement fines"
+        >
+          <div className={styles.marqueeTrack}>
+            {[...FINES, ...FINES].map((f, i) => (
+              <div
+                className={styles.fineCard}
+                key={i}
+                aria-hidden={i >= FINES.length ? 'true' : undefined}
+              >
+                <span className={styles.fineCompany}>{f.company}</span>
+                <span className={`${styles.fineAmount} tabular-nums`}>{f.amount}</span>
+                <div className={styles.fineMeta}>
+                  <span className={`${styles.lawChip} ${f.law === 'GDPR' ? styles.lawGdpr : styles.lawCcpa}`}>
+                    {f.law}
+                  </span>
+                  <span className={styles.fineReg}>{f.regulator} · {f.year}</span>
+                </div>
+                <span className={styles.fineReason}>{f.reason}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
       {/* The hunt */}
       <section
         ref={huntRef}
         className={`${styles.reveal} ${styles.huntScene} ${huntInView ? styles.visible : ''}`}
       >
-        <h2 className={styles.sectionTitle}>Now go find all of it</h2>
-        <p className={styles.sectionLead}>
-          Eight systems, three different kinds of “done.” Some you delete outright. Some you
-          can only flag. Some you do not control, and some you are not even allowed to erase.
-        </p>
-        <div className={styles.huntGrid}>
-          {CARDS.filter((c) => !c.extra).map((c, i) => (
-            <div
-              key={c.id}
-              className={`${styles.huntCard} ${huntInView ? styles.huntIn : ''}`}
-              style={{ transitionDelay: `${i * 0.07}s` }}
-            >
-              <div className={styles.huntCardTop}>
-                <span className={styles.huntLabel}>{c.label}</span>
-                <span className={`${styles.statusChip} ${styles['tone_' + c.tone]}`}>{c.status}</span>
-              </div>
-              <span className={styles.huntDetail}>{c.detail}</span>
-              {c.note && <span className={styles.huntNote}>{c.note}</span>}
+        <header className={styles.huntHeader}>
+          <div>
+            <span className={styles.caseLabel}>Interactive case file · DSR-017</span>
+            <h2 className={styles.sectionTitle}>Now go find all of it</h2>
+            <p className={styles.sectionLead}>
+              Closing an erasure request is not one delete query. Reconcile every system:
+              find the right identity, decide what the law and architecture allow, take action,
+              and keep proof that it worked.
+            </p>
+          </div>
+          <aside className={styles.caseProgress} aria-label={`${resolvedCount} of ${INVESTIGATION_CARDS.length} systems reconciled`}>
+            <div className={styles.caseProgressTop}>
+              <span>Case progress</span>
+              <strong className="tabular-nums">{resolvedCount}/{INVESTIGATION_CARDS.length}</strong>
             </div>
-          ))}
+            <progress value={resolvedCount} max={INVESTIGATION_CARDS.length}>
+              {resolvedCount} of {INVESTIGATION_CARDS.length}
+            </progress>
+            <span className={styles.caseDeadline}>Day 01 of 30 · clock running</span>
+          </aside>
+        </header>
+
+        <div className={styles.investigationGuide} aria-label="Four steps in an erasure investigation">
+          <span><b>01</b> Discover systems</span>
+          <span><b>02</b> Match identities</span>
+          <span><b>03</b> Apply disposition</span>
+          <span><b>04</b> Verify the result</span>
         </div>
+
+        <div className={styles.huntWorkbench}>
+          <nav className={styles.systemQueue} aria-label="Systems in this erasure case">
+            <div className={styles.queueHeader}>
+              <span>System inventory</span>
+              <span>{INVESTIGATION_CARDS.length} found</span>
+            </div>
+            <div className={styles.queueList}>
+              {INVESTIGATION_CARDS.map((card, index) => {
+                const isSelected = selectedSystem === card.id;
+                const isResolved = resolvedSystems.has(card.id);
+                return (
+                  <button
+                    key={card.id}
+                    type="button"
+                    className={`${styles.queueItem} ${isSelected ? styles.queueItemSelected : ''} ${isResolved ? styles.queueItemResolved : ''}`}
+                    onClick={() => setSelectedSystem(card.id)}
+                    aria-pressed={isSelected}
+                  >
+                    <span className={styles.queueIndex}>{String(index + 1).padStart(2, '0')}</span>
+                    <span className={styles.queueIdentity}>
+                      <strong>{card.label}</strong>
+                      <small>{card.system}</small>
+                    </span>
+                    <span className={styles.queueState}>{isResolved ? 'Closed' : 'Open'}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </nav>
+
+          <article className={styles.caseDetail} aria-live="polite">
+            <header className={styles.caseDetailHeader}>
+              <span className={styles.caseSystemIcon}><Icon name={selectedCard.icon} /></span>
+              <div>
+                <span>{selectedCard.system}</span>
+                <h3>{selectedCard.label}</h3>
+              </div>
+              <span className={`${styles.statusChip} ${styles['tone_' + selectedCard.tone]}`}>
+                {selectedCard.status}
+              </span>
+            </header>
+
+            <div className={styles.evidenceGrid}>
+              <div>
+                <span className={styles.evidenceLabel}>Match with</span>
+                <code>{selectedCard.identifier}</code>
+              </div>
+              <div>
+                <span className={styles.evidenceLabel}>Control boundary</span>
+                <strong>{selectedCard.control}</strong>
+              </div>
+            </div>
+
+            <div className={styles.dispositionPanel}>
+              <span className={styles.evidenceLabel}>Required disposition</span>
+              <h4>{selectedCard.action}</h4>
+              <p>{selectedCard.lesson}</p>
+              {selectedCard.note && <p className={styles.boundaryNote}>{selectedCard.note}</p>}
+            </div>
+
+            <div className={styles.verificationPanel}>
+              <span className={styles.verifyMark} aria-hidden="true">✓</span>
+              <div>
+                <span className={styles.evidenceLabel}>Evidence to close</span>
+                <p>{selectedCard.verify}</p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              className={styles.resolveButton}
+              onClick={handleResolve}
+              disabled={resolvedSystems.has(selectedCard.id)}
+            >
+              {resolvedSystems.has(selectedCard.id) ? 'System reconciled' : selectedCard.actionLabel}
+              <span aria-hidden="true">{resolvedSystems.has(selectedCard.id) ? ' ✓' : ' →'}</span>
+            </button>
+          </article>
+        </div>
+
+        {investigationComplete && (
+          <div className={styles.caseComplete} role="status">
+            <div>
+              <span className={styles.completeKicker}>Case reconciled</span>
+              <h3>Eight systems found. Four different endings.</h3>
+              <p>
+                Four records were deleted, purged, or expired; two external parties received
+                instructions; one record was retained under a legal exception; and one backup
+                received a restore tombstone. “Done” means a justified, verified outcome—not
+                that every byte vanished in the same way.
+              </p>
+            </div>
+            <button type="button" className={styles.resetButton} onClick={resetInvestigation}>
+              Run the case again
+            </button>
+          </div>
+        )}
       </section>
 
       {/* Closing + CTA */}

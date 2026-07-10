@@ -12,6 +12,7 @@ phases. Build after every phase (`npm run build`) and keep changes reviewable.
 | 02 | [Re-identification Demo](./02-reidentification-demo.md) | Idea | k-anonymity slider showing how "anonymous" rows collapse to a unique person. |
 | 03 | [Differential Privacy Sandbox](./03-differential-privacy-sandbox.md) | Idea | An epsilon slider trading privacy noise against query utility. |
 | 04 | [Game of Life](./04-game-of-life.md) | Idea | Calm, ambient Conway's Game of Life — the pure-aesthetic option. |
+| 05 | [Enforcement Fines Marquee](./05-fines-marquee.md) | Built | Scrolling banner of companies with the real GDPR/CCPA fines they took. Sits under the erasure request on the data-journey page. |
 
 ★ = recommended next build.
 

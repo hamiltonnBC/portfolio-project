@@ -19,7 +19,7 @@
 
 // External Dependencies
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 // Layout Component Import
 import Layout from './components/Layout';
@@ -31,6 +31,9 @@ import AboutPage from './pages/about/about_page';
 import CertificationsPage from './pages/certifications/certifications_page';
 import ResumePage from './pages/resume/resume_page';
 import DataJourneyPage from './pages/data_journey/data_journey_page';
+import PrivacyEngineeringPage from './pages/privacy_engineering/privacy_engineering_page';
+import PrivacyEngineeringOverviewPage from './pages/privacy_engineering/privacy_engineering_overview_page';
+import DsrConsentAnalyticsPage from './pages/privacy_engineering/dsr_consent_analytics_page';
 // import ContactForm from './components/contact_form/contact_form_component';
 
 /**
@@ -45,6 +48,7 @@ import DataJourneyPage from './pages/data_journey/data_journey_page';
  * /projects         -> ProjectsPage
  * /about            -> AboutPage
  * /certifications   -> CertificationsPage
+ * /privacy-engineering -> PrivacyEngineeringPage with nested case studies
  * /contact          -> ContactForm
  *
  * @returns {JSX.Element} The configured router component with all application routes
@@ -68,8 +72,18 @@ function AppRouter() {
                 {/* Resume Page */}
                 <Route path="resume" element={<ResumePage />} />
 
-                {/* "Where does your data go?" — interactive privacy demo */}
-                <Route path="where-your-data-goes" element={<DataJourneyPage />} />
+                {/* Privacy Engineering Section */}
+                <Route path="privacy-engineering" element={<PrivacyEngineeringPage />}>
+                    <Route index element={<PrivacyEngineeringOverviewPage />} />
+                    <Route path="where-your-data-goes" element={<DataJourneyPage />} />
+                    <Route path="dsr-consent-analytics" element={<DsrConsentAnalyticsPage />} />
+                </Route>
+
+                {/* Legacy data journey URL */}
+                <Route
+                    path="where-your-data-goes"
+                    element={<Navigate to="/privacy-engineering/where-your-data-goes" replace />}
+                />
 
                 {/* Contact Page */}
                 {/* <Route path="contact" element={<ContactForm />} /> */}

@@ -77,10 +77,10 @@ const MobileHeader = ({ theme, setTheme, isOpen, setIsOpen }) => {
             Certifications
           </NavLink>
           <NavLink
-            to="/where-your-data-goes"
+            to="/privacy-engineering"
             className={({ isActive }) => (isActive ? styles.activeLink : '')}
           >
-            Where does your data go?
+            Privacy Engineering
           </NavLink>
           {/* <NavLink
             to="/contact"
