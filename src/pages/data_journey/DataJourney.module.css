@@ -139,12 +139,27 @@
   stroke-dashoffset: 0;
 }
 
-.signupCard {
+.originRow {
   position: relative;
   z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(280px, 360px);
+  justify-content: center;
+  align-items: start;
+  gap: 1.25rem;
   width: 100%;
-  max-width: 360px;
-  margin: 0 auto 3rem auto;
+  max-width: 1120px;
+  margin: 0 auto 3rem;
+}
+
+.originRowActive {
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+}
+
+.signupCard {
+  position: relative;
+  width: 100%;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -155,6 +170,163 @@
   box-shadow: var(--shadow-md);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
+}
+
+.lifecyclePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  border: 1px solid var(--border-color-hover);
+  border-radius: var(--border-radius-lg);
+  background:
+    radial-gradient(circle at 100% 0%, var(--accent-soft), transparent 40%),
+    var(--bg-raised);
+  box-shadow: var(--shadow-md);
+  animation: lifecyclePanelIn 0.65s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@keyframes lifecyclePanelIn {
+  from { opacity: 0; transform: translateX(18px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.lifecycleHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.lifecycleKicker,
+.lifecycleFootnote {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+}
+
+.lifecycleHeader h2 {
+  margin: 0.45rem 0 0;
+  font-family: var(--font-title);
+  font-size: clamp(1.25rem, 2vw, 1.7rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-main);
+}
+
+.systemCounter {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+}
+
+.systemCounter strong {
+  font-size: 1rem;
+  color: var(--accent-primary);
+}
+
+.lifecycleCopy {
+  max-width: 68ch;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.lifecycleActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+}
+
+.lifecycleAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 67px;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  background: var(--surface-subtle);
+  color: var(--text-main);
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.lifecycleAction:hover:not(:disabled) {
+  border-color: var(--border-color-hover);
+  background: var(--bg-panel-hover);
+  transform: translateY(-2px);
+}
+
+.lifecycleAction:active:not(:disabled) {
+  transform: scale(0.99);
+}
+
+.lifecycleAction:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.lifecycleAction > span:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.lifecycleAction strong {
+  font-family: var(--font-title);
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.lifecycleAction small {
+  color: var(--text-muted);
+  font-size: 0.62rem;
+  line-height: 1.35;
+}
+
+.lifecycleActionState {
+  flex: 0 0 auto;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.04em;
+  color: var(--accent-secondary);
+}
+
+.lifecycleActionDone {
+  border-color: var(--success-border);
+  background: var(--success-soft);
+}
+
+.lifecycleActionDone .lifecycleActionState {
+  color: var(--success);
+}
+
+.lifecycleAction:disabled {
+  cursor: default;
+}
+
+.lifecycleFootnote {
+  margin: 0;
+  color: var(--text-muted);
+  text-transform: none;
+  letter-spacing: 0.02em;
+  line-height: 1.45;
 }
 
 .field {
@@ -224,14 +396,88 @@
   margin-top: 0.25rem;
 }
 
-/* ---------- System cards grid ---------- */
-.cardsGrid {
+/* ---------- System map grouped by lifecycle moment ---------- */
+.systemMap {
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.systemPhase {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  background: var(--surface-input);
+  transition: var(--transition-fast);
+}
+
+.systemPhaseOn {
+  border-color: var(--border-color-hover);
+  background: var(--surface-subtle);
+}
+
+.phaseHeader {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 2.5rem 2rem;
-  align-items: start;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0 0.2rem 0.8rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.phaseNumber,
+.phaseCount {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.phaseNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-raised);
+}
+
+.systemPhaseOn .phaseNumber {
+  border-color: var(--border-color-hover);
+  color: var(--accent-primary);
+  background: var(--accent-soft);
+}
+
+.phaseHeader > span:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.phaseHeader strong {
+  font-family: var(--font-title);
+  font-size: 0.88rem;
+  color: var(--text-main);
+}
+
+.phaseHeader small {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: stretch;
 }
 
 .systemCard {
@@ -239,7 +485,7 @@
   flex-direction: column;
   gap: 0.85rem;
   padding: 1.25rem 1.35rem;
-  min-height: 150px;
+  min-height: 145px;
   /* Opaque so the wires routed behind a card are hidden, not showing through */
   background: var(--bg-raised);
   border: 1px solid var(--border-color);
@@ -260,77 +506,11 @@
   box-shadow: var(--shadow-md);
 }
 
-.systemCard[data-system='db'] {
-  grid-column: 1 / 5;
-  grid-row: 1;
-}
-
-.systemCard[data-system='payments'] {
-  grid-column: 9 / 13;
-  grid-row: 1;
-}
-
-.systemCard[data-system='cache'] {
-  grid-column: 1 / 5;
-  grid-row: 3;
-}
-
-.systemCard[data-system='logs'] {
-  grid-column: 9 / 13;
-  grid-row: 3;
-}
-
-.systemCard[data-system='analytics'] {
-  grid-column: 5 / 9;
-  grid-row: 2;
-}
-
-.systemCard[data-system='crm'] {
-  grid-column: 5 / 9;
-  grid-row: 4;
-}
-
-.systemCard[data-system='adpixel'] {
-  grid-column: 5 / 9;
-  grid-row: 5;
-}
-
-.systemCard[data-system='backups'] {
-  grid-column: 1 / 5;
-  grid-row: 5;
-}
-
-.systemCard[data-system='more'] {
-  grid-column: 9 / 13;
-  grid-row: 4;
-}
-
-/* "and so many more" card — centered, dashed, no payload */
-.cardExtra {
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  border-style: dashed;
-}
-
-.cardExtra .cardHead {
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.cardExtra .cardLabel {
-  font-size: 1.15rem;
-  color: var(--accent-secondary);
-}
-
-.cardExtra.cardOn {
-  border-color: color-mix(in oklch, var(--accent-secondary) 45%, transparent);
-}
-
 .cardHead {
   display: flex;
   align-items: center;
   gap: 0.7rem;
+  flex-wrap: wrap;
 }
 
 .cardIcon {
@@ -1285,7 +1465,8 @@
   .kv,
   .eventLine,
   .miniChip,
-  .caseComplete {
+  .caseComplete,
+  .lifecyclePanel {
     transition: none;
     animation: none;
     opacity: 1;
@@ -1304,23 +1485,36 @@
   }
 }
 
-@media (max-width: 900px) {
-  /* Below the wide layout, stack the cards in one column and drop the wires
-     (measured connectors get messy on a narrow single column). */
+@media (max-width: 1180px) {
   .cardsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lifecycleActions {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  /* Below the wide layout, stack the story origins and drop measured wires. */
+  .originRow,
+  .originRowActive {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 680px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.1rem;
   }
   .systemCard {
-    grid-column: 1 / -1 !important;
-    grid-row: auto !important;
     min-height: 0;
   }
   .wires {
     display: none;
   }
-  .signupCard {
-    margin-bottom: 2rem;
+  .lifecycleActions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .huntHeader {
@@ -1399,6 +1593,19 @@
 }
 
 @media (max-width: 560px) {
+  .cardsGrid,
+  .lifecycleActions {
+    grid-template-columns: 1fr;
+  }
+
+  .lifecycleHeader {
+    flex-direction: column;
+  }
+
+  .systemCounter {
+    align-items: flex-start;
+  }
+
   .queueList {
     display: flex;
     overflow-x: auto;

@@ -17,14 +17,14 @@ import { Link } from 'react-router-dom';
 import styles from './DataJourney.module.css';
 
 /**
- * Every system a single signup touches. `order` drives the activation cascade,
- * `when` is the story timestamp, `payload` is the little live view each card shows,
- * and the erasure fields (status/tone/note) power the later "hunt" section.
+ * Systems are grouped by the product moment that actually creates or enriches
+ * their records. The original eight erasure examples also carry the case-file
+ * fields used later in the story; supporting examples stay illustrative only.
  */
 const CARDS = [
   {
     id: 'db', label: 'User Database', system: 'Postgres', icon: 'database',
-    when: 'on signup', order: 0, from: 'signup', pos: { col: '1 / 5', row: 1 },
+    when: 'account created', trigger: 'signup', from: 'signup',
     payload: { kind: 'table', head: ['id', 'name'], row: ['usr_8f3a', 'Nicholas Hamilton'] },
     detail: 'Primary users row', status: 'Deleted', tone: 'done',
     identifier: 'usr_8f3a + email', control: 'First-party system',
@@ -33,19 +33,8 @@ const CARDS = [
     verify: 'Search again by user ID and email; both queries must return zero account rows.',
   },
   {
-    id: 'payments', label: 'Payments', system: 'Stripe', icon: 'card',
-    when: 'on signup', order: 1, from: 'signup', pos: { col: '9 / 13', row: 1 },
-    payload: { kind: 'kv', rows: [['customer', 'cus_9Fh2Kd'], ['status', 'active']] },
-    detail: 'Customer object', status: 'Retained', tone: 'retained',
-    note: 'Kept under a legal obligation. Erasure does not override tax and financial record law.',
-    identifier: 'cus_9Fh2Kd + email', control: 'Processor with legal records',
-    action: 'Restrict and retain lawfully', actionLabel: 'Record retention exception',
-    lesson: 'Erasure has exceptions. Keep only the minimum financial record, lock it from other uses, and document why.',
-    verify: 'Confirm the customer cannot be used for marketing or product access, and record the retention end date.',
-  },
-  {
     id: 'cache', label: 'Session Cache', system: 'Redis', icon: 'bolt',
-    when: 'instantly', order: 2, from: 'signup', pos: { col: '1 / 5', row: 3 },
+    when: 'session issued', trigger: 'signup', from: 'signup',
     payload: { kind: 'kv', rows: [['key', 'session:usr_8f3a'], ['ttl', '24h']] },
     detail: 'Login session', status: 'Expired', tone: 'done',
     identifier: 'session:usr_8f3a', control: 'First-party ephemeral store',
@@ -55,7 +44,7 @@ const CARDS = [
   },
   {
     id: 'logs', label: 'Application Logs', system: 'stdout', icon: 'terminal',
-    when: 'instantly', order: 3, from: 'signup', pos: { col: '9 / 13', row: 3 },
+    when: 'request completed', trigger: 'signup', from: 'signup',
     payload: { kind: 'event', line: 'POST /signup 201  usr_8f3a' },
     detail: 'Request log with email', status: 'Purged', tone: 'done',
     identifier: 'usr_8f3a + request trace', control: 'First-party observability',
@@ -64,9 +53,31 @@ const CARDS = [
     verify: 'Search hot logs and the archive index; the trace may remain only after its identity fields are removed.',
   },
   {
+    id: 'security', label: 'Security Signals', system: 'WAF + device risk', icon: 'broadcast',
+    when: 'risk check', trigger: 'signup', from: 'signup', investigate: false,
+    payload: { kind: 'kv', rows: [['ip', '198.51.100.42'], ['risk', 'low']] },
+  },
+
+  {
+    id: 'profile', label: 'Profile Service', system: 'Profile API', icon: 'user',
+    when: 'profile saved', trigger: 'profile', from: 'profile', investigate: false,
+    payload: { kind: 'chips', items: ['phone', 'address', 'birthday'] },
+  },
+  {
+    id: 'avatars', label: 'Media Storage', system: 'Object storage', icon: 'cloud',
+    when: 'photo uploaded', trigger: 'profile', from: 'profile', investigate: false,
+    payload: { kind: 'kv', rows: [['object', 'avatars/usr_8f3a'], ['metadata', 'image/jpeg']] },
+  },
+  {
+    id: 'search', label: 'Search Index', system: 'Elasticsearch', icon: 'search',
+    when: 'profile indexed', trigger: 'profile', from: 'profile', investigate: false,
+    payload: { kind: 'event', line: 'index profile usr_8f3a' },
+  },
+
+  {
     id: 'analytics', label: 'Analytics', system: 'Warehouse', icon: 'chart',
-    when: '+2 seconds', order: 4, from: 'signup', pos: { col: '5 / 9', row: 2 },
-    payload: { kind: 'event', line: 'track user_signed_up { plan: "free" }' },
+    when: 'events streamed', trigger: 'browse', from: 'browse',
+    payload: { kind: 'event', line: 'track product_viewed { sku: "BK-204" }' },
     detail: 'Event keyed to user_id', status: 'Deleted', tone: 'done',
     identifier: 'user_id + device_id', control: 'First-party warehouse',
     action: 'Delete linked event history', actionLabel: 'Erase linked events',
@@ -74,9 +85,63 @@ const CARDS = [
     verify: 'Run the identity graph and warehouse query again; no event should resolve back to this person.',
   },
   {
+    id: 'cdp', label: 'Identity Graph', system: 'Customer data platform', icon: 'identity',
+    when: 'identities merged', trigger: 'browse', from: 'browse', investigate: false,
+    payload: { kind: 'chips', items: ['user_id', 'device_id', 'anonymous_id'] },
+  },
+  {
+    id: 'recommendations', label: 'Recommendations', system: 'Feature store', icon: 'spark',
+    when: 'interests inferred', trigger: 'browse', from: 'browse', investigate: false,
+    payload: { kind: 'kv', rows: [['category', 'privacy books'], ['affinity', '0.78']] },
+  },
+
+  {
+    id: 'payments', label: 'Payments', system: 'Stripe', icon: 'card',
+    when: 'payment added', trigger: 'purchase', from: 'purchase',
+    payload: { kind: 'kv', rows: [['customer', 'cus_9Fh2Kd'], ['card', '•••• 4242']] },
+    detail: 'Customer object', status: 'Retained', tone: 'retained',
+    note: 'Kept under a legal obligation. Erasure does not override tax and financial record law.',
+    identifier: 'cus_9Fh2Kd + email', control: 'Processor with legal records',
+    action: 'Restrict and retain lawfully', actionLabel: 'Record retention exception',
+    lesson: 'Erasure has exceptions. Keep only the minimum financial record, lock it from other uses, and document why.',
+    verify: 'Confirm the customer cannot be used for marketing or product access, and record the retention end date.',
+  },
+  {
+    id: 'orders', label: 'Order Database', system: 'Commerce service', icon: 'order',
+    when: 'order placed', trigger: 'purchase', from: 'purchase', investigate: false,
+    payload: { kind: 'table', head: ['order', 'total'], row: ['ord_48291', '$68.42'] },
+  },
+  {
+    id: 'tax', label: 'Tax & Invoicing', system: 'Finance system', icon: 'receipt',
+    when: 'invoice issued', trigger: 'purchase', from: 'purchase', investigate: false,
+    payload: { kind: 'chips', items: ['billing address', 'tax jurisdiction'] },
+  },
+  {
+    id: 'fraud', label: 'Fraud Screening', system: 'Risk processor', icon: 'fingerprint',
+    when: 'transaction scored', trigger: 'purchase', from: 'purchase', investigate: false,
+    payload: { kind: 'kv', rows: [['decision', 'accept'], ['score', '0.08']] },
+  },
+  {
+    id: 'fulfillment', label: 'Fulfillment', system: 'Shipping partner', icon: 'truck',
+    when: 'shipment created', trigger: 'purchase', from: 'purchase', investigate: false,
+    payload: { kind: 'chips', items: ['recipient name', 'delivery address'] },
+  },
+
+  {
+    id: 'support', label: 'Support Desk', system: 'Zendesk', icon: 'support',
+    when: 'ticket opened', trigger: 'support', from: 'support', investigate: false,
+    payload: { kind: 'event', line: 'ticket #1842 · account access' },
+  },
+  {
+    id: 'conversations', label: 'Conversation Archive', system: 'Support transcripts', icon: 'transcript',
+    when: 'conversation saved', trigger: 'support', from: 'support', investigate: false,
+    payload: { kind: 'chips', items: ['chat transcript', 'agent notes'] },
+  },
+
+  {
     id: 'crm', label: 'Email / CRM', system: 'Mailchimp', icon: 'mail',
-    when: '+1 minute', order: 5, from: 'signup', pos: { col: '5 / 9', row: 4 },
-    payload: { kind: 'chips', items: ['welcome email queued', 'audience: Newsletter'] },
+    when: 'consent recorded', trigger: 'marketing', from: 'marketing',
+    payload: { kind: 'chips', items: ['newsletter opt-in', 'audience: Updates'] },
     detail: 'Marketing audience', status: 'Forwarded', tone: 'forwarded',
     note: 'A processor you have to instruct, not your own database.',
     identifier: 'email + subscriber hash', control: 'External processor',
@@ -86,8 +151,8 @@ const CARDS = [
   },
   {
     id: 'adpixel', label: 'Ad Pixel', system: 'adnetwork.com', icon: 'broadcast',
-    when: '+2 seconds', order: 6, from: 'analytics', pos: { col: '5 / 9', row: 5 },
-    payload: { kind: 'chips', items: ['tag fired', 'shared off-site'] },
+    when: 'if consent allows', trigger: 'marketing', from: 'marketing',
+    payload: { kind: 'chips', items: ['campaign event', 'shared off-site'] },
     detail: 'Third-party tag', status: 'Forwarded', tone: 'forwarded',
     note: 'That data already left with a third party.',
     identifier: 'cookie ID + event timestamp', control: 'External recipient',
@@ -96,8 +161,14 @@ const CARDS = [
     verify: 'Record the recipient, instruction, response, and any limitation you must explain to the requester.',
   },
   {
+    id: 'audiences', label: 'Audience Sync', system: 'Ad platform', icon: 'broadcast',
+    when: 'audience refreshed', trigger: 'marketing', from: 'marketing', investigate: false,
+    payload: { kind: 'kv', rows: [['match key', 'hashed email'], ['segment', 'returning customer']] },
+  },
+
+  {
     id: 'backups', label: 'Nightly Backups', system: 'S3 Glacier', icon: 'backup',
-    when: '+12 hours', order: 7, from: 'db', pos: { col: '1 / 5', row: 5 },
+    when: 'overnight snapshot', trigger: 'overnight', from: 'overnight',
     payload: { kind: 'table', head: ['id', 'name'], row: ['usr_8f3a', 'Nicholas Hamilton'], tag: 'immutable snapshot' },
     detail: 'Encrypted snapshot', status: 'Tombstoned', tone: 'pending',
     note: 'You can’t edit a sealed backup, so it gets flagged for deletion on restore.',
@@ -107,14 +178,32 @@ const CARDS = [
     verify: 'Run a restore drill and confirm the deletion ledger removes the row before the recovered system goes live.',
   },
   {
-    id: 'more', label: 'and so many more!', system: '', icon: 'more',
-    when: '', order: 8, from: 'signup', pos: { col: '9 / 13', row: 4 },
-    payload: null, extra: true,
+    id: 'warehouse', label: 'Analytics Warehouse', system: 'Snowflake / BigQuery', icon: 'database',
+    when: 'batch transformed', trigger: 'overnight', from: 'overnight', investigate: false,
+    payload: { kind: 'table', head: ['user_key', 'orders'], row: ['usr_8f3a', '1'] },
+  },
+  {
+    id: 'lake', label: 'Raw Data Lake', system: 'Object storage', icon: 'cloud',
+    when: 'exports landed', trigger: 'overnight', from: 'overnight', investigate: false,
+    payload: { kind: 'chips', items: ['event export', 'support export', 'order export'] },
   },
 ];
 
-const ORDERED = [...CARDS].sort((a, b) => a.order - b.order);
-const INVESTIGATION_CARDS = CARDS.filter((card) => !card.extra);
+const INVESTIGATION_CARDS = CARDS.filter((card) => card.investigate !== false);
+
+const LIFECYCLE_STEPS = [
+  { id: 'profile', label: 'Complete a profile', detail: 'Phone, address, preferences, and a photo' },
+  { id: 'browse', label: 'Browse the product', detail: 'Views, searches, identity links, and inferences' },
+  { id: 'purchase', label: 'Make a purchase', detail: 'Payment, order, tax, risk, and fulfillment' },
+  { id: 'support', label: 'Contact support', detail: 'Tickets, messages, attachments, and agent notes' },
+  { id: 'marketing', label: 'Opt into updates', detail: 'CRM records and consent-based ad sharing' },
+  { id: 'overnight', label: 'A day passes', detail: 'Backups, warehouse jobs, and raw exports' },
+];
+
+const SYSTEM_PHASES = [
+  { id: 'signup', label: 'Signup', detail: 'Account creation and immediate technical records' },
+  ...LIFECYCLE_STEPS,
+];
 
 /**
  * Real GDPR / CCPA enforcement actions. Every figure verified against a primary
@@ -146,7 +235,17 @@ const ICON_PATHS = {
   card: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="M3 10h18" /><path d="M7 15h4" /></>,
   bolt: <><path d="M13 2 5 13h6l-1 9 8-11h-6z" /></>,
   terminal: <><rect x="3" y="4" width="18" height="16" rx="2" /><path d="M7 9l3 3-3 3" /><path d="M13 15h4" /></>,
-  more: <><circle cx="5" cy="12" r="1.6" fill="currentColor" stroke="none" /><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none" /><circle cx="19" cy="12" r="1.6" fill="currentColor" stroke="none" /></>,
+  user: <><circle cx="12" cy="8" r="3.5" /><path d="M5 21a7 7 0 0 1 14 0" /></>,
+  cloud: <><path d="M7 18h10a4 4 0 0 0 .7-7.9A6 6 0 0 0 6.2 9 4.5 4.5 0 0 0 7 18Z" /></>,
+  search: <><circle cx="10.5" cy="10.5" r="6.5" /><path d="m15.5 15.5 5 5" /></>,
+  identity: <><circle cx="8" cy="8" r="3" /><circle cx="17" cy="16" r="3" /><path d="M10.5 9.5 14.5 14.5" /></>,
+  spark: <><path d="m12 3 1.4 4.6L18 9l-4.6 1.4L12 15l-1.4-4.6L6 9l4.6-1.4Z" /><path d="m18.5 15 .7 2.3 2.3.7-2.3.7-.7 2.3-.7-2.3-2.3-.7 2.3-.7Z" /></>,
+  order: <><path d="M6 7h15l-2 8H8L6 4H3" /><circle cx="9" cy="19" r="1.5" /><circle cx="18" cy="19" r="1.5" /></>,
+  receipt: <><path d="M6 3h12v18l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5L6 21Z" /><path d="M9 8h6M9 12h6M9 16h4" /></>,
+  fingerprint: <><path d="M8 11a4 4 0 0 1 8 0c0 4-1 7-2.5 10" /><path d="M5 11a7 7 0 0 1 14 0c0 2.5-.3 5-1.2 7.3" /><path d="M11 11c0 3-.4 5.8-1.8 8.5" /></>,
+  truck: <><path d="M3 6h11v11H3Z" /><path d="M14 10h4l3 3v4h-7Z" /><circle cx="7" cy="19" r="2" /><circle cx="18" cy="19" r="2" /></>,
+  support: <><path d="M4 13v-2a8 8 0 0 1 16 0v2" /><path d="M4 13h3v6H5a2 2 0 0 1-2-2v-2a2 2 0 0 1 1-2ZM20 13h-3v6h1a2 2 0 0 0 2-2Z" /><path d="M17 19c-1 2-3 2-5 2" /></>,
+  transcript: <><path d="M5 4h14v13H9l-4 3Z" /><path d="M8 8h8M8 12h6" /></>,
 };
 
 const Icon = ({ name }) => (
@@ -228,12 +327,14 @@ const Reveal = ({ children, className = '' }) => {
 const DataJourneyPage = () => {
   const [signedUp, setSignedUp] = useState(false);
   const [active, setActive] = useState(() => new Set());
+  const [triggeredSteps, setTriggeredSteps] = useState(() => new Set());
   const [huntRef, huntInView] = useInView(0.2);
   const [selectedSystem, setSelectedSystem] = useState(INVESTIGATION_CARDS[0].id);
   const [resolvedSystems, setResolvedSystems] = useState(() => new Set());
 
   const stageRef = useRef(null);
   const sourceRef = useRef(null);
+  const triggerRefs = useRef({});
   const cardRefs = useRef({});
   const timers = useRef([]);
   const [wires, setWires] = useState({});
@@ -253,24 +354,19 @@ const DataJourneyPage = () => {
     const src = sourceRef.current;
     if (!stage || !src) return;
     const sRect = stage.getBoundingClientRect();
-    const srcRect = src.getBoundingClientRect();
-    const start = { x: srcRect.left - sRect.left + srcRect.width / 2, y: srcRect.bottom - sRect.top };
-
     const next = {};
     CARDS.forEach((c) => {
       const el = cardRefs.current[c.id];
-      if (!el) return;
+      const originEl = c.from === 'signup' ? src : triggerRefs.current[c.from];
+      if (!el || !originEl) return;
       const r = el.getBoundingClientRect();
+      const originRect = originEl.getBoundingClientRect();
       const cx = r.left - sRect.left + r.width / 2;
       const cyTop = r.top - sRect.top;
-      let from = start;
-      if (c.from !== 'signup') {
-        const pEl = cardRefs.current[c.from];
-        if (pEl) {
-          const pr = pEl.getBoundingClientRect();
-          from = { x: pr.left - sRect.left + pr.width / 2, y: pr.bottom - sRect.top };
-        }
-      }
+      const from = {
+        x: originRect.left - sRect.left + originRect.width / 2,
+        y: originRect.bottom - sRect.top,
+      };
       const midY = (from.y + cyTop) / 2;
       next[c.id] = `M ${from.x} ${from.y} C ${from.x} ${midY}, ${cx} ${midY}, ${cx} ${cyTop}`;
     });
@@ -291,17 +387,33 @@ const DataJourneyPage = () => {
     };
   }, [measure]);
 
+  useLayoutEffect(() => {
+    measure();
+  }, [signedUp, measure]);
+
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
   const handleSignup = (e) => {
     e.preventDefault();
     if (signedUp) return;
     setSignedUp(true);
-    // Slow cascade: each system lights up roughly 1.2s after the last.
-    ORDERED.forEach((card, i) => {
+    const signupCards = CARDS.filter((card) => card.trigger === 'signup');
+    signupCards.forEach((card, i) => {
       const t = setTimeout(() => {
         setActive((prev) => new Set(prev).add(card.id));
-      }, 650 + i * 1200);
+      }, 350 + i * 500);
+      timers.current.push(t);
+    });
+  };
+
+  const handleLifecycleStep = (stepId) => {
+    if (triggeredSteps.has(stepId)) return;
+    setTriggeredSteps((previous) => new Set(previous).add(stepId));
+    const stepCards = CARDS.filter((card) => card.trigger === stepId);
+    stepCards.forEach((card, i) => {
+      const t = setTimeout(() => {
+        setActive((previous) => new Set(previous).add(card.id));
+      }, 180 + i * 360);
       timers.current.push(t);
     });
   };
@@ -333,9 +445,9 @@ const DataJourneyPage = () => {
         <span className={styles.eyebrow}>Privacy by design</span>
         <h1 className={styles.title}>Where does your data go?</h1>
         <p className={styles.dek}>
-          One form creates a person in seconds. Then identifiers, events, and copies scatter
-          across systems with different owners and rules. Follow one signup outward, then work
-          the deletion request yourself.
+          One form creates an account in seconds. What happens after that depends on what the
+          person actually does. Create the account, simulate the moments that follow, and watch
+          a small data trail become a company-wide map.
         </p>
       </Reveal>
 
@@ -361,51 +473,124 @@ const DataJourneyPage = () => {
             ))}
           </svg>
 
-          {/* Source: the signup form */}
-          <form className={styles.signupCard} ref={sourceRef} onSubmit={handleSignup}>
-            <div className={styles.field}>
-              <label htmlFor="fn">First name</label>
-              <input id="fn" type="text" value="Nicholas" readOnly />
-            </div>
-            <div className={styles.field}>
-              <label htmlFor="ln">Last name</label>
-              <input id="ln" type="text" value="Hamilton" readOnly />
-            </div>
-            <div className={styles.field}>
-              <label htmlFor="em">Email</label>
-              <input id="em" type="email" value="hamiltonn428@gmail.com" readOnly />
-            </div>
-            <button type="submit" className={styles.signupBtn} disabled={signedUp}>
-              {signedUp ? 'Signed up ✓' : 'Sign up'}
-            </button>
-            <p className={styles.sceneHint}>
-              {signedUp ? 'Following the trail…' : 'Click Sign up for a demo!'}
-            </p>
-          </form>
+          <div className={`${styles.originRow} ${signedUp ? styles.originRowActive : ''}`}>
+            {/* Source: the signup form */}
+            <form className={styles.signupCard} ref={sourceRef} onSubmit={handleSignup}>
+              <div className={styles.field}>
+                <label htmlFor="fn">First name</label>
+                <input id="fn" type="text" value="Nicholas" readOnly />
+              </div>
+              <div className={styles.field}>
+                <label htmlFor="ln">Last name</label>
+                <input id="ln" type="text" value="Hamilton" readOnly />
+              </div>
+              <div className={styles.field}>
+                <label htmlFor="em">Email</label>
+                <input id="em" type="email" value="hamiltonn428@gmail.com" readOnly />
+              </div>
+              <button type="submit" className={styles.signupBtn} disabled={signedUp}>
+                {signedUp ? 'Signed up ✓' : 'Sign up'}
+              </button>
+              <p className={styles.sceneHint}>
+                {signedUp ? 'Following four immediate signup records…' : 'Start with the account creation event.'}
+              </p>
+            </form>
 
-          {/* System cards */}
-          <div className={styles.cardsGrid}>
-            {CARDS.map((c) => {
-              const on = active.has(c.id);
+            {signedUp && (
+              <aside className={styles.lifecyclePanel} aria-live="polite">
+                <header className={styles.lifecycleHeader}>
+                  <div>
+                    <span className={styles.lifecycleKicker}>What happens next</span>
+                    <h2>Signup is only the first event.</h2>
+                  </div>
+                  <span className={styles.systemCounter}>
+                    <strong className="tabular-nums">{active.size}/{CARDS.length}</strong>
+                    systems touched
+                  </span>
+                </header>
+                <p className={styles.lifecycleCopy}>
+                  At signup, a product may create an account row, session, request log, and
+                  security signal. It has not created payment, shipping, support, or marketing
+                  records yet.
+                </p>
+                <p className={styles.lifecycleCopy}>
+                  As the person uses the product, each action can add new records, derived
+                  profiles, and disclosures to service providers. Try the moments below.
+                </p>
+                <div className={styles.lifecycleActions}>
+                  {LIFECYCLE_STEPS.map((step) => {
+                    const triggered = triggeredSteps.has(step.id);
+                    return (
+                      <button
+                        key={step.id}
+                        type="button"
+                        ref={(el) => { triggerRefs.current[step.id] = el; }}
+                        className={`${styles.lifecycleAction} ${triggered ? styles.lifecycleActionDone : ''}`}
+                        onClick={() => handleLifecycleStep(step.id)}
+                        disabled={triggered}
+                      >
+                        <span>
+                          <strong>{step.label}</strong>
+                          <small>{step.detail}</small>
+                        </span>
+                        <span className={styles.lifecycleActionState}>{triggered ? 'Added ✓' : 'Simulate →'}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+                <p className={styles.lifecycleFootnote}>
+                  Illustrative architecture: the exact systems and lawful purposes vary by product.
+                </p>
+              </aside>
+            )}
+          </div>
+
+          {/* System map, grouped by the product moment that created each record. */}
+          <div className={styles.systemMap}>
+            {SYSTEM_PHASES.map((phase, phaseIndex) => {
+              const phaseCards = CARDS.filter((card) => card.trigger === phase.id);
+              const phaseActive = phaseCards.some((card) => active.has(card.id));
               return (
-                <article
-                  key={c.id}
-                  ref={(el) => { cardRefs.current[c.id] = el; }}
-                  className={`${styles.systemCard} ${c.extra ? styles.cardExtra : ''} ${on ? styles.cardOn : ''}`}
-                  data-system={c.id}
+                <section
+                  className={`${styles.systemPhase} ${phaseActive ? styles.systemPhaseOn : ''}`}
+                  key={phase.id}
+                  data-trigger={phase.id}
                 >
-                  <header className={styles.cardHead}>
-                    <span className={styles.cardIcon}><Icon name={c.icon} /></span>
-                    <span className={styles.cardTitles}>
-                      <span className={styles.cardLabel}>{c.label}</span>
-                      {c.system && <span className={styles.cardSystem}>{c.system}</span>}
+                  <header className={styles.phaseHeader}>
+                    <span className={styles.phaseNumber}>{String(phaseIndex + 1).padStart(2, '0')}</span>
+                    <span>
+                      <strong>{phase.label}</strong>
+                      <small>{phase.detail}</small>
                     </span>
-                    {c.when && (
-                      <span className={`${styles.whenBadge} ${on ? styles.whenOn : ''}`}>{c.when}</span>
-                    )}
+                    <span className={styles.phaseCount}>{phaseCards.length} systems</span>
                   </header>
-                  {c.payload && <Payload card={c} on={on} />}
-                </article>
+                  <div className={styles.cardsGrid}>
+                    {phaseCards.map((c) => {
+                      const on = active.has(c.id);
+                      return (
+                        <article
+                          key={c.id}
+                          ref={(el) => { cardRefs.current[c.id] = el; }}
+                          className={`${styles.systemCard} ${on ? styles.cardOn : ''}`}
+                          data-system={c.id}
+                          data-trigger={c.trigger}
+                        >
+                          <header className={styles.cardHead}>
+                            <span className={styles.cardIcon}><Icon name={c.icon} /></span>
+                            <span className={styles.cardTitles}>
+                              <span className={styles.cardLabel}>{c.label}</span>
+                              {c.system && <span className={styles.cardSystem}>{c.system}</span>}
+                            </span>
+                            {c.when && (
+                              <span className={`${styles.whenBadge} ${on ? styles.whenOn : ''}`}>{c.when}</span>
+                            )}
+                          </header>
+                          {c.payload && <Payload card={c} on={on} />}
+                        </article>
+                      );
+                    })}
+                  </div>
+                </section>
               );
             })}
           </div>
